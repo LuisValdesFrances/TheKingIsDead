@@ -1,0 +1,149 @@
+﻿
+La guerra es el arte de destruir a los hombres, la política es el arte de engañarlos.
+Tras la guerra, paz; de la paz, abundancia; de la abundancia, vicio; del vicio, la guerra.
+La guerra es un gran esfuerzo de todos hacia la paz.
+Matadlos a todos, que Dios ya reconocerá a los suyos.
+Los dos guerreros más poderosos son la paciencia y el tiempo.
+He recorrido un largo camino desde el campo de batalla a la mesa de paz.
+Maldito hombre de letras, lo destrozare con mis puños.
+Parmenides de Elea
+Francisco de Quevedo
+Montesquieu
+Arnaud Amairic
+Leo Tolstoy
+Moshe Dayan
+Burufulot
+Idioma
+Sonido
+Alertas
+English
+Español
+Català
+CAMPAÑA
+CONTINUAR
+EMPEZAR
+MULTIJUGADOR
+ON LINE
+NUEVA PARTIDA
+NUEVA CUENTA
+INICIAR SESION
+Juego
+Opciones
+Mas
+Salir
+Sonido On
+Sonido Off
+Vibracion On
+Vibracion Off
+Quieres sair?
+No
+Si
+AYUDA
+ACERCA DE
+Texto help.
+Diseñado y desarrollado: Luis Valdes. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Musica y FX: Francisco Hoyos y Mr.Dufay. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ All right reserved.
+SELECCIONA UNA PARTIDA
+CREA UNA PARTIDA
+UNETE A UNA PARTIDA
+CONFIGURA UNA PARTIDA
+HUMANO
+IA
+TU TURNO
+TURNO
+Puntos:
+Record:
+Continua
+Abandonar
+Nuevo record:
+¿Quires volver al menu?
+Notificaciones
+Nombre
+Password
+Repite pass
+Passwords no coinciden
+Lo siento, ya existe un usuario con ese nombre. Prueba otro nombre.
+Nombre de usuario o password incorrectos
+Error de conexion
+Error de servidor
+No hay conexion a interrnet
+Se ha creado la cuenta
+Se ha creado la partida
+Conectado con
+¿Quieres unirte a la partida creada por
+Jugadores:
+Te has unido al juego
+Juego cargado
+Enviando datos de la partida...
+Tu versión del juego esta obsoleta. Por favor, descarga la ultima version.
+¡Tu reino te necesita!
+¿Comfirmas la orden?
+Tienes una partida para responder
+¿Quieres crear esta partida? La partida empezará cuando se hayan unido el resto de jugadores.
+TURNO:
+Llano
+Bosque
+Montaña
+Ciudad
+Castillo
+Infanteria
+Caballeria
+Hostigadores
+Asedio
+Defensa
+Oro
+Fé
+RESULTADO
+Jugador
+Gran derrota
+Derrota
+Victoria
+Gran victoria
+Has perdido el juego
+pierde el juego
+Atacante gana
+Atacante pierde
+El atacante ha destruido el enemigo
+El atacante ha sido destruido
+Atacante pierde
+Defensor pierde
+bajas
+Nuevo ejercito reclutado
+Los ejercitos han unido sus fuerzas
+ECONOMIA
+Ganancias
+Salarios
+El coste de las tropas excede tu tesoro. Descarta algunas.
+El número total de tropas excede el máximo. Se despediran las sobrantes.
+es el ganador!
+cambia su capital
+¿Realmente quieres descartar esta tropa
+por
+monedas
+?
+Nueva tropa adquirda
+Equilibrio de poder
+¡Critico!
+¡Pifia!
+Dificultad
+Tropa basica de eficiencia media en todo tipo de terrenos.
+Tropa poderosa en llano, poco eficiente en bosque y torpe en montaña.
+Expertos luchando en bosque y sobretodo en montaña. En llano son fáciles de vencer.
+Devastadoras en ciudades. En el resto de terrenos no aportan ninguna ventaja.
+ATACAR
+HUIR
+ESPERAR
+CANCELAR
+¿Deseas mejorar esta constucción
+Torre
+Mercado
+Iglesia
+Incrementa la defensa de la ciudad.
+Incrementa los ingresos de la ciudad.
+Protege el reino de cualquier ataque (Probabilidad).
+Has perdido la partida.
+pierde la partida.
+Tu ejercito ha sido derrotado.
+Tu ejercito ha vencido.
+Tu ejercito ha sido destruido.
+Tu ejercito ha destruido al enemigo.
+cambia su capital.

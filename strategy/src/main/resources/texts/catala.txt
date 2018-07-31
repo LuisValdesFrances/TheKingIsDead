@@ -1,0 +1,149 @@
+﻿
+La guerra és l'art de destruir els homes, la política és l'art de enganyar-los.
+Després de la guerra, pau; de la pau, abundància; de l'abundància, vici; del vici, la guerra.
+La guerra és un gran esforç de tots cap a la pau.
+Mateu-los a tots, que Déu ja reconeixerà els seus.
+Els dos guerrers més poderosos són la paciència i el temps.
+He recorregut un llarg camí des del camp de batalla a la taula de pau.
+Maleit escriptor desgraciat! Pense destrossarlo amb els meus punys.
+Parmenides d'Elea
+Francisco de Quevedo
+Montesquieu
+Arnaud Amairic
+Leo Tolstoi
+Moshe Dayan
+Burufulot
+Idioma
+So
+Alertes
+English
+Espanyol
+Català
+CAMPANYA
+CONTINUAR
+COMENÇAR
+MULTIJUGADOR
+ON LINE
+NOVA PARTIDA
+NOU COMPTE
+INICIAR SESSIÓ
+Joc
+Opcions
+Mes
+Eixir
+So On
+So Off
+Vibració On
+Vibració Off
+Vols eixir?
+No
+Si
+AJUDA
+SOBRE
+Text help.
+Dissenyat i desenvolupat: Luis Valdes. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Musica y FX: Francisco Hoyos i Mr.Dufay. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ All right reserved.
+SELECCIONA UNA PARTIDA
+CREA UNA PARTIDA
+UNEIX-TE A UNA PARTIDA
+CONFIGURA UNA PARTIDA
+HUMÀ
+IA
+EL TEU TORN
+TORN
+Punts:
+Record:
+Continua
+Abandonar
+Nou rècord:
+¿Vols tornar al menu?
+Notificacions
+Nom
+Password
+Repeteix pass
+Passwords no coincideixen
+Ho sent, ja existeix un usuari amb aquest nom. Prova un altre nom.
+Nom d'usuari o password incorrectes
+Error de connexió
+Error de servidor
+No hi ha connexió a interrnet
+S'ha creat el compte
+S'ha creat la partida
+Connectat amb
+Vols unir-te a la partida creada per
+Jugadors:
+T'has unit al joc
+Joc carregat
+Enviant dades de la partida ...
+La teua versió del joc esta obsoleta. Per favor, descarrega la darrera versio.
+El teu regne et necessita!
+¿Comfirmas l'ordre?
+Tens una partida per respondre
+Vols crear aquesta partida? La partida començarà quan s'hagin unit la resta de jugadors.
+TORN:
+Pla
+Bosc
+Muntanya
+Ciutat
+Castell
+Infanteria
+Caballeria
+Fustigadors
+Setge
+Defensa
+Or
+Fe
+RESULTAT
+Jugador
+Gran derrota
+Derrota
+Victòria
+Gran victòria
+Has perdut el joc
+perd el joc
+Atacant guanya
+Atacant perd
+L'atacant ha destruït l enemig
+L'atacant ha segut destruit
+Atacant perd
+Defensor perd
+baixes
+Nou exèrcit reclutat
+Els exèrcits han unit les seves forces
+ECONOMIA
+Ganacies
+Salaris
+El cost de les tropes excedeix el teu tresor. Descarta algunes.
+El nombre total de tropes excedeix el màxim. S'acomiadaran les sobrants.
+és el guanyador!
+canvia la seua capital
+Realment vols descartar aquesta tropa
+per
+monedes
+?
+Nova tropa adquirda
+Equilibri de poder
+¡Critico!
+¡Pífia!
+Dificultat
+Tropa bàsica d'eficiència mitjana en tot tipus de terrenys.
+Tropa poderosa en pla, poc eficient en bosc i dolenta en muntanya.
+Experts lluitant en bosc i sobretot en muntanya. En pla són fàcils de vèncer.
+Devastadores en ciutats. A la resta de terrenys no aporten cap avantatge.
+ATACAR
+FUGIR
+ESPERAR
+CANCEL·LAR
+¿Desitjes millorar aquesta construcció
+Torre
+Mercart
+Esglesia
+Incrementa la defensa de la ciudat.
+Incrementa els ingresos de la ciudat.
+Protegeix el regne de cualsevol atac (Probabilidat).
+Has perdut la partida.
+perd la partida.
+El teu exèrcit ha estat derrotat.
+El teu exèrcit ha vençut.
+El teu exèrcit ha estat destruït.
+El teu exèrcit ha destruït l'enemic.
+canvia la seva capital.

@@ -1,0 +1,149 @@
+﻿
+War is the art of destroying men, politics is the art of deceiving them.
+After the war, peace; of peace, abundance; of abundance, vice; of vice, war.
+War is a great effort of all towards peace.
+Kill them all, God will already recognize theirs.
+The two most powerful warriors are patience and time.
+I have come a long way from the battlefield to the peace table.
+Damn man of letters, I will destroy it with my fists.
+Parmenides de Elea
+Francisco de Quevedo
+Montesquieu
+Arnaud Amairic
+Leo Tolstoy
+Moshe Dayan
+Burufulot
+Language
+Sound
+Alerts
+English
+Español
+Català
+CAMPAING
+CONTINUE
+START
+MULTIPLAYER
+ON LINE
+NEW GAME
+NEW ACCOUNT
+LOGIN
+Play
+Options
+More
+Exit
+Sound On
+sound Off
+Vibration On
+Vibration Off
+Do you want exit?
+No
+Yes
+HELP
+ABOUT
+Texto help.
+Designed and developed: Luis Valdes. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Music & FX: Francisco Hoyos and Mr.Dufay. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ All right reserved.
+SELECT GAME
+CREATE GAME
+JOIN TO GAME
+CONFIGURE GAME
+HUMAN
+AI
+YOUR TURN
+NEXT
+Points:
+Record:
+Continue
+Quit
+New record:
+Do you want return to menu?
+Notifications
+Name
+Password
+Repeat pass
+Passwords do not match
+Sorry, there is already a user with that name. Try it with another name.
+Incorrect username or password
+Connection error
+Server error
+There is no internet connection
+Account has been created
+Game has been created
+Connected by
+Do you want to join the game created by
+Players:
+You have joined the game
+Game loaded
+Send game data...
+Your version of the game is obsolete, please download the latest version.
+Your kingdom needs you!
+Do you confirm the order?
+You have a game to answer
+Do you want to create this game? The game will start when the other players have joined.
+TURN:
+Plain
+Forest
+Montain
+Village
+Castle
+Infantry
+Knights
+Harassers
+Siege
+Defense
+Gold
+Faith
+RESULT
+Player
+Big Defeat
+Defeat
+Victory
+Big Victory
+You lost the game
+lost the game
+Attacker win
+Attacker loses
+The attacker has destroyed the enemy
+The attacker has been destroyed
+Attacker loses
+Defender loses
+casualties
+New army recruited
+The armies have joined forces
+ECONOMY
+Earning
+Salary
+Cost of troops exceedes your tresaure. Discard troops.
+The total number of troops exceeds the maximum. The leftovers will be dismissed.
+is the winner!
+change his capital
+Do you want discard this troop of
+for
+coins
+?
+New troop acquired
+Balance of power
+Critical!
+Blunder!
+Difficulty
+Basic troop, being equally efficient in all types of terrain.
+Is the powerful in the plains, inefficient in the woods and really clumsy in the mountains.
+Specialists in forests and especially in mountains. On the plain they are easy to beat.
+Devastating troop when attack cities. In the rest of the lands, they do not provide any advantage.
+ATACK
+ESCAPE
+WAIT
+CANCEL
+Do you want to improve this construction
+Tower
+Market
+Church
+Increase the defense of the city.
+Increase the gold of the city.
+Protect the kingdom from any attack (Probability).
+You lost the game.
+lost the game.
+Your army has been defeated.
+Your army has won.
+Your army has been destroyed.
+Your army has destroyed to enemy.
+change his capital.

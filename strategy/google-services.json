@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "763319059414",
+    "firebase_url": "https://the-king-is-dead.firebaseio.com",
+    "project_id": "the-king-is-dead",
+    "storage_bucket": "the-king-is-dead.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763319059414:android:36b54ed2f10d79a2",
+        "android_client_info": {
+          "package_name": "com.luis.strategy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763319059414-r2kfo8l2qs62afvd74agv94v8og3t6cd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.luis.strategy",
+            "certificate_hash": "ed2007ea5b5ef1a5e9494b47236695b4dac186a4"
+          }
+        },
+        {
+          "client_id": "763319059414-641glveom4e5ooodifugb4f3um4u29ie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDleysaYgCVxhmo_SL53gu6FrMcmmRnlxU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763319059414-641glveom4e5ooodifugb4f3um4u29ie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
