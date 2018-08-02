@@ -28,6 +28,7 @@ public class OnlineInputOutput {
 	public static final String URL_CREATE_INSCRIPTION = "createInscriptionServlet";
 	public static final String URL_CREATE_PRE_SCENE = "createPreSceneServlet";
 	public static final String URL_CREATE_NOTIFICATION = "createNotificationServlet";
+	public static final String URL_CREATE_INCIDENCE = "createIncidenceServlet";
 	
 	public static final String URL_GET_GAME_VERSION = "getGameVersionServlet";
 	public static final String URL_GET_PRE_SCENE_LIST = "getPreSceneListServlet";
@@ -128,6 +129,46 @@ public class OnlineInputOutput {
 			connection.setUseCaches(false);
 
 			BufferedReader in = 
+					new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+			String str = "";
+			while ((str = in.readLine()) != null) {
+				result += str;// + "\n";
+			}
+			in.close();
+
+			System.out.println(result);
+			connection.disconnect();
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = e.getMessage();
+		}
+		return result;
+	}
+
+	public String sendIncidence(Context context, String scene, String player, String message){
+
+		if(!isOnline(context)){
+			return MSG_NO_CONNECTION;
+		}
+
+		HttpURLConnection connection = null;
+		String result = "";
+
+		try {
+			// open URL connection
+			URL url = new URL(ServerURL.SERVER_URL + URL_CREATE_INCIDENCE);
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestProperty("Content-Type", "application/octet-stream");
+			connection.setRequestMethod("POST");
+			connection.setRequestProperty("scene", scene);
+			connection.setRequestProperty("player", player);
+			connection.setRequestProperty("message", message);
+			connection.setDoInput(true);
+			connection.setDoOutput(true);
+			connection.setUseCaches(false);
+
+			BufferedReader in =
 					new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
 			String str = "";

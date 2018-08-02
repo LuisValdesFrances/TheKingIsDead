@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -35,6 +36,8 @@ import android.view.SurfaceView;
           this.buffer = Bitmap.createBitmap(screenW, screenH, Bitmap.Config.RGB_565);
           this.bufferCanvas = new Canvas(buffer);
           this.dstRect = new Rect();
+
+          Log.i("Debug", "scaleX: " + Settings.getInstance().getScaleX() + " scaleY: " + Settings.getInstance().getScaleY());
           
           multiTouchHandler = 
   				MultiTouchHandler.getInstance(this, Settings.getInstance().getScaleX(), Settings.getInstance().getScaleY());
@@ -49,7 +52,7 @@ import android.view.SurfaceView;
   			 try {
   	                //gestureEvent.cancel();
   	                Canvas canvas = surfaceHolder.lockCanvas();
-  	                //Construye un rect del tamaño del surfaceView
+  	                //Construye un rect del tamaï¿½o del surfaceView
   	                canvas.getClipBounds(dstRect);
   	                //Todas las llamadas a paint pintan sobre el bufferCanvas asociado a la bufferImagen
   	                paint(new Graphics(bufferCanvas));

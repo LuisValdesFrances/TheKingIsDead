@@ -205,6 +205,16 @@ public class Player {
 		return kingdom;
 	}
 
+	public int getNumberCitys(){
+		int n = 0;
+		for(int i = 0; i < kingdomList.size(); i++){
+			if(kingdomList.get(i).isACity()){
+				n++;
+			}
+		}
+		return n;
+	}
+
 	public void setCapitalKingdom(int capitalKingdom) {
 		this.capitalKingdom = capitalKingdom;
 	}

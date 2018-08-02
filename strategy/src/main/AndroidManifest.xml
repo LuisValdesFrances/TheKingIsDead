@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.luis.strategy"
     android:installLocation="auto"
-    android:versionCode="29"
-    android:versionName="1.9">
+    android:versionCode="31"
+    android:versionName="1.92">
 
     <uses-sdk
         android:minSdkVersion="16"

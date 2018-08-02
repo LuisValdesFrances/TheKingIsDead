@@ -239,6 +239,8 @@ public class Settings {
 		
 		boolean isLandscape =
                 Settings.getInstance().getScreenOrientation() == Settings.ORIENTATION_LANDSCAPE;
+
+		Log.i("Debug", "Landscape: " + isLandscape);
 		int frameBufferWidth;
 		int frameBufferHeight;
 		switch(resolutionSet){

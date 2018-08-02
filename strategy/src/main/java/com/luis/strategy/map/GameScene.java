@@ -101,9 +101,17 @@ public class GameScene{
 	}
 	
 	public void cleanKingdomTarget(){
-		//Log.i("Debug", "Clean army");
 		for (Kingdom k : kingdomList) {
 			k.setTarget(-1);
+		}
+	}
+
+	public void removePlayer(Player player){
+		for(int i = 0; i < playerList.size(); i++){
+			if(playerList.get(i).getId() == player.getId()){
+				playerList.remove(i);
+				break;
+			}
 		}
 	}
 	

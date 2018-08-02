@@ -310,12 +310,20 @@ public class ModeGame {
 			 }
 			break;
 		case Define.ST_GAME_RUN:
-			
-			btnPause.update(UserInput.getInstance().getMultiTouchHandler());
-			
+				btnPause.update(UserInput.getInstance().getMultiTouchHandler());
 			particleManager.update(Main.getDeltaSec());
 			gfxEffects.update(Main.getDeltaSec());
-			gameManager.update(Main.getDeltaSec());
+			try {
+                gameManager.update(Main.getDeltaSec());
+			}catch (Exception e){
+				if(GameState.getInstance().getGameMode() == GameState.GAME_MODE_ONLINE){
+					OnlineInputOutput.getInstance().sendIncidence(
+							Main.getInstance().getContext(),
+							""+GameState.getInstance().getSceneData().getId(),
+							GameState.getInstance().getName(), e.toString());
+				}
+				e.printStackTrace();
+			}
 			updateDebugButton();
 			break;
 			
