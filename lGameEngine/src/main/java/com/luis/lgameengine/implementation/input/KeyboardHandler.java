@@ -7,18 +7,9 @@ public class KeyboardHandler implements OnKeyListener {
 	
 	public static final int BUFFER_SIZE = 20;
 	
-	private static KeyboardHandler keyboardHandler;
-	
-	public static KeyboardHandler getInstance(View view){
-		if(keyboardHandler == null){
-			keyboardHandler = new KeyboardHandler(view);
-		};
-		return keyboardHandler;
-	}
-	
 	public KeyData[] keyList;
 	
-	private KeyboardHandler(View view){
+	public KeyboardHandler(View view){
 		view.setOnKeyListener(this);
 	}
 	
@@ -61,7 +52,7 @@ public class KeyboardHandler implements OnKeyListener {
             	if(keyCode > 0 && keyCode < 127)
                 	keyList[keyCode].setAction(KeyData.KEY_UP);
             }
-            //Controlamos el botón back para que no salga de la aplicacion:
+            //Controlamos el botï¿½n back para que no salga de la aplicacion:
 //            if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
 //            	return true;
 //            }

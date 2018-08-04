@@ -57,14 +57,14 @@ public class Settings {
 		return (fScaleX + fScaleY) / 2f;
 	}
 	
-	private int iBufferX;
-	private int iBufferY;
+	private int bufferX;
+	private int bufferY;
 	
 	public int getScreenWidth() {
-		return iBufferX;
+		return bufferX;
 	}
 	public int getScreenHeight() {
-		return iBufferY;
+		return bufferY;
 	}
 	
 	private int realWidth;
@@ -240,7 +240,6 @@ public class Settings {
 		boolean isLandscape =
                 Settings.getInstance().getScreenOrientation() == Settings.ORIENTATION_LANDSCAPE;
 
-		Log.i("Debug", "Landscape: " + isLandscape);
 		int frameBufferWidth;
 		int frameBufferHeight;
 		switch(resolutionSet){
@@ -263,8 +262,8 @@ public class Settings {
 		}
 		
 		
-		iBufferX = frameBufferWidth;
-		iBufferY = frameBufferHeight;
+		bufferX = frameBufferWidth;
+		bufferY = frameBufferHeight;
 		
 		fScaleX = ((float) frameBufferWidth/ dm.widthPixels);
 		fScaleY = ((float) frameBufferHeight/ dm.heightPixels);

@@ -23,6 +23,9 @@ public class Army extends MapObject{
 	
 	public Player player;
 	private static int idCount;
+	public static void init(){
+		idCount = 0;
+	}
 	private int id;
 	
 	public boolean defeat;

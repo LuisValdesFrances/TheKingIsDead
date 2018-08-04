@@ -11,7 +11,10 @@ import com.luis.strategy.constants.GameParams;
 public class Player {
 	
 	private static int idCount;
-	
+	public static void init(){
+		idCount = 0;
+	}
+
 	private int id;
 	private String name;
 	private int gold;

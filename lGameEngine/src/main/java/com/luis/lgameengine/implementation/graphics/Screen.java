@@ -27,10 +27,10 @@ import android.view.SurfaceView;
 
       public Screen(Activity context, int screenW, int screenH){
     	  super(context);
-          
+
           this.screenW = screenW;
           this.screenH = screenH;
-          
+
           // register our interest in hearing about changes to our surface
           this.surfaceHolder = getHolder();
           this.buffer = Bitmap.createBitmap(screenW, screenH, Bitmap.Config.RGB_565);
@@ -38,12 +38,10 @@ import android.view.SurfaceView;
           this.dstRect = new Rect();
 
           Log.i("Debug", "scaleX: " + Settings.getInstance().getScaleX() + " scaleY: " + Settings.getInstance().getScaleY());
-          
-          multiTouchHandler = 
-  				MultiTouchHandler.getInstance(this, Settings.getInstance().getScaleX(), Settings.getInstance().getScaleY());
-          
-          keyboardHandler =
-        		KeyboardHandler.getInstance(this);
+
+
+          multiTouchHandler = new MultiTouchHandler(this, Settings.getInstance().getScaleX(), Settings.getInstance().getScaleY());
+          keyboardHandler =new KeyboardHandler(this);
       }
       
       public void repaint(){

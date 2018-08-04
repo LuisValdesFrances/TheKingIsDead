@@ -2,6 +2,7 @@ ServerURL.java
 
 # Built application files
 /*/build/
+build
 
 /*/release/
 

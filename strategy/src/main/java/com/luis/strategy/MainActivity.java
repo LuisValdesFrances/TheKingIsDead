@@ -13,6 +13,8 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.os.Bundle;
@@ -40,11 +42,18 @@ public class MainActivity extends Activity{
 	
 	private PowerManager powerManager;
 	private PowerManager.WakeLock wakeLock;
+
+	private boolean start;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	    Log.i("Debug", "onCreate is called");
+
+	    start = true;
+
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
 		MobileAds.initialize(this, ADMOB_ID);
 
@@ -72,65 +81,55 @@ public class MainActivity extends Activity{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		Log.i("Debug", "lGameEngine INIT");
-		Settings.getInstance().init(
-				this, new boolean[]{
-									false,
-									true,
-									true,
-									true
-		}
-		);
+        startGame();
+        //Screen no sleep
+        powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
 
 
-		//Metodo 1
-		// Rescale surface view to layout size:
-        /*
-        main = new Main(this);
-		RelativeLayout layout = new RelativeLayout(this);
-		layout.addView(main, Settings.getInstance().getRealWidth(), Settings.getInstance().getRealHeight());
-		setContentView(layout);
-        */
-
-        //Metodo 2
-        /*
-        main = new Main(this);
-		main.setLayoutParams(new ActionBar.LayoutParams(Settings.getInstance().getRealWidth(), Settings.getInstance().getRealHeight()));
-		setContentView(main);
-        */
-
-        //Metodo 3
-
-		main = new Main(this, Settings.getInstance());
-		setContentView(main);
 
 
-		Log.i("Debug", "View load");
-		gameThread = new Thread(main);
-		gameThread.start();
-        Log.i("Debug", "Game loop START");
 
-		//Screen no sleep
-
-		powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-		wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
-		
 	}
+
+	@Override
+    public void onStart(){
+	    super.onStart();
+        Log.i("Debug", "onStart is called");
+     }
+
+    @Override
+    public void onConfigurationChanged (Configuration newConfig){
+	    super.onConfigurationChanged(newConfig);
+        Log.i("Debug", "onConfigurationChanged is called");
+
+		/*
+        if(start) {
+            start = false;
+            if (gameThread.isAlive()) {
+                main.finishGame();
+            }
+            finish();
+            startActivity(getIntent());
+        }
+        */
+
+    }
 	
 	@Override
 	public void onResume(){
 		super.onResume();
-		
+
 		if(wakeLock != null){
 			wakeLock.acquire();
 		}
 		main.unPause();
 	}
-	
+
 	@Override
 	public void onPause(){
 		super.onPause();
-		
+
 		if(wakeLock != null){
 			wakeLock.release();
 		}
@@ -153,10 +152,8 @@ public class MainActivity extends Activity{
 	public void onDestroy(){
 		super.onDestroy();
         try{
-			//main.saveAndSend();
 			if(gameThread.isAlive()){
 				main.finishGame();
-				//finish();
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -164,6 +161,46 @@ public class MainActivity extends Activity{
 		Log.i("Debug", "Thread stoped with exit!");
 
 	}
+
+	private void startGame(){
+        try {
+            Settings.getInstance().init(
+                    this,
+                    new boolean[]{
+                            false,
+                            true,
+                            true,
+                            true
+                    });
+
+            //Metodo 1
+            // Rescale surface view to layout size:
+            /*
+            main = new Main(this);
+            RelativeLayout layout = new RelativeLayout(this);
+            layout.addView(main, Settings.getInstance().getRealWidth(), Settings.getInstance().getRealHeight());
+            setContentView(layout);
+            */
+
+                //Metodo 2
+            /*
+            main = new Main(this);
+            main.setLayoutParams(new ActionBar.LayoutParams(Settings.getInstance().getRealWidth(), Settings.getInstance().getRealHeight()));
+            setContentView(main);
+            */
+
+            //Metodo 3
+            main = new Main(this, Settings.getInstance());
+            setContentView(main);
+
+            Log.i("Debug", "View load");
+            gameThread = new Thread(main);
+            gameThread.start();
+            Log.i("Debug", "Game loop START");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
 	public void loadInterstitial(){
         runOnUiThread(new Runnable(){
@@ -193,7 +230,7 @@ public class MainActivity extends Activity{
 	
 	//Notificaciones
 	public void sendNotification(int notificationId, String title, String content) {
-		
+
 		//Intent intent = new Intent(this, MainActivity.class);
 		Intent intent = getIntent();
 		//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

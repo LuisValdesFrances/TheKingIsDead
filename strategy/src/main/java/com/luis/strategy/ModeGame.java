@@ -23,7 +23,9 @@ import com.luis.strategy.data.GameBuilder;
 import com.luis.strategy.datapackage.scene.NotificationListData;
 import com.luis.strategy.datapackage.scene.SceneData;
 import com.luis.strategy.game.GameManager;
+import com.luis.strategy.map.Army;
 import com.luis.strategy.map.GameScene;
+import com.luis.strategy.map.Player;
 
 /**
  * 
@@ -85,6 +87,10 @@ public class ModeGame {
 			gfxEffects = GfxEffects.getInstance();
 			
 			GameScene gameScene = null;
+
+			//Reseteo los contadores
+			Player.init();
+			Army.init();
 			if(Main.state == Define.ST_GAME_INIT_PASS_AND_PLAY){
 				if(GameState.getInstance().getSceneData() == null){
 					gameScene = GameBuilder.getInstance().buildStartPassAndPlay();

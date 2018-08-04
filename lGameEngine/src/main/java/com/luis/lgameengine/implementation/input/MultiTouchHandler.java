@@ -8,17 +8,8 @@ import android.view.View.OnTouchListener;
 public class MultiTouchHandler implements OnTouchListener {
 	
 	public static final int NUMBER_POINTS = 5;
-	
-	private static MultiTouchHandler touchHandler;
-	
-	public static MultiTouchHandler getInstance(View view, float _scaleX, float _scaleY){
-		if(touchHandler == null){
-			touchHandler = new MultiTouchHandler(view, _scaleX, _scaleY);
-		}
-		return touchHandler;
-	}
-	
-	private MultiTouchHandler(View view, float _scaleX, float _scaleY) {
+
+    public MultiTouchHandler(View view, float _scaleX, float _scaleY) {
 	    view.setOnTouchListener(this);
 	    this.scaleX = _scaleX;
         this.scaleY = _scaleY;
