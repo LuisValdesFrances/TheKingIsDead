@@ -42,8 +42,6 @@ public class MainActivity extends Activity{
 	
 	private PowerManager powerManager;
 	private PowerManager.WakeLock wakeLock;
-
-	private boolean start;
 	
 	
 	@Override
@@ -51,20 +49,14 @@ public class MainActivity extends Activity{
 		super.onCreate(savedInstanceState);
 	    Log.i("Debug", "onCreate is called");
 
-	    start = true;
-
-	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+	    //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
 		MobileAds.initialize(this, ADMOB_ID);
-
-
-
-		mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd = new InterstitialAd(this);
 		mInterstitialAd.setAdUnitId(INTERSTITIAL_ID);
 		//mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
-
-		FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( new OnSuccessListener<InstanceIdResult>() {
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( new OnSuccessListener<InstanceIdResult>() {
 			@Override
 			public void onSuccess(InstanceIdResult instanceIdResult) {
 				// Do whatever you want with your token now
@@ -98,25 +90,8 @@ public class MainActivity extends Activity{
         Log.i("Debug", "onStart is called");
      }
 
+
     @Override
-    public void onConfigurationChanged (Configuration newConfig){
-	    super.onConfigurationChanged(newConfig);
-        Log.i("Debug", "onConfigurationChanged is called");
-
-		/*
-        if(start) {
-            start = false;
-            if (gameThread.isAlive()) {
-                main.finishGame();
-            }
-            finish();
-            startActivity(getIntent());
-        }
-        */
-
-    }
-	
-	@Override
 	public void onResume(){
 		super.onResume();
 
@@ -171,7 +146,7 @@ public class MainActivity extends Activity{
                             true,
                             true,
                             true
-                    });
+                    }, Settings.ORIENTATION_LANDSCAPE);
 
             //Metodo 1
             // Rescale surface view to layout size:
@@ -203,6 +178,7 @@ public class MainActivity extends Activity{
     }
 
 	public void loadInterstitial(){
+
         runOnUiThread(new Runnable(){
             @Override
             public void run() {
@@ -212,12 +188,13 @@ public class MainActivity extends Activity{
     }
 
 	public void requestInterstitial() {
+
 		runOnUiThread(new Runnable(){
 			@Override
 			public void run() {
-				if (mInterstitialAd.isLoaded()) {
-					mInterstitialAd.show();
-				}
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
 			}
 		});
 	}
@@ -225,10 +202,11 @@ public class MainActivity extends Activity{
 	//Firebase
     private String firebaseDeviceToken;
     public String getFirebaseDeviceToken(){
-       	return firebaseDeviceToken;
+        return firebaseDeviceToken;
     }
-	
-	//Notificaciones
+
+    //Notificaciones
+	/*
 	public void sendNotification(int notificationId, String title, String content) {
 
 		//Intent intent = new Intent(this, MainActivity.class);
@@ -254,6 +232,7 @@ public class MainActivity extends Activity{
 		// notificationId is a unique int for each notification that you must define
 		notificationManager.notify(notificationId, mBuilder.build());
 	}
+	*/
 	
 	}
 

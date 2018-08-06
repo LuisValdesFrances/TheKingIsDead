@@ -95,11 +95,12 @@ public class PushNotifications extends Thread{
 										!notification.notified){
 									
 									//Aviso al usuario
+									/*
 									Main.getInstance().getActivity().
 									sendNotification(notificationId++,
 											RscManager.allText[RscManager.TXT_KINGDOM_NEEDS_YOU], 
 											""+notification.scene + "-" + RscManager.allText[RscManager.TXT_GAME_ANSWER]);
-									
+									*/
 									notification.notified = true;
 								}
 							}

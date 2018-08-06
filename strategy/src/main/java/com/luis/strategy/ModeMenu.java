@@ -21,7 +21,6 @@ import com.luis.lgameengine.implementation.graphics.Image;
 import com.luis.lgameengine.implementation.sound.SndManager;
 import com.luis.strategy.GameState.PlayerConf;
 import com.luis.strategy.connection.OnlineInputOutput;
-//import com.luis.strategy.connection.PushNotifications;
 import com.luis.strategy.constants.Define;
 import com.luis.strategy.constants.GameParams;
 import com.luis.strategy.data.DataKingdom;
@@ -51,7 +50,6 @@ public class ModeMenu {
 	private static Button btnOnLine;
 	private static Button btnPassAndPlay;
 	private static Button btnCampaign;
-	//private static Button btnContinueCampaing;
 	private static Button btnContinuePassAndPlay;
 	
 	private static Button btnNewAccount;
@@ -90,8 +88,6 @@ public class ModeMenu {
 	private static String onLineGameName;
 	
 	private static int numLetters;
-	
-	//private static PushNotifications pushNotifications;
 	
 	public static void init(int _iMenuState){
 		Log.i("Info", "Init State: "+ _iMenuState);
@@ -135,20 +131,6 @@ public class ModeMenu {
 			//Sonido
 			SndManager.getInstance().setSound(dataConfig.split("\n")[1].equals("true"));
 			
-			//Notificaciones
-            /*
-			String dataUser = FileIO.getInstance().loadData(Define.DATA_USER, 
-					Settings.getInstance().getActiviy().getApplicationContext());
-			if(dataUser != null){
-				String n =  dataUser.split("\n")[0];
-				pushNotifications = new PushNotifications(Main.getInstance().getActivity(), n);
-				
-				if(dataConfig.split("\n")[2].equals("true")){
-					pushNotifications.start();
-				}
-			}
-			*/
-			
 			//Modo 3D
 			GameManager.game3D = dataConfig.split("\n")[3].equals("true");
 			
@@ -161,13 +143,7 @@ public class ModeMenu {
 			
 			configurationBox = new ConfigurationBox(){
 				@Override
-				public void onFinish(){
-				    /*
-					if(pushNotifications != null){
-						pushNotifications.setActive(configurationBox.isNotifications());
-					}
-					*/
-				}
+				public void onFinish(){}
 			};
 			
 			btnBack = new Button(GfxManager.imgButtonArrowBackRelease, GfxManager.imgButtonArrowBackFocus,
@@ -739,19 +715,7 @@ public class ModeMenu {
 			 break;
 		 case Define.ST_MENU_ON_LINE_LIST_ALL_GAME:
 
-		     /*
-			 if(pushNotifications == null){
-				 pushNotifications = new PushNotifications(Main.getInstance().getActivity(), GameState.getInstance().getName());
-				 
-				 if(dataConfig.split("\n")[1].equals("true")){
-					 if(!pushNotifications.isAlive()){
-						pushNotifications.start();
-					 }
-				 }
-			 }
-			 */
-
-			 btnSearchGame = new Button(
+		     btnSearchGame = new Button(
 						GfxManager.imgButtonSearchBigRelease, 
 						GfxManager.imgButtonSearchBigFocus, 
 						Define.SIZEX - (GfxManager.imgButtonSearchBigRelease.getWidth()/2) - Define.SIZEY64, 

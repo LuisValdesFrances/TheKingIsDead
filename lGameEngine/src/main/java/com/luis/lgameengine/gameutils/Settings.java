@@ -122,7 +122,7 @@ public class Settings {
 		return instance;
 	}
 
-	public void init(Activity activity, boolean[] resolutionAvailableSet){
+	public void init(Activity activity, boolean[] resolutionAvailableSet, int screenOrientation){
 		this.activity = activity;
 		CPUMaxMhzs = getMaxCPUFreqMHz();
 		deviceModel = System.getProperty("device.model");
@@ -192,12 +192,13 @@ public class Settings {
             }
         }
         */
-		
-		if (Settings.getInstance().getScreenOrientation() == Settings.ORIENTATION_LANDSCAPE) {
+
+        int orientation = screenOrientation;//Settings.getInstance().getScreenOrientation();
+		if (orientation == Settings.ORIENTATION_LANDSCAPE) {
 			realWidth = dm.widthPixels > dm.heightPixels ? dm.widthPixels : dm.heightPixels;
 			realHeight = dm.heightPixels > dm.widthPixels ? dm.widthPixels : dm.heightPixels;
 			//Log.i("Debug", "Orientation LANDSCAPE");
-		} else if (Settings.getInstance().getScreenOrientation() == Settings.ORIENTATION_PORTRAIT) {
+		} else if (orientation == Settings.ORIENTATION_PORTRAIT) {
 			realWidth = dm.widthPixels > dm.heightPixels ? dm.heightPixels : dm.widthPixels;
 			realHeight = dm.heightPixels > dm.widthPixels ? dm.heightPixels : dm.widthPixels;
             //Log.i("Debug", "Orientation PORTRAIT");
@@ -237,8 +238,7 @@ public class Settings {
 		}
 		Log.i("Debug", "Resolution: " + resolutionSet);
 		
-		boolean isLandscape =
-                Settings.getInstance().getScreenOrientation() == Settings.ORIENTATION_LANDSCAPE;
+		boolean isLandscape = orientation == Settings.ORIENTATION_LANDSCAPE;
 
 		int frameBufferWidth;
 		int frameBufferHeight;
@@ -265,8 +265,8 @@ public class Settings {
 		bufferX = frameBufferWidth;
 		bufferY = frameBufferHeight;
 		
-		fScaleX = ((float) frameBufferWidth/ dm.widthPixels);
-		fScaleY = ((float) frameBufferHeight/ dm.heightPixels);
+		fScaleX = ((float) frameBufferWidth/ realWidth);
+		fScaleY = ((float) frameBufferHeight/ realHeight);
 		
 	}
 	
