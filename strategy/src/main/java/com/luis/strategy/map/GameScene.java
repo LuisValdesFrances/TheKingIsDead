@@ -14,7 +14,16 @@ import com.luis.strategy.constants.GameParams;
 
 public class GameScene{
 	
-	
+	private int serverValidator;
+
+	public int getServerValidator() {
+		return serverValidator;
+	}
+
+	public void setServerValidator(int serverValidator) {
+		this.serverValidator = serverValidator;
+	}
+
 	private int map;
 	private int playerIndex;
 	private int turnCount;

@@ -6,8 +6,18 @@ import java.util.List;
 public class SceneData implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
-	private int id;//Fijo
+
+	private int serverValidator;
+
+    public int getServerValidator() {
+        return serverValidator;
+    }
+
+    public void setServerValidator(int serverValidator) {
+        this.serverValidator = serverValidator;
+    }
+
+    private int id;//Fijo
 	private int map;//Fijo
 	
 	private String nextPlayer;//Variable
