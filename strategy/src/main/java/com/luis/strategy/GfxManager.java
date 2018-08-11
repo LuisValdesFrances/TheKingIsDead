@@ -70,7 +70,6 @@ public class GfxManager {
 	public static Image imgProtection;
 	public static Image imgProtectionRes;
 	public static Image imgGameHud;
-	public static Image imgChest;
 	public static Image imgCoin;
 	public static Image imgCoinSmall;
 	public static Image imgCrown;
@@ -90,6 +89,8 @@ public class GfxManager {
 	public static Image imgButtonInfoFocus;
 	public static Image imgButtonMapRelease;
 	public static Image imgButtonMapFocus;
+	public static Image imgButtonChestRelease;
+	public static Image imgButtonChestFocus;
 
 	public static Image imgButtonCombatRelease;
 	public static Image imgButtonCombatFocus;
@@ -302,7 +303,6 @@ public class GfxManager {
 				imgArmyDead = Image.createImage("/army_dead.png");
 
 				imgGameHud = Image.createImage("/game_hud.png");
-				imgChest = Image.createImage("/chest.png");
 				imgCoin = Image.createImage("/coin.png");
 				imgCoinSmall = Image.createImage("/coin_small.png");
 				imgCrown = Image.createImage("/crown.png");
@@ -359,9 +359,11 @@ public class GfxManager {
 				imgButtonHelmetRelease = Image.createImage("/helmet_release.png");
 				imgButtonHelmetFocus = Image.createImage("/helmet_focus.png");
 
-				imgButtonMapRelease = Image
-						.createImage("/icon_map_release.png");
+				imgButtonMapRelease = Image.createImage("/icon_map_release.png");
 				imgButtonMapFocus = Image.createImage("/icon_map_release.png");
+
+				imgButtonChestRelease = Image.createImage("/chest_release.png");
+				imgButtonChestFocus = Image.createImage("/chest_focus.png");
 
 				imgButtonYellowRelease = Image
 						.createImage("/button_yellow_release.png");
@@ -660,8 +662,7 @@ public class GfxManager {
 		imgArmyDead = null;
 
 		imgGameHud = null;
-		imgChest = null;
-		imgCoin = null;
+        imgCoin = null;
 		imgCoinSmall = null;
 		imgCrown = null;
 		imgButtonPauseRelease = null;
@@ -684,6 +685,8 @@ public class GfxManager {
 		imgButtonGreenFocus = null;
 		imgButtonRedRelease = null;
 		imgButtonRedFocus = null;
+        imgButtonMapRelease = null;
+        imgButtonMapFocus = null;
 
 		imgButtonDeleteFocus = null;
 		imgButtonDeleteRelease = null;

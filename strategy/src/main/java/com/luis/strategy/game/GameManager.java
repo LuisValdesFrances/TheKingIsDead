@@ -31,6 +31,7 @@ import com.luis.strategy.gui.BattleBox;
 import com.luis.strategy.gui.DialogBox;
 import com.luis.strategy.gui.FlagButton;
 import com.luis.strategy.gui.MapBox;
+import com.luis.strategy.gui.RankingBox;
 import com.luis.strategy.gui.SimpleBox;
 import com.luis.strategy.gui.CityBox;
 import com.luis.strategy.map.ActionIA;
@@ -101,21 +102,24 @@ public class GameManager {
 	public static final int SUB_STATE_ARMY_MANAGEMENT = 13;
 	public static final int SUB_STATE_CITY_MANAGEMENT = 14;
 	public static final int SUB_STATE_MAP_MANAGEMENT = 15;
-	public static final int SUB_STATE_ACTION_IA_WAIT_END = 16;
+    public static final int SUB_STATE_RANKING_MANAGEMENT = 16;
+	public static final int SUB_STATE_ACTION_IA_WAIT_END = 17;
 	
 	//GUI
 	private Button btnNext;
 	private Button btnCancel;
 	private Button btnArmy;
+    private Button btnChest;
 	private FlagButton btnFlagHelmet;
 	private FlagButton btnFlagCastle;
 	
 	private Button btnMap;
-	
+
 	private ArmyBox armyBox;
 	private BattleBox battleBox;
 	private CityBox cityBox;
 	private MapBox mapBox;
+    private RankingBox rankingBox;
 	private SimpleBox economyBox;
 	private SimpleBox resultBox;
 	private SimpleBox discardBox;
@@ -317,6 +321,34 @@ public class GameManager {
 				}
 			}
 		};
+
+        int margin = Define.SIZEY64;
+        String text = "" + getCurrentPlayer().getGold();
+        int totalWidth = GfxManager.imgButtonChestRelease.getWidth() + margin + Font.getFontWidth(Font.FONT_MEDIUM)*text.length();
+        int x = Define.SIZEX - Define.SIZEX4 - totalWidth/2;
+        int y = Define.SIZEY - GfxManager.imgGameHud.getHeight()/2 + GfxManager.imgButtonChestRelease.getHeight()/4;
+        btnChest = new Button(
+                GfxManager.imgButtonChestRelease,
+                GfxManager.imgButtonChestFocus,
+                x, y,
+                null, 0){
+            @Override
+            public void onButtonPressDown(){}
+
+            @Override
+            public void onButtonPressUp(){
+                if(state == STATE_DEBUG){
+                    rankingBox.start(gameScene.getPlayerList());
+                    btnChest.setDisabled(true);
+                }else{
+                    if(getCurrentPlayer().getActionIA() == null && subState == SUB_STATE_ACTION_WAIT){
+                        changeSubState(SUB_STATE_RANKING_MANAGEMENT);
+                        rankingBox.start(gameScene.getPlayerList());
+                        setDisabled(true);
+                    }
+                }
+            }
+        };
 		
 		armyBox = new ArmyBox(){
 			@Override
@@ -359,6 +391,7 @@ public class GameManager {
 		};
 		
 		mapBox = new MapBox(worldConver, gameScene.getNumberPartsW(), gameScene.getNumberPartsH());
+        rankingBox = new RankingBox(worldConver, gameScene.getNumberPartsW(), gameScene.getNumberPartsH());
 		
 		battleBox = new BattleBox(){
 			@Override
@@ -703,6 +736,11 @@ public class GameManager {
 					changeSubState(SUB_STATE_ACTION_WAIT);
 				}
 				break;
+			case SUB_STATE_RANKING_MANAGEMENT:
+                    if(!rankingBox.update(UserInput.getInstance().getMultiTouchHandler(), delta)){
+                        changeSubState(SUB_STATE_ACTION_WAIT);
+                    }
+                    break;
 			case SUB_STATE_ACTION_IA_WAIT_END:
 				if(getCurrentPlayer().getActionIA() != null && IAWaitCount < IA_WAIT){
 					IAWaitCount+=delta;
@@ -724,6 +762,9 @@ public class GameManager {
 			if(!mapBox.update(UserInput.getInstance().getMultiTouchHandler(), delta)){
 				btnMap.setDisabled(false);
 			}
+            if(!rankingBox.update(UserInput.getInstance().getMultiTouchHandler(), delta)){
+                btnChest.setDisabled(false);
+            }
 			
 			if(!cityBox.update(UserInput.getInstance().getMultiTouchHandler(), delta)){
 			
@@ -1030,6 +1071,7 @@ public class GameManager {
 		btnCancel.update(multiTouchHandler);
 		btnNext.update(multiTouchHandler);
 		btnMap.update(multiTouchHandler);
+        btnChest.update(multiTouchHandler);
 		btnArmy.update(multiTouchHandler);
 		btnFlagHelmet.update(multiTouchHandler, delta);
 		btnFlagCastle.update(multiTouchHandler, delta);
@@ -1046,14 +1088,14 @@ public class GameManager {
 				GfxManager.imgButtonDebugPauseRelease.getHeight(), 
 				Graphics.VCENTER | Graphics.LEFT);
 		}
-		drawRanking(g);
+
+
 		if(state != STATE_END){
 			TextManager.drawSimpleText(g, Font.FONT_MEDIUM, getCurrentPlayer().getName(), 
 					0, Define.SIZEY-GfxManager.imgGameHud.getHeight(), Graphics.BOTTOM | Graphics.LEFT);
 			}
 		g.drawImage(GfxManager.imgGameHud, 0, Define.SIZEY, Graphics.BOTTOM | Graphics.LEFT);
-		drawGold(g);
-		
+
 		economyBox.draw(g, GfxManager.imgBlackBG);
 		armyBox.draw(g);
 		discardBox.draw(g, null);
@@ -1062,6 +1104,7 @@ public class GameManager {
 		battleBox.draw(g);
 		cityBox.draw(g);
 		mapBox.draw(g);
+		rankingBox.draw(g);
 		endGameBox.draw(g, GfxManager.imgBlackBG);
 		resultBox.draw(g, GfxManager.imgBlackBG);
 		btnCancel.draw(g, 0, 0);
@@ -1070,12 +1113,23 @@ public class GameManager {
 		btnFlagCastle.draw(g);
 		btnMap.draw(g, 0, 0);
 		btnArmy.draw(g, 0, 0);
-		if(Main.debug){
+		btnChest.draw(g, 0, 0);
+
+        //Gold
+        TextManager.drawSimpleText(g, Font.FONT_MEDIUM,
+                "" + getCurrentPlayer().getGold(),
+                btnChest.getX()+ btnChest.getWidth()/2,
+                btnChest.getY(),
+                Graphics.VCENTER | Graphics.LEFT);
+
+
+        if(Main.debug){
 			btnDebugPause.draw(g, 0, 0);
 		}
 		NotificationBox.getInstance().draw(g);
 	}
-	
+
+	/*
 	private void drawGold(Graphics g){
 		int margin = Define.SIZEY64;
 		String text = "" + getCurrentPlayer().getGold();
@@ -1088,42 +1142,7 @@ public class GameManager {
 			y, 
 			Graphics.VCENTER | Graphics.HCENTER);
 	}
-	
-	private void drawRanking(Graphics g){
-		int nPlayer = 0;
-		for(Player player : gameScene.getPlayerList()){
-			if(player.getCapitalkingdom() != null){
-				nPlayer++;
-			}
-		}
-		Player[] pList = new Player[nPlayer];
-		int index = 0;
-		for(int i = 0; i < gameScene.getPlayerList().size(); i++){
-			if(gameScene.getPlayerList().get(i).getCapitalkingdom() != null){
-				pList[index++] = gameScene.getPlayerList().get(i);
-			}
-		}
-		
-		//Ordeno
-		for(int i = 0; i < pList.length-1; i++){
-			for(int j = 0; j < pList.length-1; j++){
-				if(pList[j].getTaxes() >  pList[j+1].getTaxes()){
-					Player aux = pList[j+1];
-					pList[j+1] = pList[j];
-					pList[j] = aux;
-				}
-			}
-		}
-		g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-		for(int i = pList.length-1; i > -1; i--){
-			TextManager.drawSimpleText(g, Font.FONT_SMALL, 
-					pList[i].getName() + " " + pList[i].getTaxes(), 
-					Define.SIZEX-Define.SIZEX64, 
-					Define.SIZEY-GfxManager.imgGameHud.getHeight() - (i*Font.getFontHeight(Font.FONT_SMALL)), 
-					Graphics.BOTTOM | Graphics.RIGHT);
-		}
-		
-	}
+	*/
 	
 	private void cleanArmyAction(){
 		for(Player player : gameScene.getPlayerList()){
@@ -1208,6 +1227,7 @@ public class GameManager {
 		btnNext.setDisabled(true);
 		btnCancel.setDisabled(true);
 		btnMap.setDisabled(true);
+        btnChest.setDisabled(true);
 		btnArmy.setDisabled(true);
 		btnFlagHelmet.hide();
 		btnFlagCastle.hide();
@@ -1396,6 +1416,7 @@ public class GameManager {
 		btnNext.setDisabled(true);
 		btnCancel.setDisabled(true);
 		btnMap.setDisabled(true);
+        btnChest.setDisabled(true);
 		btnArmy.setDisabled(true);
 		subState = newSubState;
 		
@@ -1430,6 +1451,7 @@ public class GameManager {
 				btnNext.setDisabled(getCurrentPlayer().getActionIA()!=null);
 				btnCancel.setDisabled(true);
 				btnMap.setDisabled(false);
+                btnChest.setDisabled(false);
 				
 				//Se deshabilita este boton, si no quedan tropas activas
 				boolean disabled = true;
@@ -1556,6 +1578,7 @@ public class GameManager {
 			case SUB_STATE_ARMY_MANAGEMENT:
 			case SUB_STATE_CITY_MANAGEMENT:
 			case SUB_STATE_MAP_MANAGEMENT:
+			case SUB_STATE_RANKING_MANAGEMENT:
 				gameScene.cleanKingdomTarget();
 				gameScene.resetKingdoms();
 				break;
@@ -1572,6 +1595,7 @@ public class GameManager {
 		case STATE_DEBUG:
 			gameScene.resetKingdoms();
 			btnMap.setDisabled(false);
+            btnChest.setDisabled(false);
 			break;
 		}
 	}

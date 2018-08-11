@@ -14,7 +14,7 @@ import com.luis.strategy.constants.Define;
 
 public class LoginBox extends MenuBox{
 
-private Keyboard keyboard;
+	private Keyboard keyboard;
 	
 	private String textName;
 	private String textPassword;

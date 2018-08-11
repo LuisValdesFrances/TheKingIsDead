@@ -339,6 +339,7 @@ public class ModeMenu {
 
             }
 			else if(Main.lastState > Define.ST_GAME_INIT_PASS_AND_PLAY){
+				MenuElement.bgAlpha = (int)(GameParams.BG_BLACK_ALPHA*0.5);
 				SndManager.getInstance().playMusic(Main.MUSIC_MAIN, true);
 				Main.getInstance().getActivity().requestInterstitial();
 			}
