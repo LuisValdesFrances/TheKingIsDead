@@ -61,6 +61,9 @@ public class ModeMenu {
 	
 	private static Button btnAbout;
 	private static Button btnHelp;
+
+    private static Button btnEasterEgg;
+	private static Button btnDebug;
 	
 	
 	private static ListBox createSceneBox;
@@ -88,6 +91,9 @@ public class ModeMenu {
 	private static String onLineGameName;
 	
 	private static int numLetters;
+
+	private static int debugCount;
+    private static int easterEggCount;
 	
 	public static void init(int _iMenuState){
 		Log.i("Info", "Init State: "+ _iMenuState);
@@ -304,6 +310,56 @@ public class ModeMenu {
 						Main.changeState(Define.ST_MENU_SELECT_GAME, false);
 					}
 				};
+
+                debugCount = 0;
+                btnDebug = new Button(Define.SIZEX8, Define.SIZEY8, 0, Define.SIZEY-Define.SIZEY8){
+                    @Override
+                    public void onButtonPressDown(){}
+
+                    @Override
+                    public void onButtonPressUp(){
+                        if(debugCount == 8){
+                            debugCount = 0;
+                            Main.debug = !Main.debug;
+                            NotificationBox.getInstance().addMessage(Main.debug?"DEBUG ON":"DEBUG OFF");
+                        }else{
+                            debugCount++;
+                        }
+                        reset();
+                    }
+                };
+
+
+                btnEasterEgg = new Button(
+                        GfxManager.imgTitle.getWidth(),GfxManager.imgTitle.getHeight(),
+                        Define.SIZEX-(int)(GfxManager.imgButtonMenuBigRelease.getWidth()/2)-Define.SIZEY64,
+                        GfxManager.imgTitle.getHeight()/2 + Define.SIZEY32){
+                    @Override
+                    public void onButtonPressDown(){}
+
+                    @Override
+                    public void onButtonPressUp(){
+                        if(easterEggCount == 8){
+                            easterEggCount = 0;
+
+                            SndManager.getInstance().stopMusic();
+                            NotificationBox.getInstance().addMessage("SOUND ON");
+                            String dataConfig = FileIO.getInstance().loadData(Define.DATA_CONFIG, Main.getInstance().getActivity());
+                            int language = Integer.parseInt(dataConfig.split("\n")[0]);
+                            boolean notifications = dataConfig.split("\n")[2].equals("true");
+                            boolean game3D = dataConfig.split("\n")[3].equals("true");
+                            String data = "" + language + "\n" + true + "\n" + notifications + "\n" + game3D;
+                            FileIO.getInstance().saveData(dataConfig, Define.DATA_CONFIG, Main.getInstance().getActivity());
+
+
+                            SndManager.getInstance().playMusic(Main.MUSIC_SIR_ROBIN, false);
+                        }else{
+                            easterEggCount++;
+                        }
+                        SndManager.getInstance().playFX(Main.FX_COINS, 0);
+                        reset();
+                    }
+                };
 				
 				btnCampaign.setDisabled(true);
 
@@ -386,8 +442,7 @@ public class ModeMenu {
 					Main.getInstance().getActivity().startActivity(i);
 				}
 			};
-			
-			break;
+            break;
 		case Define. ST_MENU_EXIT:
 		case Define. ST_MENU_HELP:
 		case Define. ST_MENU_ABOUT:
@@ -1050,8 +1105,9 @@ public class ModeMenu {
 		
 		case Define.ST_MENU_MAIN:
 			runMenuBG(Main.getDeltaSec());
+			NotificationBox.getInstance().update(Main.getDeltaSec());
 			configurationBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
-				
+
 			btnConfiguration.setDisabled(configurationBox.isActive());
 			btnConfiguration.update(UserInput.getInstance().getMultiTouchHandler());
 			btnCampaign.update(UserInput.getInstance().getMultiTouchHandler());
@@ -1059,7 +1115,9 @@ public class ModeMenu {
 			btnMultiPlayer.update(UserInput.getInstance().getMultiTouchHandler());
 			btnInfo.setDisabled(configurationBox.isActive());
 			btnInfo.update(UserInput.getInstance().getMultiTouchHandler());
-			
+			btnDebug.update(UserInput.getInstance().getMultiTouchHandler());
+            btnEasterEgg.update(UserInput.getInstance().getMultiTouchHandler());
+
 			break;
 			
 		case Define.ST_MENU_INFO:
@@ -1242,6 +1300,7 @@ public class ModeMenu {
 			_g.setAlpha(alpha);
 			_g.drawImage(GfxManager.imgBlackBG, 0, 0, Graphics.TOP | Graphics.LEFT);
 			_g.setAlpha(255);
+            NotificationBox.getInstance().draw(_g);
 			break;
 			
 		case Define.ST_MENU_OPTIONS:

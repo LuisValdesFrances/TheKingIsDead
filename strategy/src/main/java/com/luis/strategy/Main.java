@@ -95,6 +95,7 @@ public class Main extends Screen implements Runnable {
     public static final byte MUSIC_MAIN = 1;
 	public static final byte MUSIC_MAP = 2;
 	public static final byte MUSIC_START_BATTLE = 3;
+    public static final byte MUSIC_SIR_ROBIN = 4;
 	
 	//FX
 	public static final byte FX_HIT = 0;
@@ -120,7 +121,8 @@ public class Main extends Screen implements Runnable {
 			R.raw.intro,
 			R.raw.main,
 			R.raw.map,
-			R.raw.battle_start
+			R.raw.battle_start,
+			R.raw.sir_robin
 	 };
 	
 	private static final int FX_FILE [] = {
