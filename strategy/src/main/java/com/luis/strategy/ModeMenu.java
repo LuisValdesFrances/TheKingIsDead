@@ -808,7 +808,8 @@ public class ModeMenu {
 				
 			Main.getInstance().startClock(Main.TYPE_EARTH);
 			SceneListData sceneListData = OnlineInputOutput.getInstance().reviceSceneListData(
-					Main.getInstance().getActivity(), GameState.getInstance().getName());//check
+					Main.getInstance().getActivity(),
+                    Main.debug?"-1":GameState.getInstance().getName());//check
 			Main.getInstance().stopClock();
 
 			if (sceneListData != null) {
@@ -878,7 +879,9 @@ public class ModeMenu {
 						}
 					}
 				};
-				selectSceneBox.setDisabledList(disableList);
+				if(!Main.debug) {
+					selectSceneBox.setDisabledList(disableList);
+				}
 				selectSceneBox.start();
 				
 				updateScenes();
@@ -900,7 +903,9 @@ public class ModeMenu {
 			 Main.getInstance().startClock(Main.TYPE_EARTH);
 			 PreSceneListData preSceneListData =  
 					 OnlineInputOutput.getInstance().revicePreSceneListData(
-							 Main.getInstance().getActivity(), OnlineInputOutput.URL_GET_PRE_SCENE_LIST, GameState.getInstance().getName());//check
+							 Main.getInstance().getActivity(),
+                             OnlineInputOutput.URL_GET_PRE_SCENE_LIST,
+                             Main.debug?"-1":GameState.getInstance().getName());//check
 			 Main.getInstance().stopClock();
 			 
 			 dialogBox = new DialogBox(GfxManager.imgMediumBox){
@@ -1671,7 +1676,8 @@ public class ModeMenu {
 							selectSceneBox != null){
 						SceneListData sceneListData = 
 								OnlineInputOutput.getInstance().reviceSceneListData(
-										Main.getInstance().getActivity(), GameState.getInstance().getName());
+										Main.getInstance().getActivity(),
+                                        Main.debug?"-1":GameState.getInstance().getName());
 						
 						if (sceneListData != null) {
 							Log.i("Debug", "Actualizando selectSceneBox " + Main.iFrame);
@@ -1695,7 +1701,9 @@ public class ModeMenu {
 								}
 							}
 						selectSceneBox.refresh(sceneListData, RscManager.allText[RscManager.TXT_SELECT_GAME], textList);
-						selectSceneBox.setDisabledList(disableList);
+                            if(!Main.debug) {
+                                selectSceneBox.setDisabledList(disableList);
+                            }
 						}
 						
 						updateNotificatons();
@@ -1729,7 +1737,9 @@ public class ModeMenu {
 						
 						preSceneListData =  
 								OnlineInputOutput.getInstance().revicePreSceneListData(
-										Main.getInstance().getActivity(), OnlineInputOutput.URL_GET_PRE_SCENE_LIST, GameState.getInstance().getName());
+										Main.getInstance().getActivity(),
+                                        OnlineInputOutput.URL_GET_PRE_SCENE_LIST,
+                                        Main.debug?"-1":GameState.getInstance().getName());
 						if (preSceneListData != null) {
 							Log.i("Debug", "Actualizando selectPreSceneBox " + Main.iFrame);
 							String[] textList = new String[preSceneListData.getPreSceneDataList().size()];

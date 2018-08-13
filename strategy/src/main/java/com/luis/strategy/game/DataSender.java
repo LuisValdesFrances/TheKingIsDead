@@ -25,11 +25,11 @@ public class DataSender{
 	public String sendGameScene(GameScene gameScene, int state, boolean showWait) {
 		GameState.getInstance().setGameScene(gameScene);
 		SceneData sceneData = GameBuilder.getInstance().buildSceneData(state);
-		
+
 		if(showWait){
 			Main.getInstance().startClock(Main.TYPE_EARTH);
 		}
-		String result = 
+		String result =
 				OnlineInputOutput.getInstance().sendDataPackage(
 						Main.getInstance().getActivity(),
 						OnlineInputOutput.URL_UPDATE_SCENE, sceneData);
@@ -41,12 +41,12 @@ public class DataSender{
 	
 	public void sendGameNotifications(){
 		for(Notification n : notificationList){
-			
+
 			String type = "" + n.type;
-			
+
 			OnlineInputOutput.getInstance().sendNotification(
 					Main.getInstance().getActivity(),
-					"" + GameState.getInstance().getSceneData().getId(), 
+					"" + GameState.getInstance().getSceneData().getId(),
 					n.from, n.to, ""+n.message, type);
 		}
 		/*
@@ -56,13 +56,13 @@ public class DataSender{
 				for(Notification n : notificationList){
 				OnlineInputOutput.getInstance().sendNotification(
 					Main.getInstance().getActivity(),
-					"" + GameState.getInstance().getSceneData().getId(), 
+					"" + GameState.getInstance().getSceneData().getId(),
 					n.from, n.to, ""+n.message, type);
 			}
 			}
 		};
 		thread.start();
-		
+
 		*/
 	}
 	

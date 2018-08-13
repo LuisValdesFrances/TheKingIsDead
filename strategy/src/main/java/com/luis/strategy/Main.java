@@ -13,6 +13,7 @@ import com.luis.lgameengine.implementation.graphics.Image;
 import com.luis.lgameengine.implementation.graphics.Screen;
 import com.luis.lgameengine.implementation.sound.SndManager;
 import com.luis.strategy.constants.Define;
+import com.luis.strategy.game.GameManager;
 
 /**
  * @author Luis Valdes Frances
@@ -391,8 +392,16 @@ public class Main extends Screen implements Runnable {
 					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_SHIELD_A).getAction()), 0, _g.getTextHeight() * 3, COLOR_WHITE);
 				_g.drawText("Key B: " + 
 					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_SHIELD_B).getAction()), Define.SIZEX2,_g.getTextHeight() * 3, COLOR_WHITE);
-				
-
+			}if(debug){
+				//Margenes
+				if(isIntervalTwo()) {
+					_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
+					_g.setColor(Main.COLOR_GREEN);
+					_g.fillRect(0, 0, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
+					_g.fillRect(0, Define.SIZEY-Define.SCR_MIDLE/32, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
+					_g.fillRect(Define.SIZEX-Define.SCR_MIDLE/32, 0, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
+					_g.fillRect(Define.SIZEX-Define.SCR_MIDLE/32, Define.SIZEY-Define.SCR_MIDLE/32, Define.SCR_MIDLE/32, Define.SCR_MIDLE/64);
+				}
 			}
 			_g.setAlpha(255);
 		} else {

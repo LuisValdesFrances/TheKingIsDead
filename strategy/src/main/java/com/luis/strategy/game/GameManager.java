@@ -49,26 +49,26 @@ public class GameManager {
 	//
 	public static boolean game3D = false;
 	private Image gameBuffer;
-	public float distorsion = 1.16f;
-	
-	public DataSender dataSender;
-	
-	public static Button btnDebugPause;
+	private float distorsion = 1.16f;
+
+
+	private static Button btnDebugPause;
 	private static boolean isDebugPaused;
-	
+
 	private static final float IA_WAIT = 1f;
-	
+
 	private static float IAWaitCount;
-	
+
 	//Pad
 	private int lastTouchX;
 	private int lastTouchY;
 	private float cameraTargetX;
 	private float cameraTargetY;
-	
-	public GameCamera gameCamera;
-	public WorldConver worldConver;
-	
+
+	private GameCamera gameCamera;
+	private WorldConver worldConver;
+	private DataSender dataSender;
+
 	private GameScene gameScene;
 	
 	private int localTurnCount;

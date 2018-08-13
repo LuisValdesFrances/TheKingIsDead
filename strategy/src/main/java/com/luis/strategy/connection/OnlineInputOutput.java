@@ -12,6 +12,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.luis.strategy.Main;
 import com.luis.strategy.datapackage.scene.NotificationListData;
 import com.luis.strategy.datapackage.scene.PreSceneListData;
 import com.luis.strategy.datapackage.scene.SceneData;
@@ -41,6 +42,7 @@ public class OnlineInputOutput {
 	public static final String URL_UPDATE_SCENE = "updateSceneServlet";
 	
 	public static final String MSG_NO_CONNECTION = "No connection";
+	public static final String MSG_DEBUG = "Debug";
 	
 	//Notifications code
 	public static final int CODE_NOTIFICATION_YOU_LOST_GAME= 0;
@@ -105,7 +107,11 @@ public class OnlineInputOutput {
 	}
 
 	public String sendNotification(Context context, String scene, String from, String to, String message, String type){
-		
+
+		if(Main.debug){
+			return MSG_DEBUG;
+		}
+
 		if(!isOnline(context)){
 			return MSG_NO_CONNECTION;
 		}
@@ -147,6 +153,10 @@ public class OnlineInputOutput {
 	}
 
 	public String sendIncidence(Context context, String scene, String player, String message){
+
+        if(Main.debug){
+            return MSG_DEBUG;
+        }
 
 		if(!isOnline(context)){
 			return MSG_NO_CONNECTION;
@@ -220,7 +230,10 @@ public class OnlineInputOutput {
 	}
 	
 	public String sendUser(Context context, String URL, String name, String password, String firebaseIdDeviceToken){
-		
+
+        if(Main.debug){
+            return MSG_DEBUG;
+        }
 		if(!isOnline(context)){
 			return MSG_NO_CONNECTION;
 		}
@@ -258,9 +271,11 @@ public class OnlineInputOutput {
 		return result;
 	}
 
-
     public String sendFirebaseIdDeviceToken(Context context, String name, String firebaseIdDeviceToken){
 
+        if(Main.debug){
+            return MSG_DEBUG;
+        }
         if(!isOnline(context)){
             return MSG_NO_CONNECTION;
         }
@@ -298,6 +313,10 @@ public class OnlineInputOutput {
     }
 	
 	public String sendPreScene(Context context, String URL, String map, String user, String name){
+
+        if(Main.debug){
+            return MSG_DEBUG;
+        }
 		if(!isOnline(context)){
 			return MSG_NO_CONNECTION;
 		}
@@ -335,6 +354,10 @@ public class OnlineInputOutput {
 	}
 	
 	public String sendInscription(Context context, String scene, String user, String create){
+
+        if(Main.debug){
+            return MSG_DEBUG;
+        }
 		if(!isOnline(context)){
 			return MSG_NO_CONNECTION;
 		}
@@ -372,6 +395,10 @@ public class OnlineInputOutput {
 	}
 	
 	public String sendDataPackage(Context context, String URL, Serializable dataPackage){
+
+        if(Main.debug){
+            return MSG_DEBUG;
+        }
 		if(!isOnline(context)){
 			return MSG_NO_CONNECTION;
 		}
@@ -471,8 +498,7 @@ public class OnlineInputOutput {
 		}
 		return sceneListData;
 	}
-	
-	
+
 	public SceneData reviceSceneData(Context context, String URL, String scene){
 		if(!isOnline(context)){
 			return null;
