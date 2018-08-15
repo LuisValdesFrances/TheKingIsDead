@@ -1975,7 +1975,7 @@ public class GameManager {
 			}
 		}
 		army1.setDefeat(army1.isDefeat() || army2.isDefeat());
-		//Si cuelquiera de los ejercitos aun no ha actuado, mantengo el estado
+		//Si cualquiera de los ejercitos aun no ha actuado, mantengo el estado
 		if(army1.getState()==Army.STATE_ON || army2.getState()==Army.STATE_ON){
 			army1.changeState(Army.STATE_ON);
 		}

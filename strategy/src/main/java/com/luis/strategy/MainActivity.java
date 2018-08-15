@@ -174,24 +174,27 @@ public class MainActivity extends Activity{
 
 	public void loadInterstitial(){
 
-        runOnUiThread(new Runnable(){
-            @Override
-            public void run() {
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-        });
+		if(!Main.IS_GAME_DEBUG) {
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					mInterstitialAd.loadAd(new AdRequest.Builder().build());
+				}
+			});
+		}
     }
 
 	public void requestInterstitial() {
-
-		runOnUiThread(new Runnable(){
-			@Override
-			public void run() {
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                }
-			}
-		});
+		if(!Main.IS_GAME_DEBUG) {
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					if (mInterstitialAd.isLoaded()) {
+						mInterstitialAd.show();
+					}
+				}
+			});
+		}
 	}
 
 	//Firebase

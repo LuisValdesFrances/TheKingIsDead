@@ -25,6 +25,9 @@ public class MapBox extends MenuBox{
 	private int numberPartsW;
 	private int numberPartsH;
 
+	private int worldWidth;
+	private int worldHeight;
+
 	public MapBox(WorldConver worldConver, int numberPartsW, int numberPartsH) {
 		super(
 				Define.SIZEX, Define.SIZEY, GfxManager.imgBigBox, null, null,
@@ -51,12 +54,21 @@ public class MapBox extends MenuBox{
 		
 		this.numberPartsW = numberPartsW;
 		this.numberPartsH = numberPartsH;
-		this.imgMap = new Image((int)worldConver.getWorldWidth(), (int)worldConver.getWorldHeight());
+		this.worldWidth = (int)worldConver.getWorldWidth();
+		this.worldHeight = (int)worldConver.getWorldHeight();
+
 	}
 	
 	public void start(List<Player>playerList){
 		super.start();
 		this.playerList = playerList;
+		this.imgMap = new Image(worldWidth, worldHeight);
+	}
+
+	@Override
+	public void onFinish(){
+		this.imgMap = null;
+		System.gc();
 	}
 	
 	public void draw(Graphics g){
