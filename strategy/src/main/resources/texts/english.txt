@@ -20,7 +20,7 @@ English
 Español
 Català
 CAMPAING
-CONTINUE
+PLAY
 START
 MULTIPLAYER
 ON LINE
@@ -50,6 +50,7 @@ HUMAN
 AI
 YOUR TURN
 NEXT
+You must select at least one human player.
 Points:
 Record:
 Continue

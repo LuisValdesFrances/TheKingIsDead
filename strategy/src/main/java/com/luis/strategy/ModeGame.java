@@ -409,7 +409,7 @@ public class ModeGame {
 	public static final int DEBUG_BUTTON_X = Define.SIZEX-DEBUG_BUTTON_W-DEBUG_BUTTON_W/2;
 	public static final int DEBUG_BUTTON_Y = Define.SIZEY4 - DEBUG_BUTTON_H/2;
 	private static void drawDebugButton(Graphics _g){
-		if(Main.debug){
+		if(Main.IS_GAME_DEBUG){
 			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			if(!showDebugInfo){
 				_g.setColor(Main.COLOR_RED);
@@ -421,7 +421,7 @@ public class ModeGame {
 	}
 	
 	private static void updateDebugButton(){
-		if(Main.debug){
+		if(Main.IS_GAME_DEBUG){
 			if((UserInput.getInstance().getMultiTouchHandler().getTouchFrames(0) == 1) && 
 				UserInput.getInstance().compareTouch(
 					DEBUG_BUTTON_X, DEBUG_BUTTON_Y, DEBUG_BUTTON_X + DEBUG_BUTTON_W, DEBUG_BUTTON_Y + DEBUG_BUTTON_H, 0)){

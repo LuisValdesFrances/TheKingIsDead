@@ -19,6 +19,7 @@ import java.util.List;
 public class RankingBox extends MenuBox {
 
     private List<Player> playerList;
+    private Player[] pList;
 
     public RankingBox(WorldConver worldConver, int numberPartsW, int numberPartsH) {
         super(
@@ -48,6 +49,33 @@ public class RankingBox extends MenuBox {
     public void start(List<Player>playerList){
         super.start();
         this.playerList = playerList;
+
+
+        int nPlayer = 0;
+        for(Player player : this.playerList){
+            if(player.getCapitalkingdom() != null){
+                nPlayer++;
+            }
+        }
+        this.pList = new Player[nPlayer];
+        int index = 0;
+        for(int i = 0; i < playerList.size(); i++){
+            if(playerList.get(i).getCapitalkingdom() != null){
+                this.pList[index++] = playerList.get(i);
+            }
+        }
+
+        //Ordeno
+        for(int i = 0; i < pList.length-1; i++){
+            for(int j = 0; j < pList.length-1; j++){
+                if(pList[j].getTaxes() <  pList[j+1].getTaxes()){
+                    Player aux = pList[j+1];
+                    pList[j+1] = pList[j];
+                    pList[j] = aux;
+                }
+            }
+        }
+
     }
 
     public void draw(Graphics g){
@@ -58,30 +86,7 @@ public class RankingBox extends MenuBox {
     }
 
     private void drawRanking(Graphics g){
-        int nPlayer = 0;
-        for(Player player : playerList){
-            if(player.getCapitalkingdom() != null){
-                nPlayer++;
-            }
-        }
-        Player[] pList = new Player[nPlayer];
-        int index = 0;
-        for(int i = 0; i < playerList.size(); i++){
-            if(playerList.get(i).getCapitalkingdom() != null){
-                pList[index++] = playerList.get(i);
-            }
-        }
 
-        //Ordeno
-        for(int i = 0; i < pList.length-1; i++){
-            for(int j = 0; j < pList.length-1; j++){
-                if(pList[j].getTaxes() >  pList[j+1].getTaxes()){
-                    Player aux = pList[j+1];
-                    pList[j+1] = pList[j];
-                    pList[j] = aux;
-                }
-            }
-        }
 
         float modH = 0.8f;
         int fileH = (int)(GfxManager.imgFlagSmallList.get(0).getHeight()*modH);
@@ -114,10 +119,7 @@ public class RankingBox extends MenuBox {
                 startY,
                 Graphics.VCENTER | Graphics.HCENTER);
 
-        for(int i = pList.length-1; i > -1; i--){
-
-
-
+        for(int i = 0; i < pList.length; i++){
             g.drawImage(GfxManager.imgFlagSmallList.get(pList[i].getFlag()),
                     startX,
                     startY +  Font.getFontHeight(Font.FONT_MEDIUM) + Font.getFontHeight(Font.FONT_SMALL) /2 + (i*fileH),

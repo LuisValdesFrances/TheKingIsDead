@@ -20,8 +20,6 @@ import com.luis.strategy.game.GameManager;
  */
 public class Main extends Screen implements Runnable {
 	
-	public static boolean debug = false;
-
 	public static Main instance;
 	public static Main getInstance(){
 		return instance;
@@ -43,7 +41,7 @@ public class Main extends Screen implements Runnable {
 	}
 	public static float getDeltaSec(){
 		float d = Math.min(((float)deltaTime / 1000f), 0.1f);
-		if(debug){
+		if(IS_GAME_DEBUG){
 			if(d > 0.1f){
 				d = 0.1f;
 			}
@@ -81,11 +79,11 @@ public class Main extends Screen implements Runnable {
 	public static final int COLOR_GREEN_BG = 0xff8bfc88;
 	public static final int COLOR_YELOW_BG = 0xfffcf659;
 
-	public static final boolean IS_FPS = false;
-	public static final boolean IS_DEBUG = false;
-	public static final boolean IS_TOUCH_INPUT_DEBUG = false;
-	public static final boolean IS_KEY_INPUT_DEBUG = false;
-	public static final boolean IS_GAME_DEBUG = false;
+	public static boolean IS_FPS = false;
+	public static boolean IS_DEBUG = false;
+	public static boolean IS_TOUCH_INPUT_DEBUG = false;
+	public static boolean IS_KEY_INPUT_DEBUG = false;
+    public static boolean IS_GAME_DEBUG = false;
 
 	public static final int INDEX_DATA_LANGUAGE = 0;
 	public static final int INDEX_DATA_RECORD = 1;
@@ -392,7 +390,7 @@ public class Main extends Screen implements Runnable {
 					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_SHIELD_A).getAction()), 0, _g.getTextHeight() * 3, COLOR_WHITE);
 				_g.drawText("Key B: " + 
 					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_SHIELD_B).getAction()), Define.SIZEX2,_g.getTextHeight() * 3, COLOR_WHITE);
-			}if(debug){
+			}if(IS_GAME_DEBUG){
 				//Margenes
 				if(isIntervalTwo()) {
 					_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
@@ -400,7 +398,7 @@ public class Main extends Screen implements Runnable {
 					_g.fillRect(0, 0, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
 					_g.fillRect(0, Define.SIZEY-Define.SCR_MIDLE/32, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
 					_g.fillRect(Define.SIZEX-Define.SCR_MIDLE/32, 0, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
-					_g.fillRect(Define.SIZEX-Define.SCR_MIDLE/32, Define.SIZEY-Define.SCR_MIDLE/32, Define.SCR_MIDLE/32, Define.SCR_MIDLE/64);
+					_g.fillRect(Define.SIZEX-Define.SCR_MIDLE/32, Define.SIZEY-Define.SCR_MIDLE/32, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
 				}
 			}
 			_g.setAlpha(255);

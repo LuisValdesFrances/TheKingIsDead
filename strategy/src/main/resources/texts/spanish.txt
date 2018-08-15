@@ -22,7 +22,7 @@ Català
 CAMPAÑA
 CONTINUAR
 EMPEZAR
-MULTIJUGADOR
+JUGAR
 ON LINE
 NUEVA PARTIDA
 NUEVA CUENTA
@@ -50,6 +50,7 @@ HUMANO
 IA
 TU TURNO
 TURNO
+Debes de seleccionar al menos un jugador humano.
 Puntos:
 Record:
 Continua

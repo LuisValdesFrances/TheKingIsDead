@@ -108,7 +108,7 @@ public class OnlineInputOutput {
 
 	public String sendNotification(Context context, String scene, String from, String to, String message, String type){
 
-		if(Main.debug){
+		if(Main.IS_GAME_DEBUG){
 			return MSG_DEBUG;
 		}
 
@@ -154,7 +154,7 @@ public class OnlineInputOutput {
 
 	public String sendIncidence(Context context, String scene, String player, String message){
 
-        if(Main.debug){
+        if(Main.IS_GAME_DEBUG){
             return MSG_DEBUG;
         }
 
@@ -231,7 +231,7 @@ public class OnlineInputOutput {
 	
 	public String sendUser(Context context, String URL, String name, String password, String firebaseIdDeviceToken){
 
-        if(Main.debug){
+        if(Main.IS_GAME_DEBUG){
             return MSG_DEBUG;
         }
 		if(!isOnline(context)){
@@ -273,7 +273,7 @@ public class OnlineInputOutput {
 
     public String sendFirebaseIdDeviceToken(Context context, String name, String firebaseIdDeviceToken){
 
-        if(Main.debug){
+        if(Main.IS_GAME_DEBUG){
             return MSG_DEBUG;
         }
         if(!isOnline(context)){
@@ -314,7 +314,7 @@ public class OnlineInputOutput {
 	
 	public String sendPreScene(Context context, String URL, String map, String user, String name){
 
-        if(Main.debug){
+        if(Main.IS_GAME_DEBUG){
             return MSG_DEBUG;
         }
 		if(!isOnline(context)){
@@ -355,7 +355,7 @@ public class OnlineInputOutput {
 	
 	public String sendInscription(Context context, String scene, String user, String create){
 
-        if(Main.debug){
+        if(Main.IS_GAME_DEBUG){
             return MSG_DEBUG;
         }
 		if(!isOnline(context)){
@@ -396,7 +396,7 @@ public class OnlineInputOutput {
 	
 	public String sendDataPackage(Context context, String URL, Serializable dataPackage){
 
-        if(Main.debug){
+        if(Main.IS_GAME_DEBUG){
             return MSG_DEBUG;
         }
 		if(!isOnline(context)){

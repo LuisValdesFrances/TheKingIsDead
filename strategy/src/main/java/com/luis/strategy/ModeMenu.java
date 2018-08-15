@@ -77,6 +77,7 @@ public class ModeMenu {
 	private static SimpleBox gameVersionBox;
 	private static ListBox notificationBox;
 	private static DialogBox dialogBox;
+    private static SimpleBox simpleBox;
 	public static ConfigurationBox configurationBox;
 	
 	private static boolean createUsserSucces;
@@ -320,8 +321,8 @@ public class ModeMenu {
                     public void onButtonPressUp(){
                         if(debugCount == 8){
                             debugCount = 0;
-                            Main.debug = !Main.debug;
-                            NotificationBox.getInstance().addMessage(Main.debug?"DEBUG ON":"DEBUG OFF");
+                            Main.IS_GAME_DEBUG = !Main.IS_GAME_DEBUG;
+                            NotificationBox.getInstance().addMessage(Main.IS_GAME_DEBUG?"DEBUG ON":"DEBUG OFF");
                         }else{
                             debugCount++;
                         }
@@ -596,13 +597,32 @@ public class ModeMenu {
 			createSceneBox.start();
 			break;
 		case Define.ST_MENU_CONFIG_MAP:
+
+            simpleBox = new SimpleBox(GfxManager.imgSmallBox, true, false) {
+                @Override
+                public void onFinish() {
+                    Main.changeState(Define.ST_MENU_CONFIG_MAP, false);
+                }
+            };
+
 			configMapBox = new ConfigMapBox(GameState.getInstance().getPlayerConfList()){
 				@Override
 				public void onFinish(){
 					if(getIndexPressed() != -1){
-						//Borro los datos guardados en caso de haberlos
-						GameState.getInstance().setSceneData(null);
-						Main.changeState(Define.ST_GAME_INIT_PASS_AND_PLAY, true);
+                        //Chequeo de que se haya seleccionado almenos un jugador real
+						boolean onlyIA = true;
+						for(int i = 0; i < GameState.getInstance().getPlayerConfList().length && onlyIA; i++){
+						    if(!GameState.getInstance().getPlayerConfList()[i].IA){
+                                onlyIA = false;
+                            }
+                        }
+                        if(onlyIA){
+                            simpleBox.start(null, RscManager.allText[RscManager.TXT_SELECT_ONE_HUMAN]);
+						}else{
+							//Borro los datos guardados en caso de haberlos
+							GameState.getInstance().setSceneData(null);
+							Main.changeState(Define.ST_GAME_INIT_PASS_AND_PLAY, true);
+						}
 					}else{
 						Main.changeState(Define.ST_MENU_SELECT_MAP, false);
 					}
@@ -809,7 +829,7 @@ public class ModeMenu {
 			Main.getInstance().startClock(Main.TYPE_EARTH);
 			SceneListData sceneListData = OnlineInputOutput.getInstance().reviceSceneListData(
 					Main.getInstance().getActivity(),
-                    Main.debug?"-1":GameState.getInstance().getName());//check
+                    Main.IS_GAME_DEBUG?"-1":GameState.getInstance().getName());//check
 			Main.getInstance().stopClock();
 
 			if (sceneListData != null) {
@@ -879,7 +899,7 @@ public class ModeMenu {
 						}
 					}
 				};
-				if(!Main.debug) {
+				if(!Main.IS_GAME_DEBUG) {
 					selectSceneBox.setDisabledList(disableList);
 				}
 				selectSceneBox.start();
@@ -905,7 +925,7 @@ public class ModeMenu {
 					 OnlineInputOutput.getInstance().revicePreSceneListData(
 							 Main.getInstance().getActivity(),
                              OnlineInputOutput.URL_GET_PRE_SCENE_LIST,
-                             Main.debug?"-1":GameState.getInstance().getName());//check
+                             Main.IS_GAME_DEBUG?"-1":GameState.getInstance().getName());//check
 			 Main.getInstance().stopClock();
 			 
 			 dialogBox = new DialogBox(GfxManager.imgMediumBox){
@@ -1093,12 +1113,12 @@ public class ModeMenu {
 		
 		switch (Main.state) {
 		case Define.ST_MENU_START:
-			if(!runPresentation(ST_TIME_CITA_1, ST_TIME_CITA_2, ST_TIME_CITA_3) || Main.debug){
+			if(!runPresentation(ST_TIME_CITA_1, ST_TIME_CITA_2, ST_TIME_CITA_3) || Main.IS_GAME_DEBUG){
 				Main.changeState(Define.ST_MENU_LOGO, false);
 			}
 			break;
 		case Define.ST_MENU_LOGO:
-			if(!runPresentation(ST_TIME_LOGO_1, ST_TIME_LOGO_2, ST_TIME_LOGO_3) || Main.debug){
+			if(!runPresentation(ST_TIME_LOGO_1, ST_TIME_LOGO_2, ST_TIME_LOGO_3) || Main.IS_GAME_DEBUG){
 				Main.changeState(Define.ST_MENU_MAIN, false);
 			}
 			break;
@@ -1188,6 +1208,7 @@ public class ModeMenu {
 			btnBack.update(UserInput.getInstance().getMultiTouchHandler());
 			btnNext.update(UserInput.getInstance().getMultiTouchHandler());
 			configMapBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
+            simpleBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
 			break;
 			
         case Define.ST_MENU_ON_LINE_START:
@@ -1355,12 +1376,13 @@ public class ModeMenu {
 			btnBack.draw(_g, 0, 0);
 			createSceneBox.draw(_g, GfxManager.imgBlackBG);
 			break;
-		
+
 		case Define.ST_MENU_CONFIG_MAP:
 			drawMenuBG(_g);
 			btnBack.draw(_g, 0, 0);
 			btnNext.draw(_g, 0, 0);
 			configMapBox.draw(_g);
+            simpleBox.draw(_g, GfxManager.imgBlackBG);
 			break;
 			
 		 case Define.ST_MENU_ON_LINE_START:
@@ -1677,7 +1699,7 @@ public class ModeMenu {
 						SceneListData sceneListData = 
 								OnlineInputOutput.getInstance().reviceSceneListData(
 										Main.getInstance().getActivity(),
-                                        Main.debug?"-1":GameState.getInstance().getName());
+                                        Main.IS_GAME_DEBUG?"-1":GameState.getInstance().getName());
 						
 						if (sceneListData != null) {
 							Log.i("Debug", "Actualizando selectSceneBox " + Main.iFrame);
@@ -1701,7 +1723,7 @@ public class ModeMenu {
 								}
 							}
 						selectSceneBox.refresh(sceneListData, RscManager.allText[RscManager.TXT_SELECT_GAME], textList);
-                            if(!Main.debug) {
+                            if(!Main.IS_GAME_DEBUG) {
                                 selectSceneBox.setDisabledList(disableList);
                             }
 						}
@@ -1739,7 +1761,7 @@ public class ModeMenu {
 								OnlineInputOutput.getInstance().revicePreSceneListData(
 										Main.getInstance().getActivity(),
                                         OnlineInputOutput.URL_GET_PRE_SCENE_LIST,
-                                        Main.debug?"-1":GameState.getInstance().getName());
+                                        Main.IS_GAME_DEBUG?"-1":GameState.getInstance().getName());
 						if (preSceneListData != null) {
 							Log.i("Debug", "Actualizando selectPreSceneBox " + Main.iFrame);
 							String[] textList = new String[preSceneListData.getPreSceneDataList().size()];

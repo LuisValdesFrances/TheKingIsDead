@@ -22,7 +22,7 @@ Català
 CAMPANYA
 CONTINUAR
 COMENÇAR
-MULTIJUGADOR
+JUGAR
 ON LINE
 NOVA PARTIDA
 NOU COMPTE
@@ -50,6 +50,7 @@ HUMÀ
 IA
 EL TEU TORN
 TORN
+Has de seleccionar un jugador humà com a mínim.
 Punts:
 Record:
 Continua
