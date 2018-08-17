@@ -134,12 +134,15 @@ ATACAR
 FUGIR
 ESPERAR
 CANCEL·LAR
-¿Desitjes millorar aquesta construcció
+Aumenta la defensa de la ciutat a un
+Aumenta la recaudació de la ciutat a un
+Aumenta la protecció de la ciutat a un
 Torre
 Mercart
 Esglesia
 Incrementa la defensa de la ciudat.
 Incrementa els ingresos de la ciudat.
+percent
 Protegeix el regne de cualsevol atac (Probabilidat).
 Has perdut la partida.
 perd la partida.

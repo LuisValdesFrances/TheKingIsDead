@@ -1775,7 +1775,7 @@ public class ModeMenu {
 										preSceneListData.getPreSceneDataList().get(i).getPlayerList().size() + 
 										"/" + numPlayer;
 								}
-							joinPreSceneBox.refresh(preSceneListData, RscManager.allText[RscManager.TXT_SELECT_GAME], textList);
+							joinPreSceneBox.refresh(preSceneListData, RscManager.allText[RscManager.TXT_JOIN_GAME], textList);
 						}
 					}
 				}

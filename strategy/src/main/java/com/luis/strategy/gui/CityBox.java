@@ -239,10 +239,25 @@ public class CityBox extends MenuBox{
 						}
 					}
 				};
-				
+
+				String improvement = "";
+				//kingdom.getCityManagement().getBuildingList().get(type).getLevel()+1
+				switch(kingdom.getCityManagement().getBuildingList().get(type).getType()){
+					case GameParams.TOWER:
+						improvement += RscManager.allText[RscManager.TXT_GAME_INCREASE_TOWER] + " " + GameParams.TOWER_DEFENSE[level];
+						break;
+					case GameParams.MARKET:
+						improvement += RscManager.allText[RscManager.TXT_GAME_INCREASE_MARKET] + " " + GameParams.MARKET_TAX[level];
+						break;
+					case GameParams.CHURCH:
+						improvement += RscManager.allText[RscManager.TXT_GAME_INCREASE_CHURCH] + " " + GameParams.FAITH_CHECK[level] +
+                                " " + RscManager.allText[RscManager.TXT_GAME_PERCENT] ;
+						break;
+				}
+
 				confirmBox.start(
-						null, 
-						RscManager.allText[RscManager.TXT_GAME_CONFIRM_UPDATE_BUILDING] + " " +
+						null,
+						improvement + " " +
 						RscManager.allText[RscManager.TXT_GAME_FOR] + " " + 
 						GameParams.BUILDING_COST[type][level] + " " +
 						RscManager.allText[RscManager.TXT_GAME_GOLD] +

@@ -134,7 +134,10 @@ ATACK
 ESCAPE
 WAIT
 CANCEL
-Do you want to improve this construction
+Increase the defense of the city to a
+Increase the collection of the city to a
+Increase protection of the city to a
+percent
 Tower
 Market
 Church

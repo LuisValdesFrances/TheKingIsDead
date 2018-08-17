@@ -134,7 +134,10 @@ ATACAR
 HUIR
 ESPERAR
 CANCELAR
-¿Deseas mejorar esta constucción
+Aumenta la defensa de la ciudad a un
+Aumenta la recaudación de la ciudad a un
+Aumenta la protección de la ciudad a un
+porciento
 Torre
 Mercado
 Iglesia

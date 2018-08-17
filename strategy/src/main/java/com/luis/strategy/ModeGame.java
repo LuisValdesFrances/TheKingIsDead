@@ -326,7 +326,8 @@ public class ModeGame {
 					OnlineInputOutput.getInstance().sendIncidence(
 							Main.getInstance().getContext(),
 							""+GameState.getInstance().getSceneData().getId(),
-							GameState.getInstance().getName(), e.toString());
+							GameState.getInstance().getName(),
+							e.getMessage() + " - " + e.toString());
 				}
 				e.printStackTrace();
 			}

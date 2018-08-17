@@ -167,9 +167,12 @@ public class RscManager {
 	public static final int TXT_GAME_WAIT= TXT_GAME_ESCAPE+1;
 	public static final int TXT_GAME_CANCEL= TXT_GAME_WAIT+1;
 	
-	public static final int TXT_GAME_CONFIRM_UPDATE_BUILDING = TXT_GAME_CANCEL+1;
+	public static final int TXT_GAME_INCREASE_TOWER = TXT_GAME_CANCEL+1;
+	public static final int TXT_GAME_INCREASE_MARKET = TXT_GAME_INCREASE_TOWER+1;
+	public static final int TXT_GAME_INCREASE_CHURCH = TXT_GAME_INCREASE_MARKET+1;
+    public static final int TXT_GAME_PERCENT = TXT_GAME_INCREASE_CHURCH+1;
 	
-	public static final int TXT_GAME_TOWER = TXT_GAME_CONFIRM_UPDATE_BUILDING+1;
+	public static final int TXT_GAME_TOWER = TXT_GAME_PERCENT+1;
 	public static final int TXT_GAME_MARKET = TXT_GAME_TOWER+1;
 	public static final int TXT_GAME_CHURCH = TXT_GAME_MARKET+1;
 	public static final int TXT_GAME_TOWER_DESC = TXT_GAME_CHURCH+1;

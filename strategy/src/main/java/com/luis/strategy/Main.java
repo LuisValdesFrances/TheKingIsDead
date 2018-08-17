@@ -170,7 +170,7 @@ public class Main extends Screen implements Runnable {
 	}
 
 	private void initGame() {
-		Log.i("INFO", "Game initialized");
+		Log.i("Debug", "Game initialized");
 		targetFPS = GamePerformance.getInstance().getOptimalFrames();//30;
 		minDurationFrame = 1000 / targetFPS;
 		changeState(Define.ST_MENU_START, true);
@@ -182,13 +182,12 @@ public class Main extends Screen implements Runnable {
 	public void run() {
 
 		initGame();
-		Log.i("Debug", "Init game");
 
 		while (isGameRun) {
-			
+
 			deltaTime = System.currentTimeMillis() - lastTime;
 			lastTime = System.currentTimeMillis();
-			
+
 			if(orderToChangeState){
 				updateChangeState();
 			}else{
@@ -207,14 +206,14 @@ public class Main extends Screen implements Runnable {
 					case Define.ST_MENU_SELECT_MAP:
 					case Define.ST_MENU_CONFIG_MAP:
 					case Define.ST_MENU_CAMPAING:
-						
+
 					case Define.ST_MENU_ON_LINE_START:
 					case Define.ST_MENU_ON_LINE_CREATE_USER:
 					case Define.ST_MENU_ON_LINE_LOGIN:
 					case Define.ST_MENU_ON_LINE_LIST_ALL_GAME:
 					case Define.ST_MENU_ON_LINE_LIST_JOIN_GAME:
 					case Define.ST_MENU_ON_LINE_CREATE_SCENE:
-					
+
 					case Define.ST_TEST:
 					if (!isLoading) {
 						ModeMenu.update();
