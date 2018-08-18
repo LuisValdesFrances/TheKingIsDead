@@ -115,12 +115,9 @@ public class GameScene{
 		}
 	}
 
-	public void removePlayer(Player player){
-		for(int i = 0; i < playerList.size(); i++){
-			if(playerList.get(i).getId() == player.getId()){
-				playerList.remove(i);
-				break;
-			}
+	public void removePlayerKingdoms(Player player){
+		for(Kingdom k : player.getKingdomList()){
+			player.removeKingdom(k);
 		}
 	}
 	

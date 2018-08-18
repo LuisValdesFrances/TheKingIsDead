@@ -2104,7 +2104,7 @@ public class GameManager {
 				textH=RscManager.allText[RscManager.TXT_GAME_BIG_VICTORY];
 				break;
 		}
-		//�apa
+		//Nyapa
 		//result = 3;
 		
 		//Hay ejercito enemigo
@@ -2141,7 +2141,7 @@ public class GameManager {
 				}
 			}else{
 				defeated.setDefeat(true);
-				//Da�o
+				//Danyo
 				int casualtiesFromArmy = 0;
 				int casualtiesFromEnemy = 0;
 				if(result == 1){//Ejercito selecionado pierde
@@ -2184,17 +2184,19 @@ public class GameManager {
 					//getSelectedArmy().getKingdom().setTarget(-1);
 				}else{//Conquista
 					startConquest = true;
-					defeatPlayer = getPlayerByKingdom(getSelectedArmy().getKingdom());
-					
+
 					getSelectedArmy().getKingdom().setState(0);
 					//getSelectedArmy().getKingdom().setTarget(-1);
 					addNewConquest(getCurrentPlayer(), getSelectedArmy().getKingdom());
-					
-					//Cambio de capital
-					changeCapital = defeatPlayer != null && defeatPlayer.changeCapital();
-					
-					//Eliminacion jugador
-					deletePlayer = defeatPlayer != null && defeatPlayer.getCapitalkingdom() == null;
+
+					if(getSelectedArmy().getKingdom().isACity()) {
+						defeatPlayer = getPlayerByKingdom(getSelectedArmy().getKingdom());
+						//Cambio de capital
+						changeCapital = defeatPlayer != null && defeatPlayer.changeCapital();
+
+						//Eliminacion jugador
+						deletePlayer = defeatPlayer != null && defeatPlayer.getCapitalkingdom() == null;
+					}
 				}
 			}
 		}
@@ -2292,11 +2294,11 @@ public class GameManager {
 				}
 			}
 		}
-        /*
+        ///*
 		if(deletePlayer){
-			gameScene.removePlayer(defeatPlayer);
+			gameScene.removePlayerKingdoms(defeatPlayer);
 		}
-		*/
+		//*/
 		if(showResultBox){
 			resultBox.start(textB.length() > 0 ?textH:null, textB.length() > 0 ?textB:textH);
 			
