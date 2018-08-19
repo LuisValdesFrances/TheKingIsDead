@@ -2,6 +2,7 @@ package com.luis.strategy;
 
 import java.util.Random;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.luis.strategy.R;
@@ -154,11 +155,17 @@ public class Main extends Screen implements Runnable {
 	public void setActivity(MainActivity activity) {
 		this.activity = activity;
 	}
-	
-	public Main(MainActivity activity, Settings settings) {
+
+	private boolean notification;
+	public boolean isNotification(){
+		return  notification;
+	}
+
+	public Main(MainActivity activity, Settings settings, boolean notification) {
 		super(activity, settings.getScreenWidth(), settings.getScreenHeight());
 		this.activity = activity;
-        Log.i("Debug", "Screen size " + settings.getScreenWidth() + "x" + settings.getScreenHeight());
+		this.notification = notification;
+		Log.i("Debug", "Screen size " + settings.getScreenWidth() + "x" + settings.getScreenHeight());
         Log.i("Debug", "Real size " + Settings.getInstance().getRealWidth() + "x" + Settings.getInstance().getRealHeight());
 		instance = this;
 
@@ -176,8 +183,6 @@ public class Main extends Screen implements Runnable {
 		changeState(Define.ST_MENU_START, true);
 	}
 
-	
-	
 	@Override
 	public void run() {
 

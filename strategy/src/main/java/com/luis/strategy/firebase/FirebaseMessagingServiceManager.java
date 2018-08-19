@@ -45,9 +45,5 @@ public class FirebaseMessagingServiceManager extends FirebaseMessagingService {
         }catch(Exception e){
             e.printStackTrace();
         }
-
-
     }
-
-
 }

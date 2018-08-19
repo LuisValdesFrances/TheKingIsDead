@@ -24,6 +24,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 /**
  * 
@@ -72,6 +73,7 @@ public class MainActivity extends Activity{
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         startGame();
         //Screen no sleep
@@ -134,6 +136,31 @@ public class MainActivity extends Activity{
 
 	private void startGame(){
         try {
+
+
+            boolean notification = false;
+            if (getIntent().getExtras() != null) {
+                if(getIntent().getExtras().keySet().size() > 1){
+                    notification = true;
+                }
+                //Toast.makeText(getApplicationContext(), (""+getIntent().getExtras().keySet().size()), Toast.LENGTH_SHORT).show();
+                /*
+                for (String key : getIntent().getExtras().keySet()) {
+                    String value = String.valueOf(getIntent().getExtras().get(key));
+                    Log.d("Debug", "Key: " + key + " Value: " + value);
+                    //
+                    //Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+                    if(key.equals("collapse_key_value") && value.equals("com.luis.strategy")){
+                        notification = true;
+                    }
+                }
+                */
+            }
+
+
+
+
+
             Settings.getInstance().init(
                     this,
                     new boolean[]{
@@ -160,7 +187,7 @@ public class MainActivity extends Activity{
             */
 
             //Metodo 3
-            main = new Main(this, Settings.getInstance());
+            main = new Main(this, Settings.getInstance(), notification);
             setContentView(main);
 
             Log.i("Debug", "View load");

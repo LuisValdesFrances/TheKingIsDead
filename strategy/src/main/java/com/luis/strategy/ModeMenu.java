@@ -616,7 +616,7 @@ public class ModeMenu {
                                 onlyIA = false;
                             }
                         }
-                        if(onlyIA){
+                        if(onlyIA && !Main.IS_GAME_DEBUG){
                             simpleBox.start(null, RscManager.allText[RscManager.TXT_SELECT_ONE_HUMAN]);
 						}else{
 							//Borro los datos guardados en caso de haberlos
@@ -1113,12 +1113,12 @@ public class ModeMenu {
 		
 		switch (Main.state) {
 		case Define.ST_MENU_START:
-			if(!runPresentation(ST_TIME_CITA_1, ST_TIME_CITA_2, ST_TIME_CITA_3) || Main.IS_GAME_DEBUG){
+			if(!runPresentation(ST_TIME_CITA_1, ST_TIME_CITA_2, ST_TIME_CITA_3) || Main.IS_GAME_DEBUG || Main.getInstance().isNotification()){
 				Main.changeState(Define.ST_MENU_LOGO, false);
 			}
 			break;
 		case Define.ST_MENU_LOGO:
-			if(!runPresentation(ST_TIME_LOGO_1, ST_TIME_LOGO_2, ST_TIME_LOGO_3) || Main.IS_GAME_DEBUG){
+			if(!runPresentation(ST_TIME_LOGO_1, ST_TIME_LOGO_2, ST_TIME_LOGO_3) || Main.IS_GAME_DEBUG || Main.getInstance().isNotification()){
 				Main.changeState(Define.ST_MENU_MAIN, false);
 			}
 			break;
