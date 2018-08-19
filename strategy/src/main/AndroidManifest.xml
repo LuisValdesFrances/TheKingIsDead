@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.luis.strategy"
     android:installLocation="auto"
-    android:versionCode="46"
-    android:versionName="2.7">
+    android:versionCode="47"
+    android:versionName="2.8">
 
     <uses-sdk
-        android:minSdkVersion="18"
-        android:targetSdkVersion="28" />
+        android:minSdkVersion="17"
+        android:targetSdkVersion="27" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
