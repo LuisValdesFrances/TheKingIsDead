@@ -146,8 +146,8 @@ Increase the gold of the city.
 Protect the kingdom from any attack (Probability).
 You lost the game.
 lost the game.
-Your army has been defeated.
-Your army has won.
-Your army has been destroyed.
-Your army has destroyed to enemy.
+Your army has been defeated by
+You have defeated the army of
+Your army has been destroyed by
+You have destroyed the army of
 change his capital.

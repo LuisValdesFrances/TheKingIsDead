@@ -146,8 +146,8 @@ percent
 Protegeix el regne de cualsevol atac (Probabilidat).
 Has perdut la partida.
 perd la partida.
-El teu exèrcit ha estat derrotat.
-El teu exèrcit ha vençut.
-El teu exèrcit ha estat destruït.
-El teu exèrcit ha destruït l'enemic.
+El teu ejercit ha estat derrotar per
+Has vençut al ejercit de
+El teu ejercit ha estat destruit per
+Has destruit al ejercit de
 canvia la seva capital.

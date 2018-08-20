@@ -5,14 +5,14 @@ La guerra es un gran esfuerzo de todos hacia la paz.
 Matadlos a todos, que Dios ya reconocerá a los suyos.
 Los dos guerreros más poderosos son la paciencia y el tiempo.
 He recorrido un largo camino desde el campo de batalla a la mesa de paz.
-Maldito hombre de letras, lo destrozare con mis puños.
+No hay guerra, por que guerra no hay. Pero para la poca guerra que hay, guerra hay.
 Parmenides de Elea
 Francisco de Quevedo
 Montesquieu
 Arnaud Amairic
 Leo Tolstoy
 Moshe Dayan
-Burufulot
+Lord De Javier
 Idioma
 Sonido
 Alertas
@@ -146,8 +146,8 @@ Incrementa los ingresos de la ciudad.
 Protege el reino de cualquier ataque (Probabilidad).
 Has perdido la partida.
 pierde la partida.
-Tu ejercito ha sido derrotado.
-Tu ejercito ha vencido.
-Tu ejercito ha sido destruido.
-Tu ejercito ha destruido al enemigo.
+Tu ejército ha sido derrotado por
+Has vencido al ejército de
+Tu ejército ha sido destruido por
+Has destruido al ejército de
 cambia su capital.

@@ -147,25 +147,25 @@ public class ModeGame {
 						
 						String msg = "";
 						switch(notificationListData.getNotificationDataList().get(i).getMessage()){
-						case OnlineInputOutput.CODE_NOTIFICATION_YOUR_ARMY_DEFEATED:
+						case OnlineInputOutput.CODE_NOTIFICATION_YOUR_ARMY_DEFEATED://Tu ejercito pierde contra NOMBRE
 							msg = 
-									notificationListData.getNotificationDataList().get(i).getFrom() + "-" +
-									RscManager.allText[RscManager.TXT_NOTIFICATION_YOUR_ARMY_DEFEATED];
+									RscManager.allText[RscManager.TXT_NOTIFICATION_YOUR_ARMY_DEFEATED]  + " " +
+									notificationListData.getNotificationDataList().get(i).getFrom();
 							break;
-						case OnlineInputOutput.CODE_NOTIFICATION_YOUR_ARMY_WON:
+						case OnlineInputOutput.CODE_NOTIFICATION_YOUR_ARMY_WON://Tu ejercito gana contra NOMBRE
 							msg = 
-									notificationListData.getNotificationDataList().get(i).getFrom() + "-" +
-									RscManager.allText[RscManager.TXT_NOTIFICATION_YOUR_ARMY_WON];
+									RscManager.allText[RscManager.TXT_NOTIFICATION_YOUR_ARMY_WON]  + " " +
+									notificationListData.getNotificationDataList().get(i).getFrom();
 							break;
-						case OnlineInputOutput.CODE_NOTIFICATION_YOUR_ARMY_DESTROYED:
+						case OnlineInputOutput.CODE_NOTIFICATION_YOUR_ARMY_DESTROYED://Tu ejercito ha sido destruido por NOMBRE
 							msg = 
-									notificationListData.getNotificationDataList().get(i).getFrom() + "-" +
-									RscManager.allText[RscManager.TXT_NOTIFICATION_YOUR_ARMY_DESTROYED];
+									RscManager.allText[RscManager.TXT_NOTIFICATION_YOUR_ARMY_DESTROYED] + " " +
+									notificationListData.getNotificationDataList().get(i).getFrom();
 							break;
-						case OnlineInputOutput.CODE_NOTIFICATION_YOUR_ARMY_DESTROYED_ENEMY:
+						case OnlineInputOutput.CODE_NOTIFICATION_YOUR_ARMY_DESTROYED_ENEMY://Has destruído al ejercito de NOMBRE
 							msg = 
-									notificationListData.getNotificationDataList().get(i).getFrom() + "-" +
-									RscManager.allText[RscManager.TXT_NOTIFICATION_YOUR_ARMY_DESTROYED_ENEMY];
+									RscManager.allText[RscManager.TXT_NOTIFICATION_YOUR_ARMY_DESTROYED_ENEMY] + " " +
+									notificationListData.getNotificationDataList().get(i).getFrom();
 							break;
 						case OnlineInputOutput.CODE_NOTIFICATION_CHANGE_CAPITAL:
 							msg = 
