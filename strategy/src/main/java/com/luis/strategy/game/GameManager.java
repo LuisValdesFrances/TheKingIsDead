@@ -2184,13 +2184,14 @@ public class GameManager {
 					//getSelectedArmy().getKingdom().setTarget(-1);
 				}else{//Conquista
 					startConquest = true;
+					//Obtengo al perdedor antes de cambiar el reino de dueño
+					defeatPlayer = getPlayerByKingdom(getSelectedArmy().getKingdom());
 
 					getSelectedArmy().getKingdom().setState(0);
 					//getSelectedArmy().getKingdom().setTarget(-1);
 					addNewConquest(getCurrentPlayer(), getSelectedArmy().getKingdom());
 
 					if(getSelectedArmy().getKingdom().isACity()) {
-						defeatPlayer = getPlayerByKingdom(getSelectedArmy().getKingdom());
 						//Cambio de capital
 						changeCapital = defeatPlayer != null && defeatPlayer.changeCapital();
 

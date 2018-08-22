@@ -2,10 +2,8 @@ package com.luis.strategy;
 
 import java.util.Random;
 
-import android.os.Bundle;
 import android.util.Log;
 
-import com.luis.strategy.R;
 import com.luis.lgameengine.gameutils.GamePerformance;
 import com.luis.lgameengine.gameutils.Settings;
 import com.luis.lgameengine.gameutils.fonts.Font;
@@ -14,7 +12,6 @@ import com.luis.lgameengine.implementation.graphics.Image;
 import com.luis.lgameengine.implementation.graphics.Screen;
 import com.luis.lgameengine.implementation.sound.SndManager;
 import com.luis.strategy.constants.Define;
-import com.luis.strategy.game.GameManager;
 
 /**
  * @author Luis Valdes Frances
