@@ -20,7 +20,6 @@ public class GameParams {
 	
 	public static final int[] TOWER_DEFENSE = 		new int[]{6, 12, 18};
 	public static final int[] MARKET_TAX = 			new int[]{30, 60, 80};
-	
 	public static final int[] FAITH_CHECK =			new int[]{20, 30, 40};
 	
 	//Building

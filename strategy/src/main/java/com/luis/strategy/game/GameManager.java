@@ -635,7 +635,7 @@ public class GameManager {
 						
 						//Chequea si el reino que se ha tocado (isSelect) es valido(target != -1)
 						if(
-							(getCurrentPlayer().getActionIA() == null && kingdom.getTarget()!= -1 && kingdom.isSelect())
+							(getCurrentPlayer().getActionIA() == null && kingdom.getTarget() != -1 && kingdom.isSelect())
 							||
 							(getCurrentPlayer().getActionIA() != null && getCurrentPlayer().getActionIA().getKingdomToDecision().getId() == kingdom.getId())
 						){
@@ -1196,15 +1196,15 @@ public class GameManager {
 							if(kingdom.isProtectedByFaith()){
 								kingdom.setTarget(-1);
 							}else{
-							kingdom.setTarget(Kingdom.TARGET_BATTLE);
-							//Busco ejercitos enemigos
-							if(getEnemyAtKingdom(getCurrentPlayer(), kingdom) != null){
-								kingdom.setTouchX(kingdom.getAbsoluteX());
-								kingdom.setTouchY(kingdom.getAbsoluteY());
-							}else{
-								kingdom.setTouchX(kingdom.getTerrainList().get(0).getAbsoluteX());
-								kingdom.setTouchY(kingdom.getTerrainList().get(0).getAbsoluteY());
-							}
+                                kingdom.setTarget(Kingdom.TARGET_BATTLE);
+                                //Busco ejercitos enemigos
+                                if(getEnemyAtKingdom(getCurrentPlayer(), kingdom) != null){
+                                    kingdom.setTouchX(kingdom.getAbsoluteX());
+                                    kingdom.setTouchY(kingdom.getAbsoluteY());
+                                }else{
+                                    kingdom.setTouchX(kingdom.getTerrainList().get(0).getAbsoluteX());
+                                    kingdom.setTouchY(kingdom.getTerrainList().get(0).getAbsoluteY());
+                                }
 							}
 						}
 					}
@@ -1213,11 +1213,15 @@ public class GameManager {
 		}
 		//Si estoy en territorio hostil(A midad de una conquista), lo anyado a los seleccionables
 		if(!getCurrentPlayer().hasKingom(getSelectedArmy().getKingdom())){
-			getSelectedArmy().getKingdom().setTarget(Kingdom.TARGET_BATTLE);
-			getSelectedArmy().getKingdom().setTouchX(getSelectedArmy().getKingdom().
-					getTerrainList().get(getSelectedArmy().getKingdom().getState()).getAbsoluteX());
-			getSelectedArmy().getKingdom().setTouchY(getSelectedArmy().getKingdom().
-					getTerrainList().get(getSelectedArmy().getKingdom().getState()).getAbsoluteY());
+            if(getSelectedArmy().getKingdom().isProtectedByFaith()){
+                getSelectedArmy().getKingdom().setTarget(-1);
+            }else {
+                getSelectedArmy().getKingdom().setTarget(Kingdom.TARGET_BATTLE);
+                getSelectedArmy().getKingdom().setTouchX(getSelectedArmy().getKingdom().
+                        getTerrainList().get(getSelectedArmy().getKingdom().getState()).getAbsoluteX());
+                getSelectedArmy().getKingdom().setTouchY(getSelectedArmy().getKingdom().
+                        getTerrainList().get(getSelectedArmy().getKingdom().getState()).getAbsoluteY());
+            }
 		}
 	}
 
