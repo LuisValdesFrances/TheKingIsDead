@@ -27,6 +27,8 @@ public class Army extends MapObject{
 		idCount = 0;
 	}
 	private int id;
+
+	private long seed;
 	
 	public boolean defeat;
 	
@@ -525,7 +527,15 @@ public class Army extends MapObject{
 		this.iaDecision = iaDecision;
 	}
 
-	public void discardTroop(int discardNumber){
+    public long getSeed() {
+        return seed;
+    }
+
+    public void setSeed(long seed) {
+        this.seed = seed;
+    }
+
+    public void discardTroop(int discardNumber){
 		int discardCount = 0;
 		
 		//Obtengo el minimo de tropas

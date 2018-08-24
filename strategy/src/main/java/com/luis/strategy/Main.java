@@ -409,16 +409,15 @@ public class Main extends Screen implements Runnable {
 	}
 	
 	//Resources:
-    private static Random random;// = new Random(0);
-    //Obtiene un randon entre el primer parametro(Numero menor) y el segundo parametro(numero mayor). 
+    //Obtiene un randon entre el primer parametro(Numero menor) y el segundo parametro(numero mayor).
     //Ambos incluidos.
     public static int getRandom(int _i0, int _i1) {
-        if(random == null) random = new Random();
+        Random random = new Random();
         return _i0 + Math.abs(random.nextInt() % (1 + _i1 - _i0));
     }
     
     public static int getRandom(int _iNumber) {
-        if(random == null) random = new Random();
+        Random random = new Random();
         if (_iNumber < 0) {
             return (random.nextInt() % -_iNumber);
         }
@@ -429,6 +428,13 @@ public class Main extends Screen implements Runnable {
            return 0;
         }
     }
+
+    public static int getRandom(long seed, int _i0, int _i1) {
+        Random random = new Random(seed);
+        return _i0 + Math.abs(random.nextInt() % (1 + _i1 - _i0));
+    }
+
+
     
     public static boolean isModule(int number) {
         if ((number % 2) == 1) {
@@ -468,13 +474,15 @@ public class Main extends Screen implements Runnable {
 		SndManager.getInstance().pauseMusic();
 		SndManager.getInstance().pauseFX();
 	}
-	
+
+	/*
 	public void saveAndSend(){
 		if(state >= Define.ST_GAME_RUN && GameState.getInstance().getGameMode() == GameState.GAME_MODE_ONLINE){
 			ModeGame.sendSceneToServerAsin(Define.ST_MENU_MAIN);
 			changeState(Define.ST_MENU_MAIN, true);
 		}
 	}
+	*/
 
 	public void unPause() {
 		//MyCanvas.isPause = false;

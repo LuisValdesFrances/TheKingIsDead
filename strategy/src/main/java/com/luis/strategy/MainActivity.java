@@ -111,13 +111,13 @@ public class MainActivity extends Activity{
 	@Override
 	public void onStop(){
 		super.onStop();
-
+		/*
 		try{
 			main.saveAndSend();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-
+		*/
 	}
 
 	@Override

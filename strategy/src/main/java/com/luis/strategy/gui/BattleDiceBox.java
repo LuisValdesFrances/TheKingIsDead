@@ -8,6 +8,7 @@ import com.luis.lgameengine.gui.NotificationBox;
 import com.luis.lgameengine.implementation.graphics.Graphics;
 import com.luis.lgameengine.implementation.input.MultiTouchHandler;
 import com.luis.lgameengine.implementation.sound.SndManager;
+import com.luis.strategy.GameState;
 import com.luis.strategy.GfxManager;
 import com.luis.strategy.Main;
 import com.luis.strategy.RscManager;
@@ -48,11 +49,13 @@ public class BattleDiceBox {
 	private boolean[] result;
 	
 	private boolean callToFX;
+
+	private Army army;
 	
 	private ResultIconPropierties[] resultIcon;
 	
 	public BattleDiceBox() {
-		
+
 		int shieldSep = GfxManager.imgShieldIcon.getWidth()/2;
 		int parchmentSep = -GfxManager.imgNotificationBox.getHeight()/3;
 		int totalWidth = GfxManager.imgNotificationBox.getWidth() 
@@ -102,6 +105,7 @@ public class BattleDiceBox {
 	public void start(
 			Kingdom kingdom, 
 			Army armyAtack, Army armyDefense, boolean autoPlay){
+	    this.army = armyAtack;
 		this.state = STATE_START;
 		this.modPosY = -((Define.SIZEY-totalHeight)+totalHeight);
 		this.modPosDice = -Define.SIZEX;
@@ -120,7 +124,7 @@ public class BattleDiceBox {
 	
 	private void combat() {
 		callToFX = true;
-		this.diceValue = Main.getRandom(1, GameParams.ROLL_SYSTEM);
+		this.diceValue = getRandom();
 		if(diceValue == GameParams.ROLL_SYSTEM){
 			NotificationBox.getInstance().
 			addMessage(RscManager.allText[RscManager.TXT_GAME_CRITICAL]);
@@ -285,6 +289,17 @@ public class BattleDiceBox {
 				r++;
 		}
 		return r;
+	}
+
+	private int getRandom(){
+		//return Main.getRandom(1, GameParams.ROLL_SYSTEM);
+        if(GameState.getInstance().getGameMode() == GameState.GAME_MODE_ONLINE) {
+            long seed = army.getSeed() * (army.getKingdom().getId() + 1) * (stateCombat + 1);
+            return Main.getRandom(seed, 1, GameParams.ROLL_SYSTEM);
+        }else{
+            return Main.getRandom(1, GameParams.ROLL_SYSTEM);
+        }
+
 	}
 	
 

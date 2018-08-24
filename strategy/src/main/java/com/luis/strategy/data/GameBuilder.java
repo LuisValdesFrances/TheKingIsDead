@@ -101,6 +101,10 @@ public class GameBuilder {
 					gameScene.getMapObject(), player, gameScene.getKingdom(k1), player.getFlag(), 
 					gameScene.getMapObject().getX(), gameScene.getMapObject().getY(), gameScene.getMapObject().getWidth(), gameScene.getMapObject().getHeight());
 			army.initTroops();
+
+			long seed =  (GameState.getInstance().getSceneData().getId()+1) * (army.getId()+1);
+			army.setSeed(seed);
+
 			player.getArmyList().add(army);
 			
 			playerList.add(player);
@@ -179,6 +183,9 @@ public class GameBuilder {
 				Army army = new Army(
 						gameScene.getMapObject(), player, k, player.getFlag(), 
 						gameScene.getMapObject().getX(), gameScene.getMapObject().getY(), gameScene.getMapObject().getWidth(), gameScene.getMapObject().getHeight());
+
+				army.setSeed(armyData.getSeed());
+
 				for(TroopData td : armyData.getTroopList()){
 					Troop troop = new Troop(td.getType(), td.isSubject());
 					army.getTroopList().add(troop);

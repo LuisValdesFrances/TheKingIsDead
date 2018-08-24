@@ -1323,8 +1323,17 @@ public class GameManager {
 			
 			//Activo tropas
 			for(Player player : gameScene.getPlayerList())
-				for(Army army : player.getArmyList())
+				for(Army army : player.getArmyList()) {
+
+			        /*
+					if(GameState.getInstance().getGameMode() == GameState.GAME_MODE_ONLINE) {
+						long seed =
+								GameState.getInstance().getSceneData().getId() * gameScene.getTurnCount() * (army.getId() + 1);
+					}
+					*/
+
 					army.changeState(Army.STATE_ON);
+				}
 			
 			//Calculo de ganancias:
 			int tax = getCurrentPlayer().getTaxes();
