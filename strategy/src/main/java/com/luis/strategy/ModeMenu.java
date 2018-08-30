@@ -554,8 +554,6 @@ public class ModeMenu {
 						SndManager.getInstance().playFX(Main.FX_NEXT, 0);
 						
 						GameState.getInstance().init(GameState.GAME_MODE_PLAY_AND_PASS, sceneData);
-						String msg = RscManager.allText[RscManager.TXT_GAME_LOADED];
-						NotificationBox.getInstance().addMessage(msg);
 						Main.changeState(Define.ST_GAME_INIT_PASS_AND_PLAY, true);
 						//Main.changeState(Define.ST_GAME_CONTINUE, true);
 						reset();
@@ -883,10 +881,7 @@ public class ModeMenu {
 							Main.getInstance().stopClock();
 							
 							if(sceneData != null){
-								
 								GameState.getInstance().init(GameState.GAME_MODE_ONLINE, sceneData);
-								msg = RscManager.allText[RscManager.TXT_GAME_LOADED];
-								NotificationBox.getInstance().addMessage(msg);
 								Main.changeState(Define.ST_GAME_INIT_ON_LINE, true);
 							}else{
 								msg = RscManager.allText[RscManager.TXT_SERVER_ERROR];

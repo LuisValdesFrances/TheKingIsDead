@@ -510,6 +510,9 @@ public class Main extends Screen implements Runnable {
 			isLoadGraphics = _isLoadGraphics;
 		}
 	}
+	public static void forceChangeState(int _iNewState, boolean _isLoadGraphics){
+		executeChageState(_iNewState, _isLoadGraphics);
+	}
 	private static void updateChangeState(){
 		if(tripleBufferWait > 3 && orderToChangeState){
 			executeChageState(newState, isLoadGraphics);

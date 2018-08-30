@@ -527,7 +527,14 @@ public class GameManager {
 		}
 
 		Main.getInstance().getActivity().loadInterstitial();
-		changeState(STATE_INCOME);
+
+		if(validate()) {
+            NotificationBox.getInstance().addMessage(RscManager.allText[RscManager.TXT_GAME_LOADED]);
+            changeState(STATE_INCOME);
+        }else{
+            NotificationBox.getInstance().addMessage("Game validation error");
+            Main.forceChangeState(Define.ST_MENU_MAIN, true);
+        }
 	}
 	
 	public void update(float delta){
@@ -1242,43 +1249,7 @@ public class GameManager {
 		switch(state){
 		case STATE_INCOME:
 
-		    //Validaciones
-            if(GameState.getInstance().getGameMode() == GameState.GAME_MODE_ONLINE){
-
-                //Validacion del jugador
-                if(!getCurrentPlayer().getName().equals(GameState.getInstance().getName())){
-					OnlineInputOutput.getInstance().sendIncidence(
-							Main.getInstance().getContext(),
-							""+GameState.getInstance().getSceneData().getId(),
-							GameState.getInstance().getName(), "getCurrentPlayer().getName() No coincide con GameState.getInstance().getName()");
-						Main.changeState(Define.ST_MENU_MAIN, true);
-                }
-
-                //Validacion de tropas
-                List<Integer> idList = new ArrayList<Integer>();
-                int numTroop = 0;
-                for(Player p : gameScene.getPlayerList()){
-                    for(Army a : p.getArmyList()){
-                        numTroop++;
-                        boolean exist = false;
-                        for(Integer id : idList){
-                            exist = id == a.getId();
-                        }
-                        if(!exist){
-                            idList.add(a.getId());
-                        }
-                    }
-                }
-                if(idList.size() != numTroop){
-                    OnlineInputOutput.getInstance().sendIncidence(
-                            Main.getInstance().getContext(),
-                            ""+GameState.getInstance().getSceneData().getId(),
-                            GameState.getInstance().getName(), "Discrepancia con ID tropas");
-                    Main.changeState(Define.ST_MENU_MAIN, true);
-                }
-            }
-
-			if(Main.IS_GAME_DEBUG){
+		    if(Main.IS_GAME_DEBUG){
 				btnDebugPause.setDisabled(getCurrentPlayer().getActionIA() == null);
 			}
 			startPresentation(Font.FONT_BIG, RscManager.allText[RscManager.TXT_GAME_TURN] + 
@@ -1976,23 +1947,54 @@ public class GameManager {
 			}
 		}
 	}
+
+	private void orderTroops(Army army){
+
+	    /*
+        Log.i("Debug", "\nAntes del order");
+        for(int i = 0; i < army.getTroopList().size(); i++){
+            Log.i("Debug", ""+GameParams.TROOP_ORDER[army.getTroopList().get(i).getType()]);
+        }
+        */
+
+	    for(int i = 0; i < army.getTroopList().size(); i++){
+            for(int j = 0; j < army.getTroopList().size(); j++){
+                int aI = GameParams.TROOP_ORDER[army.getTroopList().get(i).getType()];
+                int aJ = GameParams.TROOP_ORDER[army.getTroopList().get(j).getType()];
+                if(aJ > aI){
+                    Troop aux = army.getTroopList().get(i);
+                    army.getTroopList().set(i, army.getTroopList().get(j));
+                    army.getTroopList().set(j, aux);
+                }
+            }
+        }
+
+        /*
+        Log.i("Debug", "\nDespues del order");
+        for(int i = 0; i < army.getTroopList().size(); i++){
+            Log.i("Debug", ""+GameParams.TROOP_ORDER[army.getTroopList().get(i).getType()]);
+        }
+        */
+    }
 	
-	private int join(Army army1, Army army2){
+	private int join(Army target, Army current){
+		orderTroops(current);
+
 		int cost = 0;
-		for(Troop troop : army2.getTroopList()){
-			if(army1.getTroopList().size() < GameParams.MAX_NUMBER_OF_TROOPS){
+		for(Troop troop : current.getTroopList()){
+			if(target.getTroopList().size() < GameParams.MAX_NUMBER_OF_TROOPS){
 				troop.setSubject(false);
-				army1.getTroopList().add(troop);
+				target.getTroopList().add(troop);
 			}else{
 				cost += GameParams.TROOP_COST[troop.getType()]/2;
 			}
 		}
-		army1.setDefeat(army1.isDefeat() || army2.isDefeat());
+		target.setDefeat(target.isDefeat() || current.isDefeat());
 		//Si cualquiera de los ejercitos aun no ha actuado, mantengo el estado
-		if(army1.getState()==Army.STATE_ON || army2.getState()==Army.STATE_ON){
-			army1.changeState(Army.STATE_ON);
+		if(target.getState()==Army.STATE_ON || current.getState()==Army.STATE_ON){
+			target.changeState(Army.STATE_ON);
 		}
-		removeArmy(army2);
+		removeArmy(current);
 		
 		return cost;
 	}
@@ -2535,21 +2537,10 @@ public class GameManager {
 			if(cost > 0){
 				NotificationBox.getInstance().addMessage("+" + cost + " coins");
 			}
-		}
-		
-		try{
-			if(getDefeatArmy().getPlayer() != null && getDefeatArmy().getPlayer().getId() == getCurrentPlayer().getId()){
-				getDefeatArmy().changeState(Army.STATE_OFF);
-			}else{
-				getDefeatArmy().changeState(Army.STATE_ON);
-			}
-		}catch(Exception e){
-			Log.i("Debug", getDefeatArmy().toString());
-			Log.i("Debug", getDefeatArmy().getPlayer().toString());
-			Log.i("Debug", getCurrentPlayer().toString());
-			changeState(STATE_DEBUG);
-		}
-			
+		}else{
+            getDefeatArmy().changeState(Army.STATE_OFF);
+        }
+
 		if(getCurrentPlayer().getActionIA() != null){
 			changeSubState(SUB_STATE_ACTION_IA_WAIT_START);
 		}else{
@@ -2656,11 +2647,7 @@ public class GameManager {
 	private Army getNextArmy(){
 		Army army = null;
 
-
-
-
-
-		if(getCurrentPlayer().getArmyList().size() > 0){
+        if(getCurrentPlayer().getArmyList().size() > 0){
 
 		    //Si solo tento un ejercito y esta activo, devuelvo ese
 			if(getCurrentPlayer().getArmyList().size() == 1 && getCurrentPlayer().getArmyList().get(0).getState() == Army.STATE_ON){
@@ -2744,6 +2731,45 @@ public class GameManager {
 		}
 		return army;
 	}
+
+	private boolean validate(){
+
+	    if(!Main.IS_GAME_DEBUG && GameState.getInstance().getGameMode() == GameState.GAME_MODE_ONLINE){
+
+            //Validacion del jugador
+            if(!getCurrentPlayer().getName().equals(GameState.getInstance().getName())){
+                OnlineInputOutput.getInstance().sendIncidence(
+                        Main.getInstance().getContext(),
+                        ""+GameState.getInstance().getSceneData().getId(),
+                        GameState.getInstance().getName(), "getCurrentPlayer().getName() No coincide con GameState.getInstance().getName()");
+                return false;
+            }
+
+            //Validacion de tropas
+            List<Integer> idList = new ArrayList<Integer>();
+            int numTroop = 0;
+            for(Player p : gameScene.getPlayerList()){
+                for(Army a : p.getArmyList()){
+                    numTroop++;
+                    boolean exist = false;
+                    for(Integer id : idList){
+                        exist = id == a.getId();
+                    }
+                    if(!exist){
+                        idList.add(a.getId());
+                    }
+                }
+            }
+            if(idList.size() != numTroop){
+                OnlineInputOutput.getInstance().sendIncidence(
+                        Main.getInstance().getContext(),
+                        ""+GameState.getInstance().getSceneData().getId(),
+                        GameState.getInstance().getName(), "Discrepancia con ID tropas");
+                return false;
+            }
+        }
+        return true;
+    }
 	
 	private class Mist{
 		
