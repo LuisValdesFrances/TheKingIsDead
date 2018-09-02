@@ -74,6 +74,7 @@ public class Define {
 	public static final int ST_MENU_ON_LINE_LIST_ALL_GAME = 17;
 	public static final int ST_MENU_ON_LINE_LIST_JOIN_GAME = 18;
 	public static final int ST_MENU_ON_LINE_CREATE_SCENE = 19;
+	public static final int ST_MENU_ON_LINE_RANKING = 20;
 	
 	public static final int ST_TEST = 50;
 

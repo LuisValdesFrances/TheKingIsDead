@@ -24,6 +24,7 @@ import com.luis.strategy.connection.OnlineInputOutput;
 import com.luis.strategy.constants.Define;
 import com.luis.strategy.constants.GameParams;
 import com.luis.strategy.data.DataKingdom;
+import com.luis.strategy.data.GameBuilder;
 import com.luis.strategy.datapackage.scene.NotificationListData;
 import com.luis.strategy.datapackage.scene.PreSceneData;
 import com.luis.strategy.datapackage.scene.PreSceneListData;
@@ -35,8 +36,10 @@ import com.luis.strategy.gui.CreateUserBox;
 import com.luis.strategy.gui.DialogBox;
 import com.luis.strategy.gui.LoginBox;
 import com.luis.strategy.gui.ConfigurationBox;
+import com.luis.strategy.gui.RankingBox;
 import com.luis.strategy.gui.SceneDataListBox;
 import com.luis.strategy.gui.SimpleBox;
+import com.luis.strategy.map.GameScene;
 
 public class ModeMenu {
 
@@ -56,6 +59,7 @@ public class ModeMenu {
 	private static Button btnLogin;
 	private static Button btnSearchGame;
 	private static Button btnCreateScene;
+	private static Button btnRanking;
 	private static Button btnInfo;
 	private static Button btnConfiguration;
 	
@@ -66,10 +70,11 @@ public class ModeMenu {
 	private static Button btnDebug;
 	
 	
-	private static ListBox createSceneBox;
+	private static ListBox createSceneListBox;
 	
-	private static ListBox selectSceneBox;
-	private static ListBox joinPreSceneBox;
+	private static ListBox selectSceneListBox;
+	private static ListBox joinPreSceneListBox;
+    private static ListBox rankingSceneListBox;
 	
 	private static ConfigMapBox configMapBox;
 	private static CreateUserBox createUserBox;
@@ -78,6 +83,7 @@ public class ModeMenu {
 	private static ListBox notificationBox;
 	private static DialogBox dialogBox;
     private static SimpleBox simpleBox;
+    private static RankingBox rankingBox;
 	public static ConfigurationBox configurationBox;
 	
 	private static boolean createUsserSucces;
@@ -175,16 +181,16 @@ public class ModeMenu {
 						Main.changeState(Define.ST_MENU_INFO, false);
 						break;
 					case Define.ST_MENU_SELECT_MAP:
-						createSceneBox.cancel();
+						createSceneListBox.cancel();
 						break;
 					case Define.ST_MENU_ON_LINE_CREATE_SCENE:
-						createSceneBox.cancel();
+						createSceneListBox.cancel();
 						break;
 					case Define.ST_MENU_ON_LINE_LIST_ALL_GAME:
-						selectSceneBox.cancel();
+						selectSceneListBox.cancel();
 						break;
 					case Define.ST_MENU_ON_LINE_LIST_JOIN_GAME:
-						joinPreSceneBox.cancel();
+						joinPreSceneListBox.cancel();
 						break;
 					case Define.ST_MENU_CONFIG_MAP:
 						configMapBox.cancel();
@@ -195,6 +201,9 @@ public class ModeMenu {
 					case Define.ST_MENU_ON_LINE_LOGIN:
 						loginBox.cancel();
 						break;
+						case Define.ST_MENU_ON_LINE_RANKING:
+                            rankingSceneListBox.cancel();
+                            break;
 					}
 				};
 			};
@@ -562,7 +571,7 @@ public class ModeMenu {
 			}
 			break;
 		case Define.ST_MENU_SELECT_MAP:
-			createSceneBox = new ListBox(
+			createSceneListBox = new ListBox(
 					Define.SIZEX, Define.SIZEY, 
 					null, GfxManager.imgNotificationBox, GfxManager.imgNotificationBox, 
 					Define.SIZEX2, Define.SIZEY2, 
@@ -592,7 +601,7 @@ public class ModeMenu {
 					}
 				}
 			};
-			createSceneBox.start();
+			createSceneListBox.start();
 			break;
 		case Define.ST_MENU_CONFIG_MAP:
 
@@ -809,8 +818,8 @@ public class ModeMenu {
 				btnCreateScene = new Button(
 						GfxManager.imgButtonCrossBigRelease, 
 						GfxManager.imgButtonCrossBigFocus, 
-						Define.SIZEX - (GfxManager.imgButtonCrossBigRelease.getWidth()/2)-Define.SIZEY64, 
-						Define.SIZEY - (GfxManager.imgButtonCrossBigRelease.getHeight()/2)-Define.SIZEY64,
+						Define.SIZEX - (GfxManager.imgButtonCrossBigRelease.getWidth()/2)-Define.SIZEY64,
+                        (GfxManager.imgButtonSearchBigRelease.getHeight()) + (GfxManager.imgButtonSearchBigRelease.getHeight()/2) + Define.SIZEY32,
 						null, -1){
 					@Override
 					public void onButtonPressDown(){}
@@ -822,12 +831,29 @@ public class ModeMenu {
 						Main.changeState(Define.ST_MENU_ON_LINE_CREATE_SCENE, false);
 					}
 				};
+
+             btnRanking = new Button(
+                     GfxManager.imgButtonRankingRelease,
+                     GfxManager.imgButtonRankingFocus,
+                     Define.SIZEX - (GfxManager.imgButtonCrossBigRelease.getWidth()/2)-Define.SIZEY64,
+                     (GfxManager.imgButtonSearchBigRelease.getHeight()*2) + (GfxManager.imgButtonSearchBigRelease.getHeight()/2) + Define.SIZEY32 + Define.SIZEY64,
+                     null, -1){
+                 @Override
+                 public void onButtonPressDown(){}
+
+                 @Override
+                 public void onButtonPressUp(){
+                     SndManager.getInstance().playFX(Main.FX_NEXT, 0);
+                     reset();
+                     Main.changeState(Define.ST_MENU_ON_LINE_RANKING, false);
+                 }
+             };
 				
 				
 			Main.getInstance().startClock(Main.TYPE_EARTH);
 			SceneListData sceneListData = OnlineInputOutput.getInstance().reviceSceneListData(
 					Main.getInstance().getActivity(),
-                    Main.IS_GAME_DEBUG?"-1":GameState.getInstance().getName());//check
+                    Main.IS_GAME_DEBUG?"-1":GameState.getInstance().getName(), "active");//check
 			Main.getInstance().stopClock();
 
 			if (sceneListData != null) {
@@ -845,14 +871,12 @@ public class ModeMenu {
 							sceneListData.getSceneDataList().get(i).getId() + " - " +
 							DataKingdom.SCENARY_NAME_LIST[sceneListData.getSceneDataList().get(i).getMap()] +
 							" - ";
-					if(disableList[i]){
-						textList[i] += RscManager.allText[RscManager.TXT_NEXT] + " " + sceneListData.getSceneDataList().get(i).getNextPlayer();
-					}else{
-						textList[i] += RscManager.allText[RscManager.TXT_YOUR_TURN];
-					}
+					textList[i] += RscManager.allText[RscManager.TXT_NEXT] + " " +
+                            (sceneListData.getSceneDataList().get(i).getTurnCount()+1) + "/" + GameParams.MAX_TURNS + " " +
+							sceneListData.getSceneDataList().get(i).getNextPlayer();
 				}
-                
-				selectSceneBox = new SceneDataListBox(
+
+				selectSceneListBox = new SceneDataListBox(
 						sceneListData, RscManager.allText[RscManager.TXT_SELECT_GAME], textList) {
 					@Override
 					public void onFinish() {
@@ -895,9 +919,9 @@ public class ModeMenu {
 					}
 				};
 				if(!Main.IS_GAME_DEBUG) {
-					selectSceneBox.setDisabledList(disableList);
+					selectSceneListBox.setDisabledList(disableList);
 				}
-				selectSceneBox.start();
+				selectSceneListBox.start();
 				
 				updateScenes();
 			
@@ -965,7 +989,7 @@ public class ModeMenu {
 							NotificationBox.getInstance().addMessage(msg);
 							Main.changeState(Define.ST_MENU_ON_LINE_LIST_ALL_GAME, false);
 						}else{
-							joinPreSceneBox.start();
+							joinPreSceneListBox.start();
 						}
 					}
 				};
@@ -986,7 +1010,7 @@ public class ModeMenu {
 							"/" + numPlayer;
 				}
 				
-				joinPreSceneBox = new SceneDataListBox(
+				joinPreSceneListBox = new SceneDataListBox(
 						preSceneListData, RscManager.allText[RscManager.TXT_JOIN_GAME], textList){
 					@Override
 					public void onFinish(){
@@ -1019,7 +1043,7 @@ public class ModeMenu {
 						}
 					}
 				};
-				joinPreSceneBox.start();
+				joinPreSceneListBox.start();
 				updatePreScenes();
 				
 				
@@ -1061,12 +1085,12 @@ public class ModeMenu {
 							NotificationBox.getInstance().addMessage(msg);
 							
 						}else{
-							createSceneBox.start();
+							createSceneListBox.start();
 						}
 					}
 				};
 			 
-			 createSceneBox = new ListBox(
+			 createSceneListBox = new ListBox(
 						Define.SIZEX, Define.SIZEY, 
 						null, GfxManager.imgNotificationBox, GfxManager.imgNotificationBox, 
 						Define.SIZEX2, Define.SIZEY2, 
@@ -1096,8 +1120,78 @@ public class ModeMenu {
 						}
 					};
 				};
-				createSceneBox.start();
+				createSceneListBox.start();
 			 break;
+
+            case Define.ST_MENU_ON_LINE_RANKING:
+
+                rankingBox = new RankingBox(){
+                    public void onFinish() {
+                        btnBack.setDisabled(false);
+                        rankingSceneListBox.start();
+                    }
+                };
+
+                Main.getInstance().startClock(Main.TYPE_EARTH);
+                SceneListData rankingListData = OnlineInputOutput.getInstance().reviceSceneListData(
+                        Main.getInstance().getActivity(),
+                        Main.IS_GAME_DEBUG?"-1":GameState.getInstance().getName(), "unactive");//check
+                Main.getInstance().stopClock();
+
+                if (rankingListData != null) {
+
+                    String[] textList = new String[rankingListData.getSceneDataList().size()];
+                    for(int i = 0; i < rankingListData.getSceneDataList().size(); i++){
+
+                        textList[i] = ""+
+                                rankingListData.getSceneDataList().get(i).getId() + " - " +
+                                DataKingdom.SCENARY_NAME_LIST[rankingListData.getSceneDataList().get(i).getMap()];
+                    }
+
+                    rankingSceneListBox = new SceneDataListBox(
+                            rankingListData, RscManager.allText[RscManager.TXT_GAME_RANKING], textList) {
+                        @Override
+                        public void onFinish() {
+                            if (getIndexPressed() != -1) {
+
+                                SceneListData sceneListData = (SceneListData)getSceneListData();
+                                SceneData sd = sceneListData.getSceneDataList().get(getIndexPressed());
+
+                                String msg = "";
+                                Main.getInstance().startClock(Main.TYPE_EARTH);
+
+                                SceneData sceneData = OnlineInputOutput.getInstance().reviceSceneData(
+                                        Main.getInstance().getActivity(),
+                                        OnlineInputOutput.URL_GET_SCENE, ""+ sd.getId());//check;
+
+                                Main.getInstance().stopClock();
+
+                                if(sceneData != null){
+                                    GameState.getInstance().init(GameState.GAME_MODE_ONLINE, sceneData);
+                                    GameScene gameScene = GameBuilder.getInstance().buildGameScene();
+                                    btnBack.setDisabled(true);
+                                    rankingBox.start(gameScene.getPlayerList());
+                                }else{
+                                    msg = RscManager.allText[RscManager.TXT_SERVER_ERROR];
+                                    NotificationBox.getInstance().addMessage(msg);
+                                    Main.changeState(Define.ST_MENU_ON_LINE_LIST_ALL_GAME, false);
+                                }
+
+                            }else{
+                                Main.changeState(Define.ST_MENU_ON_LINE_LIST_ALL_GAME, false);
+                            }
+                        }
+                    };
+
+                    rankingSceneListBox.start();
+
+                } else {
+                    NotificationBox.getInstance().
+                            addMessage(RscManager.allText[RscManager.TXT_CONNECTION_ERROR]);
+                    Main.changeState(Define.ST_MENU_ON_LINE_START, false);
+                }
+
+                break;
 			 
 		 case Define.ST_TEST:
 			break;
@@ -1195,7 +1289,7 @@ public class ModeMenu {
         case Define.ST_MENU_SELECT_MAP:
         	runMenuBG(Main.getDeltaSec());
         	btnBack.update(UserInput.getInstance().getMultiTouchHandler());
-        	createSceneBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
+        	createSceneListBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
 			break;
 			
         case Define.ST_MENU_CONFIG_MAP:
@@ -1237,11 +1331,11 @@ public class ModeMenu {
 				 btnBack.update(UserInput.getInstance().getMultiTouchHandler());
 				 btnSearchGame.update(UserInput.getInstance().getMultiTouchHandler());
 				 btnCreateScene.update(UserInput.getInstance().getMultiTouchHandler());
-				 if(selectSceneBox != null){
-					 selectSceneBox .update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
+                 btnRanking.update(UserInput.getInstance().getMultiTouchHandler());
+				 if(selectSceneListBox != null){
+					 selectSceneListBox .update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
 				 }
 			 }
-			 
 			 break;
 			 
 		 case Define.ST_MENU_ON_LINE_LIST_JOIN_GAME:
@@ -1249,8 +1343,8 @@ public class ModeMenu {
 			 btnBack.update(UserInput.getInstance().getMultiTouchHandler());
 			 dialogBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
 			 
-			 if(joinPreSceneBox != null){
-				 joinPreSceneBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
+			 if(joinPreSceneListBox != null){
+				 joinPreSceneListBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
 			 }
 			 break;
 			 
@@ -1258,12 +1352,20 @@ public class ModeMenu {
 			 runMenuBG(Main.getDeltaSec());
 			 btnBack.update(UserInput.getInstance().getMultiTouchHandler());
 			 dialogBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
-			 if(createSceneBox != null)
-				 createSceneBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
+			 if(createSceneListBox != null)
+				 createSceneListBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
 			 break;
-		
-		 
-		 case Define.ST_TEST:
+
+			 case Define.ST_MENU_ON_LINE_RANKING:
+                 runMenuBG(Main.getDeltaSec());
+                 btnBack.update(UserInput.getInstance().getMultiTouchHandler());
+                 rankingBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
+                 if(rankingSceneListBox != null){
+                     rankingSceneListBox.update(UserInput.getInstance().getMultiTouchHandler(), Main.getDeltaSec());
+                 }
+                break;
+
+		case Define.ST_TEST:
 			break;
 		}
 		
@@ -1317,10 +1419,10 @@ public class ModeMenu {
 			btnMultiPlayer.draw(_g, 0, 0);
 			btnInfo.draw(_g, 0, 0);
 			btnConfiguration.draw(_g, 0, 0);
-			configurationBox.draw(_g, GfxManager.imgBlackBG);
 			_g.setAlpha(alpha);
 			_g.drawImage(GfxManager.imgBlackBG, 0, 0, Graphics.TOP | Graphics.LEFT);
 			_g.setAlpha(255);
+			configurationBox.draw(_g, GfxManager.imgBlackBG);
             NotificationBox.getInstance().draw(_g);
 			break;
 			
@@ -1342,10 +1444,10 @@ public class ModeMenu {
 			
 		case Define.ST_MENU_ABOUT:
 			drawMenuBG(_g);
-			btnBack.draw(_g, 0, 0);
 			TextManager.draw(_g, Font.FONT_BIG, RscManager.allText[RscManager.TXT_ABOUT_DESCRIP],
 					Define.SIZEX2, Define.SIZEY2,
 					Define.SIZEX-Define.SIZEX8, TextManager.ALING_CENTER, numLetters);
+			btnBack.draw(_g, 0, 0);
 			break;
 			
 		case Define. ST_MENU_CAMPAING:
@@ -1355,29 +1457,29 @@ public class ModeMenu {
 			
 		case Define.ST_MENU_SELECT_GAME:
 			drawMenuBG(_g);
+			if(gameVersionBox != null){
+				gameVersionBox.draw(_g, GfxManager.imgBlackBG);
+			}
 			btnBack.draw(_g, 0, 0);
 			btnOnLine.draw(_g, 0, 0);
 			btnPassAndPlay.draw(_g, 0, 0);
 			if(btnContinuePassAndPlay != null){
 				btnContinuePassAndPlay.draw(_g, 0, 0);
 			}
-			if(gameVersionBox != null){
-				gameVersionBox.draw(_g, GfxManager.imgBlackBG);
-			}
 			break;
 			
 		case Define.ST_MENU_SELECT_MAP:
 			drawMenuBG(_g);
+			createSceneListBox.draw(_g, GfxManager.imgBlackBG);
 			btnBack.draw(_g, 0, 0);
-			createSceneBox.draw(_g, GfxManager.imgBlackBG);
 			break;
 
 		case Define.ST_MENU_CONFIG_MAP:
 			drawMenuBG(_g);
-			btnBack.draw(_g, 0, 0);
-			btnNext.draw(_g, 0, 0);
 			configMapBox.draw(_g);
             simpleBox.draw(_g, GfxManager.imgBlackBG);
+			btnBack.draw(_g, 0, 0);
+			btnNext.draw(_g, 0, 0);
 			break;
 			
 		 case Define.ST_MENU_ON_LINE_START:
@@ -1394,53 +1496,67 @@ public class ModeMenu {
 			 break;
 		 case Define.ST_MENU_ON_LINE_LOGIN:
 			 drawMenuBG(_g);
-			 btnBack.draw(_g, 0, 0);
 			 loginBox.draw(_g);
+			 btnBack.draw(_g, 0, 0);
 			 break;
 			 
 		 case Define.ST_MENU_ON_LINE_LIST_ALL_GAME:
 			 drawMenuBG(_g);
-			 btnBack.draw(_g, 0, 0);
 			 TextManager.drawSimpleText(
-					 _g, Font.FONT_SMALL, 
-					 RscManager.allText[RscManager.TXT_GAME_PLAYER] + " " + GameState.getInstance().getName(), 
-					 Define.SIZEX64, 
+					 _g, Font.FONT_SMALL,
+					 RscManager.allText[RscManager.TXT_GAME_PLAYER] + " " + GameState.getInstance().getName(),
+					 Define.SIZEX64,
 					 Define.SIZEY-Define.SIZEY64, Graphics.BOTTOM | Graphics.LEFT);
-			 btnSearchGame.draw(_g, 0, 0);
-			 btnCreateScene.draw(_g,0, 0);
-			 if(selectSceneBox != null){
-				 selectSceneBox.draw(_g, GfxManager.imgBlackBG);
+			 if(selectSceneListBox != null){
+				 selectSceneListBox.draw(_g, GfxManager.imgBlackBG);
 			 }
-			 
+
 			 if(notificationBox != null){
 				 notificationBox.draw(_g, GfxManager.imgBlackBG);
 				 btnCancel.draw(_g, (int)notificationBox.getModPosX(), 0);
 			 }
+			 btnBack.draw(_g, 0, 0);
+			 btnSearchGame.draw(_g, 0, 0);
+			 btnCreateScene.draw(_g,0, 0);
+             btnRanking.draw(_g,0, 0);
 			 break;
 			 
 		 case Define.ST_MENU_ON_LINE_LIST_JOIN_GAME:
 			 drawMenuBG(_g);
-			 btnBack.draw(_g, 0, 0);
 			 dialogBox.draw(_g, GfxManager.imgBlackBG);
 			 TextManager.drawSimpleText(
-					 _g, Font.FONT_SMALL, 
-					 RscManager.allText[RscManager.TXT_GAME_PLAYER] + " " + GameState.getInstance().getName(), 
-					 Define.SIZEX64, 
+					 _g, Font.FONT_SMALL,
+					 RscManager.allText[RscManager.TXT_GAME_PLAYER] + " " + GameState.getInstance().getName(),
+					 Define.SIZEX64,
 					 Define.SIZEY-Define.SIZEY64, Graphics.BOTTOM | Graphics.LEFT);
-			 if(joinPreSceneBox != null){
-				 joinPreSceneBox.draw(_g, GfxManager.imgBlackBG);
+			 if(joinPreSceneListBox != null){
+				 joinPreSceneListBox.draw(_g, GfxManager.imgBlackBG);
 			 }
+			 btnBack.draw(_g, 0, 0);
 			 break;
 			 
 		 case Define.ST_MENU_ON_LINE_CREATE_SCENE:
 			 drawMenuBG(_g);
-			 btnBack.draw(_g, 0, 0);
 			 dialogBox.draw(_g, GfxManager.imgBlackBG);
-			 if(createSceneBox != null){
-				 createSceneBox.draw(_g, GfxManager.imgBlackBG);
+			 if(createSceneListBox != null){
+				 createSceneListBox.draw(_g, GfxManager.imgBlackBG);
 			 }
+			 btnBack.draw(_g, 0, 0);
 			 break;
-		
+
+			 case Define.ST_MENU_ON_LINE_RANKING:
+                 drawMenuBG(_g);
+                 rankingBox.draw(_g);
+                 TextManager.drawSimpleText(
+                         _g, Font.FONT_SMALL,
+                         RscManager.allText[RscManager.TXT_GAME_PLAYER] + " " + GameState.getInstance().getName(),
+                         Define.SIZEX64,
+                         Define.SIZEY-Define.SIZEY64, Graphics.BOTTOM | Graphics.LEFT);
+                 if(rankingSceneListBox != null){
+                     rankingSceneListBox.draw(_g, GfxManager.imgBlackBG);
+                 }
+                 btnBack.draw(_g, 0, 0);
+		     break;
 		 case Define.ST_MENU_EXIT:
 			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			break;
@@ -1689,12 +1805,12 @@ public class ModeMenu {
 					
 					if(
 							!Main.getInstance().isPaused() &&
-							Main.state == Define.ST_MENU_ON_LINE_LIST_ALL_GAME && 
-							selectSceneBox != null){
+							Main.state == Define.ST_MENU_ON_LINE_LIST_ALL_GAME &&
+									selectSceneListBox != null){
 						SceneListData sceneListData = 
 								OnlineInputOutput.getInstance().reviceSceneListData(
 										Main.getInstance().getActivity(),
-                                        Main.IS_GAME_DEBUG?"-1":GameState.getInstance().getName());
+                                        Main.IS_GAME_DEBUG?"-1":GameState.getInstance().getName(), "active");
 						
 						if (sceneListData != null) {
 							Log.i("Debug", "Actualizando selectSceneBox " + Main.iFrame);
@@ -1711,15 +1827,13 @@ public class ModeMenu {
 										sceneListData.getSceneDataList().get(i).getId() + " - " +
 										DataKingdom.SCENARY_NAME_LIST[sceneListData.getSceneDataList().get(i).getMap()] +
 										" - ";
-								if(disableList[i]){
-									textList[i] += "NEXT " + sceneListData.getSceneDataList().get(i).getNextPlayer();
-								}else{
-									textList[i] += "YOUR TURN";
-								}
+								textList[i] += RscManager.allText[RscManager.TXT_NEXT] + " " +
+                                        (sceneListData.getSceneDataList().get(i).getTurnCount()+1) + "/" + GameParams.MAX_TURNS + " " +
+										sceneListData.getSceneDataList().get(i).getNextPlayer();
 							}
-						selectSceneBox.refresh(sceneListData, RscManager.allText[RscManager.TXT_SELECT_GAME], textList);
+							selectSceneListBox.refresh(sceneListData, RscManager.allText[RscManager.TXT_SELECT_GAME], textList);
                             if(!Main.IS_GAME_DEBUG) {
-                                selectSceneBox.setDisabledList(disableList);
+								selectSceneListBox.setDisabledList(disableList);
                             }
 						}
 						
@@ -1750,7 +1864,7 @@ public class ModeMenu {
 					if(
 							!Main.getInstance().isPaused()  &&
 							Main.state == Define.ST_MENU_ON_LINE_LIST_JOIN_GAME && 
-							joinPreSceneBox != null){
+							joinPreSceneListBox != null){
 						
 						preSceneListData =  
 								OnlineInputOutput.getInstance().revicePreSceneListData(
@@ -1770,7 +1884,7 @@ public class ModeMenu {
 										preSceneListData.getPreSceneDataList().get(i).getPlayerList().size() + 
 										"/" + numPlayer;
 								}
-							joinPreSceneBox.refresh(preSceneListData, RscManager.allText[RscManager.TXT_JOIN_GAME], textList);
+							joinPreSceneListBox.refresh(preSceneListData, RscManager.allText[RscManager.TXT_JOIN_GAME], textList);
 						}
 					}
 				}

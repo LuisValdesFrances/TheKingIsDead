@@ -134,6 +134,8 @@ ATACAR
 FUGIR
 ESPERAR
 CANCEL·LAR
+RANKING
+Total
 Aumenta la defensa de la ciutat a un
 Aumenta la recaudació de la ciutat a un
 Aumenta la protecció de la ciutat a un

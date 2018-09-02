@@ -49,6 +49,8 @@ public class GfxManager {
 
 	public static Image imgButtonOptionsRelease;
 	public static Image imgButtonOptionsFocus;
+	public static Image imgButtonRankingRelease;
+	public static Image imgButtonRankingFocus;
 
 	public static Image imgEnglishRelease;
 	public static Image imgEnglishFocus;
@@ -67,6 +69,9 @@ public class GfxManager {
 	 * public static Image imgPadNorth; public static Image imgPadSouth; public
 	 * static Image imgPadAux;
 	 */
+	public static Image imgCityRanking;
+    public static Image imgSwordRanking;
+
 	public static Image imgProtection;
 	public static Image imgProtectionRes;
 	public static Image imgGameHud;
@@ -89,6 +94,8 @@ public class GfxManager {
 	public static Image imgButtonInfoFocus;
 	public static Image imgButtonMapRelease;
 	public static Image imgButtonMapFocus;
+	public static Image imgButtonCrownRelease;
+	public static Image imgButtonCrownFocus;
 	public static Image imgButtonChestRelease;
 	public static Image imgButtonChestFocus;
 
@@ -185,7 +192,7 @@ public class GfxManager {
 
 				loadMenuGfx();
 
-			} catch (IOException ex) {
+			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 			break;
@@ -199,7 +206,7 @@ public class GfxManager {
 			if (Main.lastState >= Define.ST_GAME_INIT_PASS_AND_PLAY) {
 				try {
 					loadMenuGfx();
-				} catch (IOException ex) {
+				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
 			}
@@ -302,9 +309,12 @@ public class GfxManager {
 				imgArmyAtack = Image.createImage("/army_atack.png");
 				imgArmyDead = Image.createImage("/army_dead.png");
 
+
 				imgGameHud = Image.createImage("/game_hud.png");
-				imgCoin = Image.createImage("/coin.png");
 				imgCoinSmall = Image.createImage("/coin_small.png");
+				imgCoin = Image.createImage("/coin.png");
+                imgSwordRanking = Image.createImage("/sword_ranking.png");
+                imgCityRanking = Image.createImage("/city_ranking.png");
 				imgCrown = Image.createImage("/crown.png");
 				imgButtonPauseRelease = Image.createImage("/pause_release.png");
 				imgButtonPauseFocus = Image.createImage("/pause_focus.png");
@@ -361,6 +371,8 @@ public class GfxManager {
 
 				imgButtonMapRelease = Image.createImage("/icon_map_release.png");
 				imgButtonMapFocus = Image.createImage("/icon_map_release.png");
+				imgButtonCrownRelease = Image.createImage("/icon_crown_release.png");
+				imgButtonCrownFocus = Image.createImage("/icon_crown_release.png");
 
 				imgButtonChestRelease = Image.createImage("/chest_release.png");
 				imgButtonChestFocus = Image.createImage("/chest_focus.png");
@@ -468,14 +480,14 @@ public class GfxManager {
 				imgCatalaRelease = Image.createImage("/catala_release.png");
 				imgCatalaFocus = Image.createImage("/catala_focus.png");
 
-			} catch (IOException ex) {
+			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 			break;
 		}
 	}
 
-	public static void loadMenuGfx() throws IOException {
+	public static void loadMenuGfx() throws Exception {
 
 		imgButtonMenuBigRelease = Image
 				.createImage("/button_menu_big_release.png");
@@ -507,6 +519,8 @@ public class GfxManager {
 		imgButtonInvisible = Image.createImage("/button_invisible.png");
 		imgButtonOptionsRelease = Image.createImage("/options_big_release.png");
 		imgButtonOptionsFocus = Image.createImage("/options_big_focus.png");
+		imgButtonRankingRelease = Image.createImage("/ranking_release.png");
+		imgButtonRankingFocus = Image.createImage("/ranking_focus.png");
 
 		imgButtonKeyboardRelease = Image
 				.createImage("/button_keyboard_release.png");
@@ -554,7 +568,28 @@ public class GfxManager {
 		imgCatalaRelease = Image.createImage("/catala_release.png");
 		imgCatalaFocus = Image.createImage("/catala_focus.png");
 
+        imgCoin = Image.createImage("/coin.png");
+        imgSwordRanking = Image.createImage("/sword_ranking.png");
+        imgCityRanking = Image.createImage("/city_ranking.png");
+
 		imgNotificationBox = Image.createImage("/notification_box.png");
+
+        imgFlagSmallList = new ArrayList<Image>();
+        imgFlagSmallList.add(Image.createImage("/flag_small1.png"));
+        imgFlagSmallList.add(Image.createImage("/flag_small2.png"));
+        imgFlagSmallList.add(Image.createImage("/flag_small3.png"));
+        imgFlagSmallList.add(Image.createImage("/flag_small4.png"));
+        imgFlagSmallList.add(Image.createImage("/flag_small5.png"));
+        imgFlagSmallList.add(Image.createImage("/flag_small6.png"));
+        imgFlagSmallList.add(Image.createImage("/flag_small7.png"));
+        imgFlagSmallList.add(Image.createImage("/flag_small8.png"));
+
+        //Imagenes no desacopladas:
+		imgTerrain = new ArrayList<Image>();
+        imgTerrain.add(Image.createImage("/plain.png"));
+        imgTerrain.add(Image.createImage("/forest.png"));
+        imgTerrain.add(Image.createImage("/montain.png"));
+        imgTerrain.add(Image.createImage("/big_city.png"));
 	}
 
 	public static void deleteMenuGFX() {
@@ -577,6 +612,8 @@ public class GfxManager {
 
 		imgButtonInfoRelease = null;
 		imgButtonInfoFocus = null;
+		imgButtonRankingRelease = null;
+		imgButtonRankingFocus = null;
 
 		imgSmallBox = null;
 		imgMediumBox = null;
@@ -594,6 +631,8 @@ public class GfxManager {
 
 		imgButtonMapRelease = null;
 		imgButtonMapFocus = null;
+		imgButtonCrownRelease = null;
+		imgButtonCrownFocus = null;
 
 		imgInputBox = null;
 		imgTextPointer = null;
@@ -616,6 +655,15 @@ public class GfxManager {
 		imgSpanishFocus = null;
 		imgCatalaRelease = null;
 		imgCatalaFocus = null;
+
+        imgCoin = null;
+        imgSwordRanking = null;
+        imgCityRanking = null;
+        imgFlagSmallList = null;
+
+
+		//Imagenes no desacopladas:
+		imgTerrain = null;
 
 		System.gc();
 	}
@@ -662,8 +710,10 @@ public class GfxManager {
 		imgArmyDead = null;
 
 		imgGameHud = null;
-        imgCoin = null;
 		imgCoinSmall = null;
+        imgCoin = null;
+        imgSwordRanking = null;
+        imgCityRanking = null;
 		imgCrown = null;
 		imgButtonPauseRelease = null;
 		imgButtonPauseFocus = null;

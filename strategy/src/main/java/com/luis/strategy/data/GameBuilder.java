@@ -138,10 +138,10 @@ public class GameBuilder {
 		gameScene.setTurnCount(GameState.getInstance().getSceneData().getTurnCount());
 		gameScene.setPlayerIndex(GameState.getInstance().getSceneData().getPlayerIndex());
 		
-		List<Player>playerList = new ArrayList<Player>();
-		
+
 		gameScene.setKingdomList(DataKingdom.getMap(gameScene.getMapObject(), GameState.getInstance().getMap()));
-		
+
+		List<Player>playerList = new ArrayList<Player>();
 		for(PlayerData playerData: GameState.getInstance().getSceneData().getPlayerDataList()){
 			
 			String name = playerData.getName();
@@ -153,6 +153,11 @@ public class GameBuilder {
 			ActionIA actionIA = isIA?new ActionIA():null;
 			Player player = new Player(name, actionIA, flag, capitalkingdom);
 			player.setGold(gold);
+
+			player.setDestroyByEnemyBattles(playerData.getDestroyByEnemyBattles());
+			player.setDefeatBattles(playerData.getDefeatBattles());
+			player.setWinBattles(playerData.getWinBattles());
+			player.setDestroyEnemyBattles(playerData.getDestroyEnemyBattles());
 			
 			for(KingdomData kingdomData : playerData.getKingdomList()){
 				Kingdom k = gameScene.getKingdom(kingdomData.getId());
@@ -223,6 +228,11 @@ public class GameBuilder {
 			pd.setCapitalKingdom(p.getCapitalkingdom() != null ? p.getCapitalkingdom().getId(): -1);
 			pd.setFlag(p.getFlag());
 			pd.setIA(p.getActionIA() != null);
+
+            pd.setDestroyByEnemyBattles(p.getDestroyByEnemyBattles());
+            pd.setDefeatBattles(p.getDefeatBattles());
+            pd.setWinBattles(p.getWinBattles());
+            pd.setDestroyEnemyBattles(p.getDestroyEnemyBattles());
 			
 			//Add army list to player object
 			List<ArmyData> adList = new ArrayList<ArmyData>();

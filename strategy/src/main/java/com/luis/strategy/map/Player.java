@@ -24,8 +24,14 @@ public class Player {
 	
 	private List<Army> armyList;
 	private List<Kingdom> kingdomList;
-	
-	public Player(String name, ActionIA actionIA, int flag, int capitalKingdom){
+
+	//Contadores:
+	private int winBattles;
+	private int defeatBattles;
+	private int destroyEnemyBattles;
+	private int destroyByEnemyBattles;
+
+    public Player(String name, ActionIA actionIA, int flag, int capitalKingdom){
 		this.id = idCount++;
 		this.name = name;
 		this.flag = flag;
@@ -83,7 +89,6 @@ public class Player {
 		}
 		return army;
 	}
-	
 
 	public int getTaxes() {
 		int tax = 0;
@@ -138,42 +143,53 @@ public class Player {
 		this.kingdomList = kingdomList;
 	}
 
-
 	public int getFlag() {
 		return flag;
 	}
-
 
 	public void setFlag(int flag) {
 		this.flag = flag;
 	}
 
-
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	/*
-	public boolean isDefeat() {
-		boolean defeat = true;
-		for(int i = 0; i < getKingdomList().size() && defeat; i++){
-			for(int j = 0; j < getKingdomList().get(i).getTerrainList().size() && defeat; j++){
-				if(
-					getKingdomList().get(i).getTerrainList().get(j).getType() == GameParams.SMALL_CITY || 
-					getKingdomList().get(i).getTerrainList().get(j).getType() == GameParams.MEDIUM_CITY || 
-					getKingdomList().get(i).getTerrainList().get(j).getType() == GameParams.BIG_CITY){
-					defeat = false;
-				}
-			}
-		}
-		return defeat;
-	}
-	*/
+
+    public int getWinBattles() {
+        return winBattles;
+    }
+
+    public void setWinBattles(int winBattles) {
+        this.winBattles = winBattles;
+    }
+
+    public int getDefeatBattles() {
+        return defeatBattles;
+    }
+
+    public void setDefeatBattles(int defeatBattles) {
+        this.defeatBattles = defeatBattles;
+    }
+
+    public int getDestroyEnemyBattles() {
+        return destroyEnemyBattles;
+    }
+
+    public void setDestroyEnemyBattles(int destroyEnemyBattles) {
+        this.destroyEnemyBattles = destroyEnemyBattles;
+    }
+
+    public int getDestroyByEnemyBattles() {
+        return destroyByEnemyBattles;
+    }
+
+    public void setDestroyByEnemyBattles(int destroyByEnemyBattles) {
+        this.destroyByEnemyBattles = destroyByEnemyBattles;
+    }
 	
 	//Falta seleccionar aquella con un nivel mayor
 	public boolean changeCapital(){
@@ -187,8 +203,6 @@ public class Player {
 		}
 		return false;
 	}
-
-	
 
 	public ActionIA getActionIA() {
 		return actionIA;
@@ -221,6 +235,23 @@ public class Player {
 	public void setCapitalKingdom(int capitalKingdom) {
 		this.capitalKingdom = capitalKingdom;
 	}
+
+	/*
+	public boolean isDefeat() {
+		boolean defeat = true;
+		for(int i = 0; i < getKingdomList().size() && defeat; i++){
+			for(int j = 0; j < getKingdomList().get(i).getTerrainList().size() && defeat; j++){
+				if(
+					getKingdomList().get(i).getTerrainList().get(j).getType() == GameParams.SMALL_CITY ||
+					getKingdomList().get(i).getTerrainList().get(j).getType() == GameParams.MEDIUM_CITY ||
+					getKingdomList().get(i).getTerrainList().get(j).getType() == GameParams.BIG_CITY){
+					defeat = false;
+				}
+			}
+		}
+		return defeat;
+	}
+	*/
 	
 	
 	

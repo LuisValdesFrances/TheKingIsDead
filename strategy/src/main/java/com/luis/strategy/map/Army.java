@@ -78,7 +78,8 @@ public class Army extends MapObject{
 		super(
 			map,
 			kingdom.getX(), kingdom.getY(),
-			GfxManager.imgArmyIdle.getWidth()/9, GfxManager.imgArmyIdle.getHeight(), 
+				GfxManager.imgArmyIdle != null ? GfxManager.imgArmyIdle.getWidth()/9:0,
+				GfxManager.imgArmyIdle != null ? GfxManager.imgArmyIdle.getHeight():0,
 			mapX, mapY, mapWidth, mapHeight,
 			-1, -1);
 		this.id = idCount++;
@@ -88,17 +89,20 @@ public class Army extends MapObject{
 		this.lastKingdom = kingdom;
 		this.flag = flag;
 		this.state = STATE_OFF;
-		spriteList = new ArrayList<SpriteImage>();
-		spriteList.add(new SpriteImage(GfxManager.imgArmyIdle.getWidth(), GfxManager.imgArmyIdle.getHeight(), 0.10f, 7));	
-		spriteList.add(new SpriteImage(GfxManager.imgArmyRun.getWidth(), GfxManager.imgArmyRun.getHeight(), 0.12f, 8));
-		spriteList.add(new SpriteImage(GfxManager.imgArmyAtack.getWidth(), GfxManager.imgArmyRun.getHeight(), 0.09f, 7));
-		spriteList.add(new SpriteImage(GfxManager.imgArmyDead.getWidth(), GfxManager.imgArmyDead.getHeight(), 0.12f, 5));
-		
+		if(GfxManager.imgArmyIdle != null && GfxManager.imgArmyRun != null && GfxManager.imgArmyAtack != null && GfxManager.imgArmyDead != null) {
+			spriteList = new ArrayList<SpriteImage>();
+			spriteList.add(new SpriteImage(GfxManager.imgArmyIdle.getWidth(), GfxManager.imgArmyIdle.getHeight(), 0.10f, 7));
+			spriteList.add(new SpriteImage(GfxManager.imgArmyRun.getWidth(), GfxManager.imgArmyRun.getHeight(), 0.12f, 8));
+			spriteList.add(new SpriteImage(GfxManager.imgArmyAtack.getWidth(), GfxManager.imgArmyRun.getHeight(), 0.09f, 7));
+			spriteList.add(new SpriteImage(GfxManager.imgArmyDead.getWidth(), GfxManager.imgArmyDead.getHeight(), 0.12f, 5));
+		}
 		if(getPlayer().getActionIA() != null){
 			iaDecision = new IADecision();
 		}
-		
-		imgNickBuffer = Image.createImage(GfxManager.imgNickBox.getWidth(), GfxManager.imgNickBox.getHeight());
+
+		if(GfxManager.imgNickBox != null) {
+			imgNickBuffer = Image.createImage(GfxManager.imgNickBox.getWidth(), GfxManager.imgNickBox.getHeight());
+		}
 		
 		anim = ANIN_IDLE;
 	}

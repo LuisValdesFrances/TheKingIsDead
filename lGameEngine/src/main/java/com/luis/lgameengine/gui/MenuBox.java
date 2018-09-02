@@ -163,8 +163,8 @@ public class MenuBox extends MenuElement {
 				if(unactiveCount < BUFFER_WAIT_FRAMES){
 					unactiveCount++;
 				}else{
-					onFinish();
 					state = STATE_UNACTIVE;
+					onFinish();
 				}
 				break;
 			}

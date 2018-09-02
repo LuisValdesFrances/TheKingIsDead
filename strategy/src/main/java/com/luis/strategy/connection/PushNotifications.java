@@ -67,7 +67,7 @@ public class PushNotifications extends Thread{
 				}
 
 				SceneListData sceneListData = OnlineInputOutput
-						.getInstance().reviceSceneListData(Main.getInstance().getActivity(), user);
+						.getInstance().reviceSceneListData(Main.getInstance().getActivity(), user, "active");
 				
 				if (sceneListData != null) {
 					//A�ado nuevas escenas si no existen

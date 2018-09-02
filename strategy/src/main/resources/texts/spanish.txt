@@ -134,6 +134,8 @@ ATACAR
 HUIR
 ESPERAR
 CANCELAR
+RANKING
+Total
 Aumenta la defensa de la ciudad a un
 Aumenta la recaudación de la ciudad a un
 Aumenta la protección de la ciudad a un

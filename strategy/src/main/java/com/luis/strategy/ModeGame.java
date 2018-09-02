@@ -88,7 +88,7 @@ public class ModeGame {
 			
 			GameScene gameScene = null;
 
-			//Reseteo los contadores
+			//Reseteo los contadores estaticos
 			Player.init();
 			Army.init();
 			if(Main.state == Define.ST_GAME_INIT_PASS_AND_PLAY){
@@ -408,7 +408,7 @@ public class ModeGame {
 	public static final int DEBUG_BUTTON_W = Define.SIZEX32;
 	public static final int DEBUG_BUTTON_H = Define.SIZEX32;
 	public static final int DEBUG_BUTTON_X = Define.SIZEX-DEBUG_BUTTON_W-DEBUG_BUTTON_W/2;
-	public static final int DEBUG_BUTTON_Y = Define.SIZEY4 - DEBUG_BUTTON_H/2;
+	public static final int DEBUG_BUTTON_Y = Define.SIZEY4 + Define.SIZEY8 - DEBUG_BUTTON_H/2;
 	private static void drawDebugButton(Graphics _g){
 		if(Main.IS_GAME_DEBUG){
 			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);

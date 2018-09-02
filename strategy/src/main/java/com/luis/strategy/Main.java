@@ -215,6 +215,7 @@ public class Main extends Screen implements Runnable {
 					case Define.ST_MENU_ON_LINE_LIST_ALL_GAME:
 					case Define.ST_MENU_ON_LINE_LIST_JOIN_GAME:
 					case Define.ST_MENU_ON_LINE_CREATE_SCENE:
+					case Define.ST_MENU_ON_LINE_RANKING:
 
 					case Define.ST_TEST:
 					if (!isLoading) {
@@ -293,6 +294,7 @@ public class Main extends Screen implements Runnable {
 				 case Define.ST_MENU_ON_LINE_LIST_ALL_GAME:
 				 case Define.ST_MENU_ON_LINE_LIST_JOIN_GAME:
 				 case Define.ST_MENU_ON_LINE_CREATE_SCENE:
+                 case Define.ST_MENU_ON_LINE_RANKING:
 		        	 
 		         case Define.ST_TEST:
 					ModeMenu.draw(_g);

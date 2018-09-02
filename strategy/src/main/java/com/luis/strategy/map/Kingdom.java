@@ -33,8 +33,9 @@ public class Kingdom extends MapObject{
 		float x, float y, float mapX, float mapY, int mapWidth, int mapHeight) {
 		super(
 			map, 
-			x, y, 
-			GfxManager.imgTargetDomain.getWidth(), GfxManager.imgTargetDomain.getHeight(), 
+			x, y,
+                GfxManager.imgTargetDomain != null ? GfxManager.imgTargetDomain.getWidth():0,
+                GfxManager.imgTargetDomain != null ? GfxManager.imgTargetDomain.getHeight():0,
 			mapX, mapY, mapWidth, mapHeight, -1, -1);
 		this.mapX = mapX;
 		this.mapY = mapY;

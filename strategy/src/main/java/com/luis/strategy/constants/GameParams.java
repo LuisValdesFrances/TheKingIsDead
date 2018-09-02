@@ -1,6 +1,8 @@
 package com.luis.strategy.constants;
 
 public class GameParams {
+
+	public static final int MAX_TURNS = 25;
 	
 	//Id terreno
 	public static final int PLAIN = 0;

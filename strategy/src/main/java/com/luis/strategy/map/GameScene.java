@@ -1,5 +1,8 @@
 package com.luis.strategy.map;
 
+import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.luis.lgameengine.gameutils.gameworld.GameCamera;
@@ -43,16 +46,28 @@ public class GameScene{
 		this.map = map;
 		this.numberPartsW = numberPartsW;
 		this.numberPartsH = numberPartsH;
-		mapObject = new MapObject(
-				null,
-				mapX, mapY, 
-				GfxManager.imgMapList.get(0).getWidth()*numberPartsW, 
-				GfxManager.imgMapList.get(0).getHeight()*numberPartsH,
-				mapX, mapY, 
-				GfxManager.imgMapList.get(0).getWidth()*numberPartsW, 
-				GfxManager.imgMapList.get(0).getHeight()*numberPartsH,
-				-1, -1) {
-		};
+		if(GfxManager.imgMapList != null){
+			mapObject = new MapObject(
+					null,
+					mapX, mapY,
+					GfxManager.imgMapList.get(0).getWidth() * numberPartsW,
+					GfxManager.imgMapList.get(0).getHeight() * numberPartsH,
+					mapX, mapY,
+					GfxManager.imgMapList.get(0).getWidth() * numberPartsW,
+					GfxManager.imgMapList.get(0).getHeight() * numberPartsH,
+					-1, -1) {
+			};
+		}else{
+			Log.i("Debug", "No se ha cargado el mapObject");
+
+            mapObject = new MapObject(
+                    null,
+                    -1, -1, -1, -1,
+                    -1, -1, -1, -1,
+                    -1, -1) {
+            };
+
+		}
 	}
 	
 	public void init(){
@@ -115,12 +130,14 @@ public class GameScene{
 		}
 	}
 
-	public void removePlayerKingdoms(Player player){
-		for(Kingdom k : player.getKingdomList()){
-			player.removeKingdom(k);
-		}
-	}
-	
+    public void removePlayerKingdoms(Player player){
+        player.setKingdomList(new ArrayList<Kingdom>());
+    }
+
+	public void removePlayerArmy(Player player){
+        player.setArmyList(new ArrayList<Army>());
+    }
+
 	private boolean alphaFlag;
 	private float alpha = 255;
 	
