@@ -6,7 +6,7 @@ public class VictoryPoints {
 
     public int getBattlePoints(Player player){
         int points =
-                (player.getWinBattles() + player.getDestroyEnemyBattles()*2);
+                (player.getWin() + player.getBigWin()*2);
         if(points > 0){
             return points*10;
         }else{

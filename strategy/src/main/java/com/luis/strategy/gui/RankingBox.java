@@ -19,6 +19,7 @@ public class RankingBox extends MenuBox {
 
     private Player[] pList;
     private VictoryPoints victoryPoins;
+    private String head;
 
     public RankingBox() {
         super(
@@ -46,8 +47,9 @@ public class RankingBox extends MenuBox {
         victoryPoins = new VictoryPoints();
     }
 
-    public void start(List<Player> playerList){
+    public void start(List<Player> playerList, String head){
         super.start();
+        this.head = head;
         int nPlayer = 0;
         for(Player player : playerList){
             if(player.getCapitalkingdom() != null){
@@ -93,7 +95,7 @@ public class RankingBox extends MenuBox {
                 getX()- GfxManager.imgBigBox.getWidth()/2 + Define.SIZEX32 + GfxManager.imgFlagSmallList.get(0).getWidth()/2 + (int)getModPosX();
 
         TextManager.drawSimpleText(g, Font.FONT_SMALL,
-                RscManager.allText[RscManager.TXT_GAME_RANKING],
+                head,
                 getX() + (int)modPosX,
                 startY,
                 Graphics.VCENTER | Graphics.HCENTER);

@@ -135,6 +135,7 @@ ESCAPE
 WAIT
 CANCEL
 RANKING
+LOOT
 Total
 Increase the defense of the city to a
 Increase the collection of the city to a

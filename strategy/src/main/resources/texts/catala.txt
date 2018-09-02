@@ -135,6 +135,7 @@ FUGIR
 ESPERAR
 CANCEL·LAR
 RANKING
+BOTÍN
 Total
 Aumenta la defensa de la ciutat a un
 Aumenta la recaudació de la ciutat a un

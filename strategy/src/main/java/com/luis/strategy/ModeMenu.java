@@ -1170,7 +1170,9 @@ public class ModeMenu {
                                     GameState.getInstance().init(GameState.GAME_MODE_ONLINE, sceneData);
                                     GameScene gameScene = GameBuilder.getInstance().buildGameScene();
                                     btnBack.setDisabled(true);
-                                    rankingBox.start(gameScene.getPlayerList());
+                                    rankingBox.start(
+                                    		gameScene.getPlayerList(),
+											sceneData.getId() + " - " + RscManager.allText[RscManager.TXT_GAME_RANKING]);
                                 }else{
                                     msg = RscManager.allText[RscManager.TXT_SERVER_ERROR];
                                     NotificationBox.getInstance().addMessage(msg);

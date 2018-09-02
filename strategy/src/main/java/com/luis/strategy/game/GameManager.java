@@ -336,13 +336,19 @@ public class GameManager {
 
             @Override
             public void onButtonPressUp(){
+                String head = RscManager.allText[RscManager.TXT_GAME_RANKING];
+                if(GameState.getInstance().getGameMode() == GameState.GAME_MODE_ONLINE){
+                    head += " - " + RscManager.allText[RscManager.TXT_GAME_TURN] + (gameScene.getTurnCount()+1) + "/" + GameParams.MAX_TURNS;
+                }else{
+                    head += " - " + RscManager.allText[RscManager.TXT_GAME_TURN] + (gameScene.getTurnCount()+1);
+                }
                 if(state == STATE_DEBUG){
-                    rankingBox.start(gameScene.getPlayerList());
+                    rankingBox.start(gameScene.getPlayerList(), head);
                     btnRanking.setDisabled(true);
                 }else{
                     if(getCurrentPlayer().getActionIA() == null && subState == SUB_STATE_ACTION_WAIT){
                         changeSubState(SUB_STATE_RANKING);
-                        rankingBox.start(gameScene.getPlayerList());
+                        rankingBox.start(gameScene.getPlayerList(), head);
                         setDisabled(true);
                     }
                 }
@@ -2159,40 +2165,49 @@ public class GameManager {
 		boolean arrackerHasBeendestroyed=false;
 		
 		textH=RscManager.allText[RscManager.TXT_GAME_RESULT];
+		int loot = 0;
 		switch(result){
 			case 0: 
 				textH=RscManager.allText[RscManager.TXT_GAME_BIG_DEFEAT];
 
                 if(enemy != null){
-				    getCurrentPlayer().setDestroyByEnemyBattles(getCurrentPlayer().getDestroyByEnemyBattles()+1);
-                    enemy.getPlayer().setDestroyEnemyBattles(enemy.getPlayer().getDestroyEnemyBattles()+1);
+				    getCurrentPlayer().setBigDefeat(getCurrentPlayer().getBigDefeat()+1);
+                    enemy.getPlayer().setBigWin(enemy.getPlayer().getBigWin()+1);
                 }
 				break;
 			case 1:
 				textH=RscManager.allText[RscManager.TXT_GAME_DEFEAT];
 
                 if(enemy != null){
-                    getCurrentPlayer().setDefeatBattles(getCurrentPlayer().getDefeatBattles()+1);
-                    enemy.getPlayer().setWinBattles(enemy.getPlayer().getWinBattles()+1);
+                    getCurrentPlayer().setDefeat(getCurrentPlayer().getDefeat()+1);
+                    enemy.getPlayer().setWin(enemy.getPlayer().getWin()+1);
                 }
 				break;
 			case 2: 
 				textH=RscManager.allText[RscManager.TXT_GAME_WIN];
 
                 if(enemy != null){
-                    getCurrentPlayer().setWinBattles(getCurrentPlayer().getWinBattles()+1);
-                    enemy.getPlayer().setDefeatBattles(enemy.getPlayer().getDefeatBattles()+1);
+                    getCurrentPlayer().setWin(getCurrentPlayer().getWin()+1);
+                    enemy.getPlayer().setDefeat(enemy.getPlayer().getDefeat()+1);
+                    loot = ((enemy.getCost() * 25) / 100);
                 }
 				break;
 			case 3: 
 				textH=RscManager.allText[RscManager.TXT_GAME_BIG_VICTORY];
 
                 if(enemy != null){
-                    getCurrentPlayer().setDestroyEnemyBattles(getCurrentPlayer().getDestroyEnemyBattles()+1);
-                    enemy.getPlayer().setDestroyByEnemyBattles(enemy.getPlayer().getDestroyByEnemyBattles()+1);
+                    getCurrentPlayer().setBigWin(getCurrentPlayer().getBigWin()+1);
+                    enemy.getPlayer().setBigDefeat(enemy.getPlayer().getBigDefeat()+1);
+                    loot = ((enemy.getCost() * 50) / 100);
                 }
 				break;
 		}
+
+		if(loot > 0){
+		    getCurrentPlayer().setGold(getCurrentPlayer().getGold()+loot);
+            NotificationBox.getInstance().addMessage(RscManager.allText[RscManager.TXT_GAME_LOOT] + ":" + loot);
+        }
+
 		//Nyapa
 		//result = 3;
 		
@@ -2390,7 +2405,7 @@ public class GameManager {
 		}
 		//*/
 		if(showResultBox){
-			resultBox.start(textB.length() > 0 ?textH:null, textB.length() > 0 ?textB:textH);
+		    resultBox.start(textB.length() > 0 ?textH:null, textB.length() > 0 ?textB:textH);
 			
 			if(result == 0 || result == 1){
 				SndManager.getInstance().playFX(Main.FX_DEFEAT, 0);

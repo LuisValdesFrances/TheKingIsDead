@@ -167,7 +167,8 @@ public class RscManager {
 	public static final int TXT_GAME_WAIT= TXT_GAME_ESCAPE+1;
 	public static final int TXT_GAME_CANCEL= TXT_GAME_WAIT+1;
 	public static final int TXT_GAME_RANKING= TXT_GAME_CANCEL+1;
-	public static final int TXT_GAME_TOTAL= TXT_GAME_RANKING+1;
+	public static final int TXT_GAME_LOOT= TXT_GAME_RANKING+1;
+	public static final int TXT_GAME_TOTAL= TXT_GAME_LOOT+1;
 
 	public static final int TXT_GAME_INCREASE_TOWER = TXT_GAME_TOTAL+1;
 	public static final int TXT_GAME_INCREASE_MARKET = TXT_GAME_INCREASE_TOWER+1;
