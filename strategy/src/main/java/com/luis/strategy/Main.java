@@ -297,7 +297,7 @@ public class Main extends Screen implements Runnable {
                  case Define.ST_MENU_ON_LINE_RANKING:
 		        	 
 		         case Define.ST_TEST:
-					ModeMenu.draw(_g);
+					ModeMenu.draw(_g,  state);
 					break;
 		         case Define.ST_GAME_INIT_PASS_AND_PLAY:
 		         case Define.ST_GAME_INIT_ON_LINE:

@@ -49,7 +49,7 @@ public class ModeMenu {
 	private static Button btnCancel;
 	private static Button btnBack;
 	private static Button btnNext;
-	private static Button btnMultiPlayer;
+	private static Button btnQuickPlay;
 	private static Button btnOnLine;
 	private static Button btnPassAndPlay;
 	private static Button btnCampaign;
@@ -304,7 +304,7 @@ public class ModeMenu {
 						reset();
 					}
 				};
-				btnMultiPlayer = new Button(
+				btnQuickPlay = new Button(
 						GfxManager.imgButtonMenuBigRelease, 
 						GfxManager.imgButtonMenuBigFocus, 
 						Define.SIZEX-(int)(GfxManager.imgButtonMenuBigRelease.getWidth()/2)-Define.SIZEY64, 
@@ -1227,8 +1227,8 @@ public class ModeMenu {
 			btnConfiguration.setDisabled(configurationBox.isActive());
 			btnConfiguration.update(UserInput.getInstance().getMultiTouchHandler());
 			btnCampaign.update(UserInput.getInstance().getMultiTouchHandler());
-			btnMultiPlayer.setDisabled(configurationBox.isActive());
-			btnMultiPlayer.update(UserInput.getInstance().getMultiTouchHandler());
+			btnQuickPlay.setDisabled(configurationBox.isActive());
+			btnQuickPlay.update(UserInput.getInstance().getMultiTouchHandler());
 			btnInfo.setDisabled(configurationBox.isActive());
 			btnInfo.update(UserInput.getInstance().getMultiTouchHandler());
 			btnDebug.update(UserInput.getInstance().getMultiTouchHandler());
@@ -1374,9 +1374,9 @@ public class ModeMenu {
 		NotificationBox.getInstance().update(Main.getDeltaSec());
 	}
 	
-	public static void draw(Graphics _g){
+	public static void draw(Graphics _g, int state){
 		
-		switch (Main.state) {
+		switch (state) {
 		case Define.ST_MENU_START:
 			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			_g.setColor(Main.COLOR_BLACK);
@@ -1418,7 +1418,7 @@ public class ModeMenu {
 		case Define.ST_MENU_MAIN:
 			drawMenuBG(_g);
 			btnCampaign.draw(_g, 0, 0);
-			btnMultiPlayer.draw(_g, 0, 0);
+			btnQuickPlay.draw(_g, 0, 0);
 			btnInfo.draw(_g, 0, 0);
 			btnConfiguration.draw(_g, 0, 0);
 			_g.setAlpha(alpha);

@@ -1,7 +1,5 @@
 package com.luis.strategy.constants;
 
-import com.luis.lgameengine.gameutils.Settings;
-
 /**
 *
 * @author Luis Valdes Frances
