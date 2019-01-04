@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.luis.strategy"
     android:installLocation="auto"
-    android:versionCode="58"
-    android:versionName="3.6">
+    android:versionCode="60"
+    android:versionName="3.8">
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="14"
         android:targetSdkVersion="26" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
