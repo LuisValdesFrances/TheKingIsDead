@@ -51,13 +51,13 @@ public interface GameControl {
 	/**
 	 * 
 	 * @param index
-	 * @return Retorna si el botón esta siendo pulsado
+	 * @return Retorna si el botï¿½n esta siendo pulsado
 	 */
 	public boolean isButtonPressed(int index);
 	
 	/**
 	 * 
-	 * @param _iIndex El index del boton
+	 * @param index El index del boton
 	 * @return Retorna si el boton acaba de ser pulsado en un evento de key-up
 	 */
 	public boolean  isButtonActived(int index);

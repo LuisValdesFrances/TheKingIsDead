@@ -39,6 +39,7 @@ public class MainActivity extends Activity{
 	private InterstitialAd mInterstitialAd;
 
 	public static final String ADMOB_ID = "ca-app-pub-9871578065265688~4052408776";
+	public static final String ADMOB_TEST_ID = "ca-app-pub-3940256099942544/1033173712";
 	public static final String INTERSTITIAL_ID = "ca-app-pub-9871578065265688/6188968599";
 	
 	private PowerManager powerManager;
