@@ -27,7 +27,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 /**
- * 
+ *
  * @author Luis Valdes Frances
  */
 
@@ -41,11 +41,11 @@ public class MainActivity extends Activity{
 	public static final String ADMOB_ID = "ca-app-pub-9871578065265688~4052408776";
 	public static final String ADMOB_TEST_ID = "ca-app-pub-3940256099942544/1033173712";
 	public static final String INTERSTITIAL_ID = "ca-app-pub-9871578065265688/6188968599";
-	
+
 	private PowerManager powerManager;
 	private PowerManager.WakeLock wakeLock;
-	
-	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -239,9 +239,9 @@ public class MainActivity extends Activity{
 		Intent intent = getIntent();
 		//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-		
+
 		long[] vibrate = {500};
-		
+
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
         .setSmallIcon(R.drawable.ic_launcher)
         .setContentTitle(title)
@@ -252,14 +252,14 @@ public class MainActivity extends Activity{
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         .setContentIntent(pendingIntent)
         .setAutoCancel(true);
-		
+
 		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
 		// notificationId is a unique int for each notification that you must define
 		notificationManager.notify(notificationId, mBuilder.build());
 	}
 	*/
-	
+
 	}
 
 

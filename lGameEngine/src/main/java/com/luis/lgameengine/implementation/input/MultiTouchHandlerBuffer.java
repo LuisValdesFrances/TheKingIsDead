@@ -73,6 +73,7 @@ public class MultiTouchHandlerBuffer implements OnTouchListener {
 		//*/
 	}
     
+	//@Override
     @SuppressLint("ClickableViewAccessibility")
 	public boolean onTouch(View v, MotionEvent event) {
     	

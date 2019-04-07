@@ -5,8 +5,8 @@ package com.luis.lgameengine.gameutils.gameworld;
  * 
  * @author Luis Valdes Frances
  * 
- * Todos los objetos que extiendan estan clases estarán expuestas a la fisica en 2D en cuanto a efectos de la gravedad
- * y colisiones. 
+ * Todos los objetos que extiendan estan clases estarán expuestas a la fisica en 2D en 
+ * cuanto a efectos de la gravedad y colisiones. 
  * El punto de anclaje con el que se realizan las colisiones es abajo-centro
  *
  */
@@ -23,17 +23,17 @@ public class RigidBody {
 		return (tileSize * value) / unityTileSize;
 	}
 	
-	private float weight;
+	protected float weight;
 	/**
 	 * rango de 0 a 1f;
 	 */
-	private float elasticity;
+	protected float elasticity;
 
     /*
     Antiguas fuerzas
     */
-    private float speedX;
-    private float speedY;
+    protected float speedX;
+    protected float speedY;
 
     public float getSpeedX()
     {
@@ -57,12 +57,12 @@ public class RigidBody {
     protected float posY;
     protected float width;
     protected float height;
-    private float newPosX;
-    private float newPosY;
-    private float gravityForce;
+    protected float newPosX;
+    protected float newPosY;
+    protected float gravityForce;
 
-    private float moveX;
-    private float moveY;
+    protected float moveX;
+    protected float moveY;
 
     public float GetMoveX()
     {
@@ -85,10 +85,10 @@ public class RigidBody {
     /*
     Debug
     */
-    private boolean isColTop;
-    private boolean isColBotton;
-    private boolean isColRight;
-    private boolean isColLeft;
+    protected boolean isColTop;
+    protected boolean isColBotton;
+    protected boolean isColRight;
+    protected boolean isColLeft;
 
 
     /*
@@ -105,7 +105,7 @@ public class RigidBody {
     protected static int COL_WIDTH = 2;
     protected static int COL_HEIGHT = 3;
 
-    private float[][] colisionDataPosition = new float[COL_BOTTON + 1][COL_HEIGHT + 1];
+    protected float[][] colisionDataPosition = new float[COL_BOTTON + 1][COL_HEIGHT + 1];
     /*
     */
     protected void init(float posX, float posY, float width, float height){
@@ -131,7 +131,8 @@ public class RigidBody {
      * @param _iScreenH
      * @param isBoundColToScreen
      */
-    protected void runPhysics (float deltaTime, 
+    protected void runPhysics (
+    		float deltaTime, 
     		int[][] _iTilesMatrixID, 
     		float _fTileW, float _fTileH, int _iScreenW, 
     		int _iScreenH){
@@ -185,7 +186,7 @@ public class RigidBody {
         }
     }
 
-    private void RunForceX(float deltaTime){
+    protected void RunForceX(float deltaTime){
         if (speedX != 0f){
             float cAcceleration = (gravityForce/2f) * weight;
 
@@ -340,7 +341,7 @@ public class RigidBody {
     /**
      * Sistema 2
     */
-    private int checkColisionY(int[][] tilesMatrixID, float pX, float pY, float pW, float tileW, float tileH){
+    protected int checkColisionY(int[][] tilesMatrixID, float pX, float pY, float pW, float tileW, float tileH){
     	//Izquierda
     	int indexY;
     	int indexX;
@@ -354,6 +355,9 @@ public class RigidBody {
     		
 	    	indexY = (int)((pY) / tileH);
 	    	indexX = (int)((pX+offsetX) / tileW);
+	    	if(indexX < 0 || indexY < 0 || indexY > tilesMatrixID.length-1 || indexX > tilesMatrixID[indexY].length-1){
+	    		return -1;
+	    	}
 	    	if(tilesMatrixID[indexY][indexX] != 0){
 	    		return indexY;
 	    	}
@@ -361,7 +365,7 @@ public class RigidBody {
     	return -1;
     }
     
-    private int checkColisionX(int[][] tilesMatrixID, float pX, float pY, float pH, float tileW, float tileH){
+    protected int checkColisionX(int[][] tilesMatrixID, float pX, float pY, float pH, float tileW, float tileH){
     	//Cabeza
     	int indexY;
     	int indexX;
@@ -375,6 +379,9 @@ public class RigidBody {
     		
 	    	indexY = (int)((pY+offsetY) / tileH);
 	    	indexX = (int)((pX) / tileW);
+	    	if(indexX < 0 || indexY < 0 || indexY > tilesMatrixID.length-1 || indexX > tilesMatrixID[indexY].length-1){
+	    		return -1;
+	    	}
 	    	if(tilesMatrixID[indexY][indexX] != 0){
 	    		return indexX;
 	    	}
@@ -382,12 +389,22 @@ public class RigidBody {
     	return -1;
     }
     
-    private void checkColision2(int[][] tilesMatrixID, float tileW, float tileH, int numFiles, int numColumns){
+    protected void checkColision2(int[][] tilesMatrixID, float tileW, float tileH, int numFiles, int numColumns){
     	
     	ResetDataColisions();
     	
     	int levelWidth = numColumns * (int)tileW;
     	int levelHeight = numFiles * (int)tileH;
+    	
+    	colisionY(tilesMatrixID, tileW, tileH, levelWidth, levelHeight, newPosX, newPosY, width, height);
+    	
+    	colisionX(tilesMatrixID, tileW, tileH, levelWidth, levelHeight, newPosX, newPosY, width, height);
+    	
+    	colisionZ(tilesMatrixID, tileW, tileH, levelWidth, levelHeight, newPosX, newPosY, width, height);
+	}
+    
+    protected void colisionY(int[][] tilesMatrixID, float tileW, float tileH, int levelWidth, int levelHeight,
+    		float newPosX, float newPosY, float width, float height){
     	if(newPosX - width/2 >= 0 && newPosX + width/2 <= levelWidth && newPosY - height >= 0 && newPosY <= levelHeight){
     		float newSpeedY = 0;
     		if(elasticity > 0){
@@ -403,7 +420,7 @@ public class RigidBody {
 	    			newPosY, width, tileW, tileH);
 	    	if(colDown != -1){
 	    		speedY = newSpeedY;
-	    		newPosY = (colDown*tileH);
+	    		this.newPosY = (colDown*tileH);
 	    		isColBotton = true;
 	    	}
 	    	
@@ -413,14 +430,17 @@ public class RigidBody {
 	    			newPosY-height, width, tileW, tileH);
 	    	if(colUp != -1){
 	    		speedY = newSpeedY;
-	    		newPosY = colUp*tileH + tileH + height;
+	    		this.newPosY = colUp*tileH + tileH + height;
 	    		isColTop = true;
 	    	}
     	}
-	    posY = newPosY + moveY;
-	    newPosY = posY;
-	    	
-	    if(newPosX - width/2 >= 0 && newPosX + width/2 <= levelWidth && newPosY - height >= 0 && newPosY <= levelHeight){
+	    posY = this.newPosY + moveY;
+	    this.newPosY = posY;
+    }
+    
+    protected void colisionX(int[][] tilesMatrixID, float tileW, float tileH, int levelWidth, int levelHeight,
+    		float newPosX, float newPosY, float width, float height){
+    	if(newPosX - width/2 >= 0 && newPosX + width/2 <= levelWidth && newPosY - height >= 0 && newPosY <= levelHeight){
 	    	
 	    	float newSpeedX = 0;
 	    	if(elasticity > 0){
@@ -433,7 +453,7 @@ public class RigidBody {
 	    			newPosY-height, height, tileW, tileH);
 	    	if(colRight != -1){
 	    		speedX = newSpeedX;
-	    		newPosX = colRight*tileW - width/2;
+	    		this.newPosX = colRight*tileW - width/2;
 	    		isColRight = true;
 	    	}
 	    	
@@ -443,21 +463,25 @@ public class RigidBody {
 	    			newPosY-height, height, tileW, tileH);
 	    	if(colLeft != -1){
 	    		speedX = newSpeedX;
-	    		newPosX = colLeft*tileW + tileW + width/2;
+	    		this.newPosX = colLeft*tileW + tileW + width/2;
 	    		isColLeft = true;
 	    	}
 	    }
-	    posX = newPosX + moveX;
-	    newPosX = posX;
-	}
+	    posX = this.newPosX + moveX;
+	    this.newPosX = posX;
+    }
     
+    protected void colisionZ(int[][] tilesMatrixID, float tileW, float tileH, int levelWidth, int levelHeight, 
+    		float newPosX, float newPosY, float width, float height){
+    	
+    }
     
     /**
      * Sistema 1
     */
-//    private int[] indexX = new int[2];
-//    private int[] indexY = new int[2];
-//    private void PutIndexX(float tileW, int numColums, float screenX){
+//    protected int[] indexX = new int[2];
+//    protected int[] indexY = new int[2];
+//    protected void PutIndexX(float tileW, int numColums, float screenX){
 //    	float minX = getPosX() - screenX / 2f;
 //        float maxX = getPosX() + screenX / 2f;
 //        float levelWidth = numColums * tileW;
@@ -468,7 +492,7 @@ public class RigidBody {
 //        else if (indexX[1] > numColums) indexX[1] = numColums;
 //    }
 //
-//    private void PutIndexY(float tileH, int numFiles, float screenY){
+//    protected void PutIndexY(float tileH, int numFiles, float screenY){
 //    	 float minY = getPosY() - screenY / 2f;
 //	     float maxY = getPosY() + screenY / 2f;
 //	     float levelHeight = numFiles * tileH;
@@ -552,12 +576,12 @@ public class RigidBody {
 //		AppliColisions();
 //	}
 //    
-//    private boolean isColisionBotton(float objX1, float objY1, float objW1, float objH1,
+//    protected boolean isColisionBotton(float objX1, float objY1, float objW1, float objH1,
 //			float objX2, float objY2, float objW2, float objH2){
 //		return isColisionCenterBottonX(objX1, objW1, objX2, objW2) && isColisionCenterBottonY(objY1, objH1, objY2, objH2);
 //	}
 //    
-//    private void AppliColisions(){
+//    protected void AppliColisions(){
 //    	posX = newPosX + moveX;
 //    	posY = newPosY + moveY;
 //    	newPosX = posX;

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.luis.strategy"
-    android:installLocation="auto"
+    android:installLocation="preferExternal"
     android:versionCode="62"
     android:versionName="4.0">
 
@@ -15,8 +14,7 @@
 
     <application
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        tools:replace="android:label">
+        android:label="@string/app_name">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -35,6 +33,13 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+
+        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9871578065265688~4052408776"/>
+
     </application>
 
 </manifest>

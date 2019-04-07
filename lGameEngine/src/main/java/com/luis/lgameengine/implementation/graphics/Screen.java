@@ -39,9 +39,11 @@ import android.view.SurfaceView;
 
           Log.i("Debug", "scaleX: " + Settings.getInstance().getScaleX() + " scaleY: " + Settings.getInstance().getScaleY());
 
-
+          //Activa el control de los botones
+          setFocusable(true);
+          
           multiTouchHandler = new MultiTouchHandler(this, Settings.getInstance().getScaleX(), Settings.getInstance().getScaleY());
-          keyboardHandler =new KeyboardHandler(this);
+          keyboardHandler = new KeyboardHandler(this);
       }
       
       public void repaint(){
@@ -56,7 +58,9 @@ import android.view.SurfaceView;
   	                paint(new Graphics(bufferCanvas));
   	                canvas.drawBitmap(buffer, null, dstRect, null);
   	                surfaceHolder.unlockCanvasAndPost(canvas);
-  	            }catch(Exception e){}
+  	            }catch(Exception e){
+  	            	e.printStackTrace();
+  	            }
   		}
   	}
   	

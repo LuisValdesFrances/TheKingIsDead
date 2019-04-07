@@ -1,11 +1,11 @@
 package com.luis.lgameengine.implementation.input;
 
+import android.annotation.SuppressLint;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
 
 public class KeyboardHandler implements OnKeyListener { 
-	
-	public static final int BUFFER_SIZE = 20;
 	
 	public KeyData[] keyList;
 	
@@ -37,8 +37,8 @@ public class KeyboardHandler implements OnKeyListener {
 		 }
 	 }
 	
-	@Override
-	public boolean onKey(View v, int keyCode, android.view.KeyEvent event) {
+	@SuppressLint("ClickableViewAccessibility")
+	public boolean onKey(View v, int keyCode, KeyEvent event) {
 		/*
 		if (event.getAction() == android.view.KeyEvent.ACTION_MULTIPLE)
             return false;

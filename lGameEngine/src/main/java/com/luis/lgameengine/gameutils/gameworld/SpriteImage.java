@@ -176,10 +176,10 @@ public class SpriteImage {
 		return fileIndex;
 	}
 	
-	public void drawFrame(Graphics g, Image _vImage, int posX, int posY, float sizeX, float sizeY, boolean flip, int _iAnchor) {
+	public void drawFrame(Graphics g, Image _vImage, int posX, int posY, float scaleX, float scaleY, boolean flip, int _iAnchor) {
 
-		float transWidth = getWidth()*sizeX;
-		float transHeight = getHeight()*sizeY;
+		float transWidth = getWidth()*scaleX;
+		float transHeight = getHeight()*scaleY;
 		
 		int extraX = 0;
 		int extraY = 0;
@@ -198,39 +198,21 @@ public class SpriteImage {
 		
 		//Ajuste de la posicion del frame:
 		float fileWidth = (getWidth()*numberFrames[fileIndex]);
-		float extraWidth  = (fileWidth*sizeX)-fileWidth;
+		float extraWidth  = (fileWidth*scaleX)-fileWidth;
 		
 		int modSizePosX = (int) (frame[fileIndex] * extraWidth) / numberFrames[fileIndex];
 		
 		g.setClip(posX - extraX, posY - extraY, (int)transWidth, (int)transHeight);
-		draw(g, _vImage, posX - extraX - modSizePosX, posY - extraY - modFileH[fileIndex], fileIndex, sizeX, flip);
+		g.setImageSize(scaleX, scaleY);
+		draw(g, _vImage, posX - extraX - modSizePosX, posY - extraY - modFileH[fileIndex], fileIndex, scaleX, flip);
+		g.setImageSize(1f, 1f);
 
 	}
 
 	public void drawFrame(Graphics g, Image _vImage, int posX, int posY, boolean flip, int _iAnchor) {
-		
 		drawFrame(g, _vImage, posX, posY, 1f, 1f, flip, _iAnchor);
-		/*
-		int extraX = 0;
-		int extraY = 0;
-		if ((_iAnchor & Graphics.BOTTOM) != 0) {
-			extraY = (int) getHeight();
-		}
-		if ((_iAnchor & Graphics.RIGHT) != 0) {
-			extraX = (int) getWidth();
-		}
-		if ((_iAnchor & Graphics.VCENTER) != 0) {
-			extraY = (int) getHeight() / 2;
-		}
-		if ((_iAnchor & Graphics.HCENTER) != 0) {
-			extraX = (int) getWidth() / 2;
-		}
-		
-		g.setClip(posX - extraX, posY - extraY, width[fileIndex], height[fileIndex]);
-		draw(g, _vImage, posX - extraX, posY - extraY - modFileH[fileIndex], fileIndex, flip);
-		*/
 	}
-
+	
 	private void draw(Graphics g, Image _vImage, int posX, int posY, int _iIndex, float sizeX, boolean flip) {
 		
 		if(flip){

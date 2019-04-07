@@ -526,5 +526,90 @@ public class Math2D {
         }
    }
     
+    
+    /**
+	 * Redondea cualquier valor al valor mas cercano potencia de 2.
+	 * Mantiene el signo.
+	 * @param n
+	 * @return
+	 */
+	public static int adjustPow2(float n){
+		int origin = (int)Math.abs(n);
+		int na = origin;
+		
+		//Obtengo el numero de veces que el valor es divisible entre 2
+		int p = 0;
+		while(na > 0){
+			na = na/2;
+			p++;
+		}
+		
+		
+		//En obtengo el valor de la potencia, el de la pontencia -1 y el de la potencia +1.
+		//Luego encuentro cual de estos tres valores esta mas cerca del valor original.
+		int currentP = Math.abs(origin-(int)((Math.pow(2,p))));
+		int currentL = Math.abs(origin- (int)(Math.pow(2,(p-1))));
+		int currentM = Math.abs(origin- (int)(Math.pow(2,(p+1))));
+		
+		int r = -1;
+		if(currentP < currentL && currentP < currentM){
+			r = (int)Math.pow(2,p);
+		}else if(currentL < currentM && currentL < currentM){
+			r = (int)Math.pow(2,(p-1));
+		}else{
+			r = (int)Math.pow(2,(p+1));
+		}
+		
+		if(n < 0){
+			r = r*-1;
+		}
+		
+		return r;
+	}
+	
+	/**
+	 * A partir del tamaño definido de un tile, devuelve el multiplo del valos mas cercano
+	 * @param value
+	 * @return
+	 */
+	public static int adjutsTileSize(float tileSize, float value){
+		int d = (int)(value / tileSize);
+		return d * (int)tileSize;
+	}
+	
+	/**
+	 * Redondea cualquier valor al valor (n) al numero redondo mas cercano a la division (div)
+	 * Mantiene el signo.
+	 * @param n
+	 * @return
+	 */
+	public static float adjustDiv(float n, float div){
+		int na = (int)Math.abs(n);
+		
+		na = (int)(na/div);
+		
+		
+		//En obtengo el valor de la potencia, el de la pontencia -1 y el de la potencia +1.
+		//Luego encuentro cual de estos tres valores esta mas cerca del valor original.
+		float currentP = Math.abs(Math.abs(n)-(div*na));
+		float currentL = Math.abs(Math.abs(n)-(div*(na-1)));
+		float currentM = Math.abs(Math.abs(n)-(div*(na+1)));
+		
+		float r = -1;
+		if(currentP < currentL && currentP < currentM){
+			r = na*div;
+		}else if(currentL < currentM && currentL < currentM){
+			r = (na-1)*div;
+		}else{
+			r = (na+1)*div;
+		}
+		
+		if(n < 0){
+			r = r*-1;
+		}
+		
+		return r;
+	}
+    
 
 }
