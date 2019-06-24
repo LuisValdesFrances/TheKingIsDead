@@ -33,7 +33,6 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity{
 
-	private Thread gameThread;
 	private Main main;
 
 	private InterstitialAd mInterstitialAd;
@@ -73,7 +72,8 @@ public class MainActivity extends Activity{
 		});
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
         startGame();
@@ -125,9 +125,9 @@ public class MainActivity extends Activity{
 	public void onDestroy(){
 		super.onDestroy();
         try{
-			if(gameThread.isAlive()){
+			//if(gameThread.isAlive()){
 				main.finishGame();
-			}
+			//}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -158,10 +158,6 @@ public class MainActivity extends Activity{
                 */
             }
 
-
-
-
-
             Settings.getInstance().init(
                     this,
                     new boolean[]{
@@ -171,37 +167,18 @@ public class MainActivity extends Activity{
                             true
                     }, Settings.ORIENTATION_LANDSCAPE);
 
-            //Metodo 1
-            // Rescale surface view to layout size:
-            /*
-            main = new Main(this);
-            RelativeLayout layout = new RelativeLayout(this);
-            layout.addView(main, Settings.getInstance().getRealWidth(), Settings.getInstance().getRealHeight());
-            setContentView(layout);
-            */
-
-                //Metodo 2
-            /*
-            main = new Main(this);
-            main.setLayoutParams(new ActionBar.LayoutParams(Settings.getInstance().getRealWidth(), Settings.getInstance().getRealHeight()));
-            setContentView(main);
-            */
-
-            //Metodo 3
             main = new Main(this, Settings.getInstance(), notification);
             setContentView(main);
 
-            Log.i("Debug", "View load");
-            gameThread = new Thread(main);
-            gameThread.start();
-            Log.i("Debug", "Game loop START");
+			Log.i("Debug", "lGameEngine START");
+			new Thread(main).start();
+
         }catch(Exception e){
             e.printStackTrace();
         }
     }
 
 	public void loadInterstitial(){
-
 		if(!Main.IS_GAME_DEBUG) {
 			runOnUiThread(new Runnable() {
 				@Override
