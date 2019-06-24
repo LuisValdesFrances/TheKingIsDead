@@ -10,7 +10,7 @@ import com.luis.lgameengine.gameutils.Settings;
 import com.luis.lgameengine.implementation.input.KeyboardHandler;
 import com.luis.lgameengine.implementation.input.MultiTouchHandler;
 
-public class Screen extends SurfaceView implements SurfaceHolder.Callback, Runnable{
+public class Screen extends SurfaceView implements SurfaceHolder.Callback{
 
     public SurfaceHolder surfaceHolder;
     public int screenW;
@@ -84,11 +84,6 @@ public class Screen extends SurfaceView implements SurfaceHolder.Callback, Runna
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-
-    }
-
-    @Override
-    public void run() {
 
     }
 }

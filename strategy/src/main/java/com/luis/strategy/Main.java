@@ -16,7 +16,7 @@ import com.luis.strategy.constants.Define;
 /**
  * @author Luis Valdes Frances
  */
-public class Main extends Screen {
+public class Main extends Screen implements Runnable{
 	
 	public static Main instance;
 	public static Main getInstance(){
