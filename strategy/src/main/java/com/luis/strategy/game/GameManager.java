@@ -1032,8 +1032,7 @@ public class GameManager {
 			}
 		} 
 		
-		 
-		 if(game3D){
+		if(game3D){
 			 float totalW = (float)gameBuffer.getWidth()*distorsion;
 			 float totalH = (float)gameBuffer.getHeight()*distorsion;
 			 g.drawDistorisionImage(

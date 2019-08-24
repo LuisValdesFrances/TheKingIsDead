@@ -5,7 +5,7 @@ package com.luis.lgameengine.gameutils.gameworld;
  * 
  * @author Luis Valdes Frances
  * 
- * Todos los objetos que extiendan estan clases estarán expuestas a la fisica en 2D en 
+ * Todos los objetos que extiendan estan clases estaran expuestas a la fisica en 2D en
  * cuanto a efectos de la gravedad y colisiones. 
  * El punto de anclaje con el que se realizan las colisiones es abajo-centro
  *
@@ -14,8 +14,8 @@ public class RigidBody {
 	
 	/**
 	 * Transforma una unidad de unity en pixeles
-	 * @param unityTileSize Tamaño de los tiles en Unity3D en unidades de Unity3D
-	 * @param tileSize Tamaño de los tiles pixeles
+	 * @param unityTileSize Tamanyo de los tiles en Unity3D en unidades de Unity3D
+	 * @param tileSize Tamanyo de los tiles pixeles
 	 * @param value Valor a convertir (Extraido de Unity3D)
 	 * @return
 	 */
@@ -129,7 +129,6 @@ public class RigidBody {
      * @param _fTileH
      * @param _iScreenW
      * @param _iScreenH
-     * @param isBoundColToScreen
      */
     protected void runPhysics (
     		float deltaTime, 

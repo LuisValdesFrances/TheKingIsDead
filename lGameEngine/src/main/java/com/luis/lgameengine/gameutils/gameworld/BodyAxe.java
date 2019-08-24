@@ -197,7 +197,7 @@ public class BodyAxe extends RigidBody{
 			float newPosX, float newPosY, float width, float height){
 		
 		
-		//La posicion Y pasa a ser una posicion local, así que para que colisione con la capa de tiles correcta,
+		//La posicion Y pasa a ser una posicion local, asï¿½ que para que colisione con la capa de tiles correcta,
 	    //se debe de sumar la posicion Z
 	    float l = ((layerZ)*tileSizeH);
 	    newPosY = l+(this.newPosY);
@@ -240,7 +240,7 @@ public class BodyAxe extends RigidBody{
 		int[][] tilesMatrixLayerID = new int[tilesMatrixID.length][tilesMatrixID[0].length];
 		buildLayerColisionVH(tilesMatrixID, tilesMatrixLayerID, tileH, layerZ, COLISION_V);
 		
-		//La posicion Y pasa a ser una posicion local, así que para que colisione con la capa de tiles correcta,
+		//La posicion Y pasa a ser una posicion local, asi que para que colisione con la capa de tiles correcta,
 	    //se debe de sumar la posicion Z
 	    float l = ((layerZ)*tileSizeH);
 	    newPosY = l+(this.newPosY);

@@ -4,7 +4,7 @@ import com.luis.lgameengine.implementation.graphics.Graphics;
 import com.luis.lgameengine.implementation.graphics.Image;
 
 /**
- * 
+ *
  * @author Luis Valdes Frances
  */
 public class SpriteImage {
@@ -12,7 +12,7 @@ public class SpriteImage {
 	/**
 	 * Esta clase gestiona el dibujado de imagenes a modo de sprites animados de
 	 * forma simple.
-	 * 
+	 *
 	 */
 	private int[] width;
 	private int[] height;
@@ -32,7 +32,7 @@ public class SpriteImage {
 	/*
 	 * Cuando se trata de imagenes con varias filas de sprites, cada una puede
 	 * medir un alto diferente. La referencias son.
-	 * 
+	 *
 	 * iModFileH guarda la posicion desde donde debe de empezar a pintarse cada
 	 * fila respecto a la imagen total.
 	 */
@@ -55,7 +55,7 @@ public class SpriteImage {
 	private boolean isEndAnimation;
 
 	public SpriteImage(int imageWidth, int imageHeight,
-			float timeMilisUpdate, int numberFrames) {
+					   float timeMilisUpdate, int numberFrames) {
 
 		this.width = new int[1];
 		this.width[0] = (int) imageWidth / numberFrames;
@@ -81,14 +81,14 @@ public class SpriteImage {
 
 	/**
 	 * Cada fila es una animacion distinta
-	 * 
+	 *
 	 * @param frameWidth
 	 * @param frameHeight
 	 * @param timeMilisUpdate
 	 * @param numberFrames
 	 */
 	public SpriteImage(int[] frameWidth, int frameHeight[],
-			float[] timeMilisUpdate, int[] numberFrames) {
+					   float[] timeMilisUpdate, int[] numberFrames) {
 
 		this.width = new int[numberFrames.length];
 		this.height = new int[numberFrames.length];
@@ -127,14 +127,14 @@ public class SpriteImage {
 
 	/**
 	 * Cada fila es una animacion distinta y cada frame tiene su duracion propia
-	 * 
+	 *
 	 * @param imageWidth
 	 * @param imageHeight
 	 * @param timeMilisUpdate
 	 * @param numberFrames
 	 */
 	public SpriteImage(int[] imageWidth, int imageHeight[],
-			float[][] timeMilisUpdate, int[] numberFrames) {
+					   float[][] timeMilisUpdate, int[] numberFrames) {
 	}
 
 	public void updateAnimation(float deltaTime) {
@@ -175,53 +175,40 @@ public class SpriteImage {
 	public int getFileIndex() {
 		return fileIndex;
 	}
-	
-	public void drawFrame(Graphics g, Image _vImage, int posX, int posY, float scaleX, float scaleY, boolean flip, int _iAnchor) {
 
-		float transWidth = getWidth()*scaleX;
-		float transHeight = getHeight()*scaleY;
-		
-		int extraX = 0;
-		int extraY = 0;
-		if ((_iAnchor & Graphics.BOTTOM) != 0) {
-			extraY = (int) getHeight();
-		}
-		if ((_iAnchor & Graphics.RIGHT) != 0) {
-			extraX = (int) transHeight;
-		}
-		if ((_iAnchor & Graphics.VCENTER) != 0) {
-			extraY = (int) transHeight / 2;
-		}
-		if ((_iAnchor & Graphics.HCENTER) != 0) {
-			extraX = (int) transWidth / 2;
-		}
-		
-		//Ajuste de la posicion del frame:
-		float fileWidth = (getWidth()*numberFrames[fileIndex]);
-		float extraWidth  = (fileWidth*scaleX)-fileWidth;
-		
-		int modSizePosX = (int) (frame[fileIndex] * extraWidth) / numberFrames[fileIndex];
-		
-		g.setClip(posX - extraX, posY - extraY, (int)transWidth, (int)transHeight);
-		g.setImageSize(scaleX, scaleY);
-		draw(g, _vImage, posX - extraX - modSizePosX, posY - extraY - modFileH[fileIndex], fileIndex, scaleX, flip);
-		g.setImageSize(1f, 1f);
+	public void drawFrame(Graphics g, Image _vImage, int posX, int posY,
+						  float scaleX, float scaleY,
+						  boolean flipH, boolean flipV, int anchor) {
+		draw(g, _vImage, posX, posY, scaleX, scaleY, fileIndex, anchor, flipH, flipV);
 
 	}
 
-	public void drawFrame(Graphics g, Image _vImage, int posX, int posY, boolean flip, int _iAnchor) {
-		drawFrame(g, _vImage, posX, posY, 1f, 1f, flip, _iAnchor);
-	}
-	
-	private void draw(Graphics g, Image _vImage, int posX, int posY, int _iIndex, float sizeX, boolean flip) {
-		
+	private void draw(Graphics g, Image image, int posX, int posY, float scaleX, float scaleY, int index,
+					  int anchor,
+					  boolean flipH, boolean flipV) {
+		/*
 		if(flip){
-			int modFlip = (int)(getWidth()*sizeX);
-			g.drawImage(_vImage, posX + modPosFrame(frame[fileIndex], _iIndex) + modFlip, posY, Graphics.HFLIP);
+			int modFlip = width[fileIndex];
+			g.drawImage(
+					image,
+					posX + modPosFrame(frame[fileIndex], index) + modFlip,
+					posY - modFileH[fileIndex],
+					Graphics.HFLIP);
 		}else{
-			g.drawImage(_vImage, posX - modPosFrame(frame[fileIndex], _iIndex), posY, 0);
+			//g.drawImage(image, posX - modPosFrame(frame[fileIndex], index), posY - modFileH[fileIndex], 0);
 		}
-		
+		*/
+		g.drawRegion(
+				image,
+				modPosFrame(frame[fileIndex], index),
+				modFileH[fileIndex],//ojo
+				width[fileIndex], height[fileIndex],
+				posX, posY,
+				(int)(width[fileIndex]*scaleX), (int)(height[fileIndex]*scaleY),
+				anchor,
+				0, 0, 0,
+				flipH, flipV);
+
 	}
 
 	private int modPosFrame(int frame, int _iIndex) {
@@ -278,7 +265,7 @@ public class SpriteImage {
 	public int getHeight(int index) {
 		return height[index];
 	}
-	
+
 	public int getTotalWidth() {
 		return totalWidth;
 	}

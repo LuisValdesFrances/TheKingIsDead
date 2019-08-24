@@ -38,7 +38,7 @@ public class WorldConver3D extends WorldConver{
 
 	public float getScale(GameCamera gameCamera, float y){
 		
-		//Rescalado máximo del objeto
+		//Rescalado maximo del objeto
 		float scaleDistorionDifX = distorsionX -1f;
 		float objectYInLay = getConversionDrawY(gameCamera.getPosY(), (int)y);
 		float maxDistorsionPositionY = getCentlayoutY() + getLayoutY()/2;
@@ -48,7 +48,7 @@ public class WorldConver3D extends WorldConver{
 	
 	public float getModDistorsionX(float objectXInLay, float objectYInLay){
 		
-		//Diferencia del desplazamiento máximo del objeto respecto a la imagen no deformada
+		//Diferencia del desplazamiento mï¿½ximo del objeto respecto a la imagen no deformada
 		float maxDistorisionDistance = (imgBuffer.getWidth()*distorsionX) - imgBuffer.getWidth();
 		
 		//Posicion abajo a la derecha: maximo punto de distorsion
@@ -64,9 +64,9 @@ public class WorldConver3D extends WorldConver{
 		float modByDistX = (objectXInLay * maxDistorisionDistance) / layoutRoRight;
 		
 		/**
-		 * Para la misma posición x la deformación es menor cuanto menor sea la posición y del objeto
-		 * (Está mas arriba) Por este mótivo, se genera una regla de tres donde la posición layoutToBotton
-		 * se corresponde con la deformación máxima aplicada en el punto anterior:
+		 * Para la misma posiciï¿½n x la deformaciï¿½n es menor cuanto menor sea la posiciï¿½n y del objeto
+		 * (Estï¿½ mas arriba) Por este mï¿½tivo, se genera una regla de tres donde la posiciï¿½n layoutToBotton
+		 * se corresponde con la deformaciï¿½n mï¿½xima aplicada en el punto anterior:
 		 * 
 		 * layoutToBotton	=	1f
 		 * objectYInLay		=	modDistY	

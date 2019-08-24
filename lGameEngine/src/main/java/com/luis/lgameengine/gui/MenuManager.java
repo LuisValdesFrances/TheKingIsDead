@@ -12,21 +12,21 @@ import com.luis.lgameengine.implementation.graphics.Image;
  */
 public class MenuManager {
 	/**
-    Esta clase es capaz de montar los menús, botones, cajas y texto partiendo de la anchura y la altura de la pantalla.
-    Para que esta funcione, las imagenes de los botones y los sofkeys deben de se seguir un patrón.
-    La clase es cápaz de hacer lo siguiente:
+    Esta clase es capaz de montar los menus, botones, cajas y texto partiendo de la anchura y la altura de la pantalla.
+    Para que esta funcione, las imagenes de los botones y los sofkeys deben de se seguir un patron.
+    La clase es capaz de hacer lo siguiente:
     -Pintar los softkeys en sus respectivos lugares.
     -Pintar botones alienados verticalemente y pintar texto centrado en ellos (Botones eje Y)
-    -Pintar un único botón, con dos pestañas a cada lado con las cuales cambiamos de opción (Bototnes en el eje X)
+    -Pintar un unico boton, con dos pestanyas a cada lado con las cuales cambiamos de opcion (Bototnes en el eje X)
     
     Softkeys: Una imagen con los cuatro softkits, dos arriba y dos abajo de la siguiente manera:
     SELECT-UNSELECT
     SELECT-UNSELECT
     
-    Botones horizontales-Y: Una imagen que contiene botón seleccionado y deseleccioando:
+    Botones horizontales-Y: Una imagen que contiene boton seleccionado y deseleccioando:
     SELECCIONADO
     DESELECCIONADO
-    Velocidad de actualización de los botones seleccionados.
+    Velocidad de actualizacion de los botones seleccionados.
     */
     private static boolean isFocusY;
     private static int iLastFocus;
@@ -41,7 +41,7 @@ public class MenuManager {
     
     private static final int UPDATE_BUTTON_COUNT = 16;
     
-    //Alineación de los botones verticales:
+    //Alineaciï¿½n de los botones verticales:
     public static final int BUTTON_UP = 0;
     public static final int BUTTON_CENTER = 1;
     public static final int BUTTON_DOWN = 2;
@@ -54,13 +54,13 @@ public class MenuManager {
 	private static int arrowH;
 
 	/**
-	 * Inicia un menu complento con botones y sofkeys, todos del mismo tamaño
+	 * Inicia un menu complento con botones y sofkeys, todos del mismo tamaï¿½o
 	 * @param buttonW Anchura del boton
 	 * @param buttonH Altura del boton
 	 * @param softkeyW Anchura del sofkey
 	 * @param softkeyH Altura del sofkey
-	 * @param arrowW Anchura del la flecha para menús de orden horizontal
-	 * @param arrowH Anchura del la flecha para menús de orden horizontal
+	 * @param arrowW Anchura del la flecha para menï¿½s de orden horizontal
+	 * @param arrowH Anchura del la flecha para menï¿½s de orden horizontal
 	 */
     public static void init(int buttonW, int buttonH, int softkeyW, int softkeyH, int arrowW, int arrowH) {
     	//MenuManager.buttonW = (int)buttonW;
@@ -89,18 +89,18 @@ public class MenuManager {
     /**
      * Pinta un menu de orden vertical
      * @param g Objeto donde se va a pintar
-     * @param number_options Numero de opciones del menú
-     * @param pos_text Número de la primera línea, en el archivo .txt, donde se encuentra el texto deseado
+     * @param number_options Numero de opciones del menï¿½
+     * @param pos_text Nï¿½mero de la primera lï¿½nea, en el archivo .txt, donde se encuentra el texto deseado
      * @param allTexts Array con todos los textos del juego
      * @param _iFontType Fuente del texto: 0 small, 1 big
-     * @param select_option Opción seleccionada por defecto
+     * @param select_option Opciï¿½n seleccionada por defecto
      * @param softkeys Imagen de los softkeys
      * @param button Imagen de los botones
      * @param frame Frame actual
      */
     public static void drawButtonsAndTextY(Graphics g, int number_options, int pos_text, String[] allTexts,
     		int _iFontType, int select_option, Image softkeys, Image button, int frame) {
-        //Obtenemos las posicion X/Y de cada botón partiendo de que se pintarán cogiendo como
+        //Obtenemos las posicion X/Y de cada botï¿½n partiendo de que se pintarï¿½n cogiendo como
         //referencia arriba-izquierda:
         iListPosY = new int[number_options];
 
@@ -155,18 +155,18 @@ public class MenuManager {
     /**
      * Pinta un menu de orden vertical
      * @param g Objeto donde se va a pintar
-     * @param number_options Numero de opciones del menú
-     * @param pos_text Número de la primera línea, en el archivo .txt, donde se encuentra el texto deseado
+     * @param number_options Numero de opciones del menï¿½
+     * @param pos_text Nï¿½mero de la primera lï¿½nea, en el archivo .txt, donde se encuentra el texto deseado
      * @param texts Array con los textos del menu
      * @param _iFontType Fuente del texto: 0 small, 1 big
-     * @param select_option Opción seleccionada por defecto
+     * @param select_option Opciï¿½n seleccionada por defecto
      * @param softkeys Imagen de los softkeys
      * @param button Imagen de los botones
      * @param frame Frame actual
      */
     public static void drawButtonsAndTextY(Graphics g, int number_options, String[] texts,
     		int _iFontType, int select_option, Image softkeys, Image button, int frame) {
-        //Obtenemos las posicion X/Y de cada botón partiendo de que se pintarán cogiendo como
+        //Obtenemos las posicion X/Y de cada botï¿½n partiendo de que se pintarï¿½n cogiendo como
         //referencia arriba-izquierda:
         iListPosY = new int[number_options];
 
@@ -221,7 +221,7 @@ public class MenuManager {
 
     private static void drawTextButtonY(Graphics g, String[] text, int[] pos_y, int _iFontType, Image button) {
         //Modificamos la posY para pintar cogiendo de referencia de la imagen el 
-        //centro derecha en vez de arriba izquierda (botón):
+        //centro derecha en vez de arriba izquierda (botï¿½n):
 
         iPosTextY = pos_y;
         for (int i = 0; i < pos_y.length; i++) {
@@ -236,7 +236,7 @@ public class MenuManager {
     private static void drawTextButtonX(Graphics g, String[] text, int pos_y, int _iFontType,
             Image button, int select_option) {
         //Modificamos la posY para pintar cogiendo de referencia de la imagen el 
-        //centro derecha en vez de arriba izquierda (botón):
+        //centro derecha en vez de arriba izquierda (botï¿½n):
 
         iPosY = pos_y + (button.getHeight()>>2);
         
@@ -265,10 +265,10 @@ public class MenuManager {
 	}
 
     //Le pasamos el array de TODOS los textos del juego y seleccionamos aquellos
-    //que usaremos en el menú:
+    //que usaremos en el menï¿½:
     //text: array con todos los textos del juego.
-    //pos_text: primera línea de inicio del texto.
-    //num_options: número de opciones.
+    //pos_text: primera lï¿½nea de inicio del texto.
+    //num_options: nï¿½mero de opciones.
     private static String[] selectText(String[] text, int pos_text, int num_options) {
         String[] sSelectText = new String[num_options];
 
@@ -282,12 +282,12 @@ public class MenuManager {
     /**
      * Pinta un menu de orden horizontal a partir de un array de String con todos los textos del juego. Solo se visualiza un boton a la vez
      * @param g Objeto donde se va a pintar
-     * @param pos_screen Alineación de los botones verticales. Por defecto es BUTTON_CENTER
-     * @param number_options Numero de opciones del menú
-     * @param pos_text Número de la primera línea, en el archivo .txt, donde se encuentra el texto deseado
+     * @param pos_screen Alineaciï¿½n de los botones verticales. Por defecto es BUTTON_CENTER
+     * @param number_options Numero de opciones del menï¿½
+     * @param pos_text Nï¿½mero de la primera lï¿½nea, en el archivo .txt, donde se encuentra el texto deseado
      * @param allTexts Array con todos los textos del juego
      * @param _iFontType Fuente del texto: 0 small, 1 big
-     * @param select_option Opción seleccionada por defecto
+     * @param select_option Opciï¿½n seleccionada por defecto
      * @param softkeys Imagen de los softkeys
      * @param button Imagen de los botones
      * @param arrow Imagen de las flechas
@@ -295,7 +295,7 @@ public class MenuManager {
      */
     public static void drawButtonsAndTextX(Graphics g, int pos_screen, int number_options, int pos_text, String[] allTexts, 
             int _iFontType, int select_option, Image softkeys, Image button, Image arrows, int frame) {
-        //Obtenemos las posicion X/Y de cada botón partiendo de que se pintarán cogiendo como
+        //Obtenemos las posicion X/Y de cada botï¿½n partiendo de que se pintarï¿½n cogiendo como
         //referencia arriba-izquierda:
         iButtonHeight = Settings.getInstance().getScreenHeight() - (softkeys.getHeight()>>1);
 
@@ -312,11 +312,11 @@ public class MenuManager {
                 break;
         }
 
-        //Pintamos el botón:
+        //Pintamos el botï¿½n:
         g.setClip(iPosX, iPosY, button.getWidth(), (button.getHeight()>>1));
         g.drawImage(button, iPosX, iPosY, Graphics.TOP | Graphics.LEFT);
 
-        //Pintamos las pestañas:
+        //Pintamos las pestaï¿½as:
         if (changeArrowsFocus(frame)) {
        	   //Izquierda:
            g.setClip(  iPosX - (arrows.getWidth()>>1), 
@@ -342,12 +342,12 @@ public class MenuManager {
     /**
      * Pinta un menu de orden horizontal a partir de un array de String con todos los textos del juego. Solo se visualiza un boton a la vez
      * @param g Objeto donde se va a pintar
-     * @param pos_screen Alineación de los botones verticales. Por defecto es BUTTON_CENTER
-     * @param number_options Numero de opciones del menú
-     * @param pos_text Número de la primera línea, en el archivo .txt, donde se encuentra el texto deseado
+     * @param pos_screen Alineaciï¿½n de los botones verticales. Por defecto es BUTTON_CENTER
+     * @param number_options Numero de opciones del menï¿½
+     * @param pos_text Nï¿½mero de la primera lï¿½nea, en el archivo .txt, donde se encuentra el texto deseado
      * @param texts Array con los textos del menu
      * @param _iFontType Fuente del texto: 0 small, 1 big
-     * @param select_option Opción seleccionada por defecto
+     * @param select_option Opciï¿½n seleccionada por defecto
      * @param softkeys Imagen de los softkeys
      * @param button Imagen de los botones
      * @param arrow Imagen de las flechas
@@ -355,7 +355,7 @@ public class MenuManager {
      */
     public static void drawButtonsAndTextX(Graphics g, int _iFontType, int pos_screen, String[] texts,
     		int select_option, Image softkeys, Image button, Image arrows, int frame) {
-    	//Obtenemos las posicion X/Y de cada botón partiendo de que se pintarán cogiendo como
+    	//Obtenemos las posicion X/Y de cada botï¿½n partiendo de que se pintarï¿½n cogiendo como
         //referencia arriba-izquierda:
         
     	iButtonHeight = Settings.getInstance().getScreenHeight() - (softkeys.getHeight()>>1);
@@ -372,12 +372,12 @@ public class MenuManager {
          }
 
 
-        //Pintamos el botón:
+        //Pintamos el botï¿½n:
         g.setClip(iPosX, iPosY, button.getWidth(), (button.getHeight()>>1));
         g.drawImage(button, iPosX, iPosY, Graphics.TOP | Graphics.LEFT);
 
       
-        //Pintamos las pestañas:
+        //Pintamos las pestaï¿½as:
         if (changeArrowsFocus(frame)) {
           	 //Izquierda:
               g.setClip(

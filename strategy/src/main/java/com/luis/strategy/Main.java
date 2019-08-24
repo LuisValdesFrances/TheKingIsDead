@@ -636,7 +636,7 @@ public class Main extends Screen implements Runnable{
 		}
 	}
 
-	private void drawClock(Graphics _g) {
+	private void drawClock(Graphics g) {
 
 		if (isClock) {
 			if (clockType == TYPE_CLOCK && imgClock == null){
@@ -656,22 +656,40 @@ public class Main extends Screen implements Runnable{
 			Image img = clockType == TYPE_CLOCK? imgClock : imgEarth;
 			
 			if(img != null){
-			_g.setColor(COLOR_BLACK);
-			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-			_g.fillRect(0, Define.SIZEY2 - img.getHeight(), Define.SIZEX, img.getHeight());
-			_g.setClip(
-					Define.SIZEX2 - ((img.getWidth() / FRAMES) >> 1),
-					Define.SIZEY2 - img.getHeight(),
-					img.getWidth() / FRAMES,
-					img.getHeight());
-			_g.drawImage(
-					img,
-					Define.SIZEX2 - ((img.getWidth() / FRAMES) >> 1)
-							- ((img.getWidth() / FRAMES) * iFrameClock),
-					Define.SIZEY2 - img.getHeight(), 0);
+				/*
+				g.setColor(COLOR_BLACK);
+				g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
+				g.fillRect(0, Define.SIZEY2 - img.getHeight(), Define.SIZEX, img.getHeight());
+				g.setClip(
+						Define.SIZEX2 - ((img.getWidth() / FRAMES) >> 1),
+						Define.SIZEY2 - img.getHeight(),
+						img.getWidth() / FRAMES,
+						img.getHeight());
+				g.drawImage(
+						img,
+						Define.SIZEX2 - ((img.getWidth() / FRAMES) >> 1)
+								- ((img.getWidth() / FRAMES) * iFrameClock),
+						Define.SIZEY2 - img.getHeight(), 0);
 
-			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-		}
+				g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
+				*/
+				g.setColor(COLOR_BLACK);
+				g.fillRect(
+						Define.SIZEX2 - (imgClock.getWidth() / FRAMES) / 2,
+						Define.SIZEY2 - img.getHeight()/2,
+						(imgClock.getWidth() / FRAMES), img.getHeight());
+				g.drawRegion(
+						imgClock,
+						((imgClock.getWidth() / FRAMES) * iFrameClock),
+						0,
+						imgClock.getWidth() / FRAMES,
+						imgClock.getHeight(),
+						Define.SIZEX2 - ((imgClock.getWidth() / FRAMES) / 2),
+						Define.SIZEY2 - imgClock.getHeight() / 2,
+						imgClock.getWidth() / FRAMES,
+						imgClock.getHeight(),
+						0, 0, 0, 0, false, false);
+			}
 		}else{
 			Log.e("error", "No se existe la imagen del reloj de carga");
 		}

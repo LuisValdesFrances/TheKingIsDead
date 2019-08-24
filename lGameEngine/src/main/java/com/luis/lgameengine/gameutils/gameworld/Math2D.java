@@ -554,7 +554,7 @@ public class Math2D {
 		int r = -1;
 		if(currentP < currentL && currentP < currentM){
 			r = (int)Math.pow(2,p);
-		}else if(currentL < currentM && currentL < currentM){
+		}else if(currentL < currentM && currentL < currentP){
 			r = (int)Math.pow(2,(p-1));
 		}else{
 			r = (int)Math.pow(2,(p+1));
@@ -568,7 +568,7 @@ public class Math2D {
 	}
 	
 	/**
-	 * A partir del tamaño definido de un tile, devuelve el multiplo del valos mas cercano
+	 * A partir del tamaï¿½o definido de un tile, devuelve el multiplo del valos mas cercano
 	 * @param value
 	 * @return
 	 */

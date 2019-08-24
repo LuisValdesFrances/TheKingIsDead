@@ -55,7 +55,7 @@ public class NotificationBox extends MenuElement{
 	
 	public void addMessage(String message){
 		if(!notificationList.isEmpty()){
-			currentDuration = currentDuration/2;//Cuantos mas mensajes, mas rápidos
+			currentDuration = currentDuration/2;//Cuantos mas mensajes, mas rapidos
 		}else{
 			currentDuration =duration;
 		}

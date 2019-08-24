@@ -55,16 +55,16 @@ public class TouchPadControl implements GameControl{
     /**
      * Create a virtual pad and virtual buttons. The position pad is fixed in coordinates x and y
      *
-     * @param _vPadArea image area. Can be null
-     * @param _vCenter image center. Can be null
+     * @param _vImgPadArea image area. Can be null
+     * @param _vImgPad image center. Can be null
      * @param _iPadX pad position x in screen. Can be null
      * @param _iPadY pad position x in screen. Can be null
-     * @param _vButtons vector of Buttons. They can be call width ID by the
+     * @param _vImgButtons vector of Buttons. They can be call width ID by the
      * order in array position. Can be null.
-     * @param _vButtons vector of Buttons thats is pressed. They can be call
+     * @param _vImgButtonsPressed vector of Buttons thats is pressed. They can be call
      * width ID by the order in array position. Can be null.
-     * @param _iButtonsX[] Buttons position x in screen. Can be null.
-     * @param _iButtonsY[] Buttons position y in screen. Can be null.
+     * @param _iButtonsX Buttons position x in screen. Can be null.
+     * @param _iButtonsY Buttons position y in screen. Can be null.
      * @param _iValorDOWN index thats return the event. You can retrieve it by
      * getters
      * @param _iValorDRAG index thats return the event. You can retrieve it by
@@ -124,15 +124,14 @@ public class TouchPadControl implements GameControl{
     /**
      * Create a virtual pad and virtual buttons. The position pad is not fixed in coordinates x and y, its depends on finger position
      *
-     * @param _vPadArea image area. Can be null
-     * @param _vCenter image center. Can be null
-     * @param _vButtons vector of Buttons. They can be call width ID by the
-     * order in array position. Can be null if no have Buttons. Can be null.
-     * @param _vButtons vector of Buttons thats is pressed. They can be call
-     * width ID by the order in array position. Can be null if no have Buttons.
-     * Can be null.
-     * @param _iButtonsX[] Buttons position x in screen. Can be null.
-     * @param _iButtonsY[] Buttons position y in screen. Can be null.
+     * @param _vImgPadArea image area. Can be null
+     * @param _vImgPad image center. Can be null
+     * @param _vImgButtons vector of Buttons. They can be call width ID by the
+     * order in array position. Can be null.
+     * @param _vImgButtonsPressed vector of Buttons thats is pressed. They can be call
+     * width ID by the order in array position. Can be null.
+     * @param _iButtonsX Buttons position x in screen. Can be null.
+     * @param _iButtonsY Buttons position y in screen. Can be null.
      * @param _iValorDOWN index thats return the event. You can retrieve it by
      * getters
      * @param _iValorDRAG index thats return the event. You can retrieve it by
@@ -186,12 +185,12 @@ public class TouchPadControl implements GameControl{
     /**
      * Create a virtual buttons
      *
-     * @param _vButtons vector of Buttons. They can be call width ID by the
+     * @param _vImgButtons vector of Buttons. They can be call width ID by the
      * order in array position. Can be null.
-     * @param _vButtons vector of Buttons thats is pressed. They can be call
+     * @param _vImgButtonsPressed vector of Buttons thats is pressed. They can be call
      * width ID by the order in array position. Can be null.
-     * @param _iButtonsX[] Buttons position x in screen. Can be null.
-     * @param _iButtonsY[] Buttons position y in screen. Can be null.
+     * @param _iButtonsX Buttons position x in screen. Can be null.
+     * @param _iButtonsY Buttons position y in screen. Can be null.
      * @param _iValorDOWN index thats return the event. You can retrieve it by
      * getters
      * @param _iValorDRAG index thats return the event. You can retrieve it by
@@ -236,16 +235,10 @@ public class TouchPadControl implements GameControl{
     /**
      * Create a virtual pad. The position pad is fixed in coordinates x and y
      *
-     * @param _vPadArea image area. Can be null
-     * @param _vCenter image center. Can be null
+     * @param _vImgPadArea image area. Can be null
+     * @param _vImgPad image center. Can be null
      * @param _iPadX pad position x in screen. Can be null
      * @param _iPadY pad position x in screen. Can be null
-     * @param _vButtons vector of Buttons. They can be call width ID by the
-     * order in array position.
-     * @param _vButtons vector of Buttons thats is pressed. They can be call
-     * width ID by the order in array position.
-     * @param _iButtonsX[] Buttons position x in screen. Can be null.
-     * @param _iButtonsY[] Buttons position y in screen. Can be null.
      * @param _iValorDOWN index thats return the event. You can retrieve it by
      * getters
      * @param _iValorDRAG index thats return the event. You can retrieve it by
@@ -285,14 +278,8 @@ public class TouchPadControl implements GameControl{
     /**
      * Create a virtual pad. The position pad is not fixed in coordinates x and y, its depends on finger position
      *
-     * @param _vPadArea image area. Can be null
-     * @param _vCenter image center. Can be null
-     * @param _vButtons vector of buttons. They can be call width ID by the
-     * order in array position. Can be null if no have buttons
-     * @param _vButtons vector of Buttons thats is pressed. They can be call
-     * width ID by the order in array position. Can be null if no have Buttons
-     * @param _iButtonsX[] Buttons position x in screen. Can be null.
-     * @param _iButtonsY[] Buttons position y in screen. Can be null.
+     * @param _vImgPadArea image area. Can be null
+     * @param _vImgPad image center. Can be null
      * @param _iValorDOWN index thats return the event. You can retrieve it by
      * getters
      * @param _iValorDRAG index thats return the event. You can retrieve it by
@@ -415,7 +402,7 @@ public class TouchPadControl implements GameControl{
 
                 iButtonsCounter[j]++;
             } //Si el index multitouch es de tipo actionUP o no esta colisionando con ningun boton, debemos de comprobar si dicho index multitouch
-            //corresponde algunos de los botonoes que tenemos. En caso de que así sea, lo desactivamos:
+            //corresponde algunos de los botonoes que tenemos. En caso de que asï¿½ sea, lo desactivamos:
             else {
                 isButtonsPressed[j] = false;
                 iButtonsCounter[j] = 0;
@@ -463,7 +450,7 @@ public class TouchPadControl implements GameControl{
                         iButtonsCounter[j]++;
                     }
                 } //Si el index multitouch es de tipo actionUP o no esta colisionando con ningun boton, debemos de comprobar si dicho index multitouch
-                //corresponde algunos de los botonoes que tenemos. En caso de que así sea, lo desactivamos:
+                //corresponde algunos de los botonoes que tenemos. En caso de que asï¿½ sea, lo desactivamos:
                 else if (iButtonsFinger[j] == i) {
                     isButtonsPressed[j] = false;
                     iButtonsCounter[j] = 0;
@@ -492,7 +479,7 @@ public class TouchPadControl implements GameControl{
 
     /*Multitouch*/
     //El indice touch 0 se guarda para el pad, en caso de qu elo haya. 
-    //Pero este sólo se pinta en caso de que no se dicho indice no colisione con ningun boton .
+    //Pero este sï¿½lo se pinta en caso de que no se dicho indice no colisione con ningun boton .
     //Este metodo comprueba que dicho indice no este colisionando con ningun boton
     private boolean isButtonCollide0(int[] _iTouchX, int[] _iTouchY, boolean _isTouchScreen) {
         if ((!isObjectsToDraw[1] || !_isTouchScreen) && !isTouchingPad) {
@@ -640,7 +627,7 @@ public class TouchPadControl implements GameControl{
             }
             if (isObjectsToDraw[0]) {
                 //El touch index 0 esta reservado al pad vitual, en caso de que haya uno. 
-                //Si este colisiona con un boton en cuando se produce un evento de tipo PERS_DOWN, no se pintará el pad
+                //Si este colisiona con un boton en cuando se produce un evento de tipo PERS_DOWN, no se pintarï¿½ el pad
                 if (isTouchingPad || !isButtonCollide0(_iTouchX, _iTouchY, isTouchingScreen(_iTouchEvents))) {//OJO CON isTouchingPad. Si lo comentas, el pad dejar de ser inactivo cuando colisiona con los botones y se cuenta la caja del area para esta colision. Si no lo comentas, se puede pintar el pad encima de los botones
                     if (isTouchingScreen(_iTouchEvents)) {
                         iLastTouchValidX = _iOriginX[0];

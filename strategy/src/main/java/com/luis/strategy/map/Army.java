@@ -268,7 +268,7 @@ public class Army extends MapObject{
 							  
 				float flagY = pY-GfxManager.imgFlagSmallList.get(flag).getHeight();
 				int angle = flip?15:-15;
-				
+				/*
 				g.drawRegion(GfxManager.imgFlagSmallList.get(flag), 
 						(int)flagX,
 						(int)flagY,
@@ -277,6 +277,19 @@ public class Army extends MapObject{
 						angle, 
 						(int)flagX+GfxManager.imgFlagSmallList.get(flag).getWidth()/2, 
 						(int)flagY+GfxManager.imgFlagSmallList.get(flag).getHeight()/2);
+				*/
+				g.drawRegion(GfxManager.imgFlagSmallList.get(flag),
+						0,
+						0,
+						GfxManager.imgFlagSmallList.get(flag).getWidth(), GfxManager.imgFlagSmallList.get(flag).getHeight(),
+						(int)flagX,
+						(int)flagY,
+						GfxManager.imgFlagSmallList.get(flag).getWidth(), GfxManager.imgFlagSmallList.get(flag).getHeight(),
+						0,
+						angle,
+						(int)flagX+GfxManager.imgFlagSmallList.get(flag).getWidth()/2,
+						(int)flagY+GfxManager.imgFlagSmallList.get(flag).getHeight()/2,
+						false, false);
 			}
 			
 			
@@ -286,28 +299,28 @@ public class Army extends MapObject{
 						pX,
 						pY,
 						(1+modSize),(1+modSize),
-						flip, Graphics.VCENTER | Graphics.HCENTER);
+						flip, false,Graphics.VCENTER | Graphics.HCENTER);
 				break;
 			case ANIN_MOVE:
 				spriteList.get(anim).drawFrame(g, GfxManager.imgArmyRun,
 						pX,
 						pY,
 						(1+modSize),(1+modSize),
-						flip, Graphics.VCENTER | Graphics.HCENTER);
+						flip, false,Graphics.VCENTER | Graphics.HCENTER);
 				break;
 			case ANIN_ATACK:
 				spriteList.get(anim).drawFrame(g, GfxManager.imgArmyAtack,
 						pX,
 						pY,
 						(1+modSize),(1+modSize),
-						flip, Graphics.VCENTER | Graphics.HCENTER);
+						flip, false, Graphics.VCENTER | Graphics.HCENTER);
 				break;
 			case ANIN_DEAD:
 				spriteList.get(anim).drawFrame(g, GfxManager.imgArmyDead,
 						pX,
 						pY,
 						(1+modSize),(1+modSize),
-						flip, Graphics.VCENTER | Graphics.HCENTER);
+						flip, false,Graphics.VCENTER | Graphics.HCENTER);
 				break;
 			}
 			

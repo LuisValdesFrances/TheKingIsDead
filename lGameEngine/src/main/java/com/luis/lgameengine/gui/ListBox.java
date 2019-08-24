@@ -51,7 +51,7 @@ public class ListBox extends MenuBox{
 	
 	public void init(Image imgRelease, Image imgFocus, String[] textOptions, int fontType, 
 			final int onDownSoundIndex, final int onUpSoundIndex){
-		//El espacio que ocupa el header, en la case madre es un 150% del tamaño de la fuente
+		//El espacio que ocupa el header, en la case madre es un 150% del tamanyo de la fuente
 		int headerHeight = textHeader != null?(int)(Font.getFontHeight(fontHeader)*1.5f):0;
 		int boxHeight = 
 			(imgBox!=null?imgBox.getHeight():screenHeight)-headerHeight;

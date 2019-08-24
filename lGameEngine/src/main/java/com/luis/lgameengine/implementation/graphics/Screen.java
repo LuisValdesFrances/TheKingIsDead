@@ -66,7 +66,6 @@ public class Screen extends SurfaceView implements SurfaceHolder.Callback{
 
     }
 
-
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         // get handles to some important objects
