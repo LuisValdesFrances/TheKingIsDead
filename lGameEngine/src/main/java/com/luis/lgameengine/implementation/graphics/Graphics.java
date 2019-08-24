@@ -80,7 +80,7 @@ public class Graphics {
 
         canvas.scale(flipH?-1:1, flipV?-1:1, canvas.getWidth()/2, canvas.getHeight()/2);
         canvas.rotate(angle, rotationPointX, rotationPointY);
-        canvas.drawBitmap(image.getBitmap(), screenRect, destinyRect, null);
+        canvas.drawBitmap(image.getBitmap(), screenRect, destinyRect, paint);
 
         canvas.restore();
     }
