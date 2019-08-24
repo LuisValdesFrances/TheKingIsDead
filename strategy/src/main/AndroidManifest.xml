@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.luis.strategy"
     android:installLocation="preferExternal"
-    android:versionCode="62"
-    android:versionName="4.0">
+    android:versionCode="63"
+    android:versionName="4.1">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,7 +12,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!-- Para conexiones con el servidor http -> android:usesCleartextTraffic="true" -> https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted -->
     <application
+        android:usesCleartextTraffic="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
         <activity
