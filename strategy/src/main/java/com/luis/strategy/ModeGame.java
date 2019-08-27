@@ -316,7 +316,7 @@ public class ModeGame {
 			 }
 			break;
 		case Define.ST_GAME_RUN:
-				btnPause.update(UserInput.getInstance().getMultiTouchHandler());
+			btnPause.update(UserInput.getInstance().getMultiTouchHandler());
 			particleManager.update(Main.getDeltaSec());
 			gfxEffects.update(Main.getDeltaSec());
 			try {

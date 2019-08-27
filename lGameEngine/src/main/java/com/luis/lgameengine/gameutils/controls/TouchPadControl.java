@@ -10,8 +10,8 @@ import com.luis.lgameengine.implementation.graphics.Image;
  * @author Luis Valdes Frances
  */
 public class TouchPadControl implements GameControl{
-	
-	//Debug variables:
+
+    //Debug variables:
 
     private static boolean isDebug = false;
     //private static Font vDefaultFont = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL);
@@ -29,7 +29,7 @@ public class TouchPadControl implements GameControl{
     private static int iPadSize;
     private static int iButtonsize;
     private boolean isPadAnchored;
-    private boolean isTouchingPad;
+    private int indexTouchingPad;
     private int iPadX;//Desplazamiento x del pad analogico desde el centro.
     private int iPadY;//Desplazamiento y del pad analogico desde el centro.
     //private int iDespX;//Desplazamiento x del pad analogico desde el centro.
@@ -73,14 +73,15 @@ public class TouchPadControl implements GameControl{
      * getters
      */
     public TouchPadControl(
-    		Image _vImgPadArea, Image _vImgPad, int _iPadX, int _iPadY,
+            Image _vImgPadArea, Image _vImgPad, int _iPadX, int _iPadY,
             Image[] _vImgButtons, Image[] _vImgButtonsPressed, int[] _iButtonsX, int[] _iButtonsY,
             int _iValorDOWN, int _iValorDRAG, int _iValorUP) {
-    	
-    	iPadAreaSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 4;
+
+        this.indexTouchingPad = -1;
+        iPadAreaSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 4;
         iPadSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 12;
         iButtonsize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 8;
-    	
+
         this.iPadAreaX = _iPadX;
         this.iPadAreaY = _iPadY;
         this.iButtonsX = _iButtonsX;
@@ -127,9 +128,10 @@ public class TouchPadControl implements GameControl{
      * @param _vImgPadArea image area. Can be null
      * @param _vImgPad image center. Can be null
      * @param _vImgButtons vector of Buttons. They can be call width ID by the
-     * order in array position. Can be null.
+     * order in array position. Can be null if no have Buttons. Can be null.
      * @param _vImgButtonsPressed vector of Buttons thats is pressed. They can be call
-     * width ID by the order in array position. Can be null.
+     * width ID by the order in array position. Can be null if no have Buttons.
+     * Can be null.
      * @param _iButtonsX Buttons position x in screen. Can be null.
      * @param _iButtonsY Buttons position y in screen. Can be null.
      * @param _iValorDOWN index thats return the event. You can retrieve it by
@@ -140,11 +142,12 @@ public class TouchPadControl implements GameControl{
      * getters
      */
     public TouchPadControl(
-    		Image _vImgPadArea, Image _vImgPad,
+            Image _vImgPadArea, Image _vImgPad,
             Image[] _vImgButtons, Image[] _vImgButtonsPressed, int[] _iButtonsX, int[] _iButtonsY,
             int _iValorDOWN, int _iValorDRAG, int _iValorUP) {
-    	
-    	iPadAreaSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 4;
+
+        this.indexTouchingPad = -1;
+        iPadAreaSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 4;
         iPadSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 12;
         iButtonsize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 8;
 
@@ -199,12 +202,13 @@ public class TouchPadControl implements GameControl{
      * getters
      */
     public TouchPadControl(
-    		Image[] _vImgButtons, Image[] _vImgButtonsPressed, int[] _iButtonsX, int[] _iButtonsY, int _iValorDOWN, int _iValorDRAG, int _iValorUP) {
-    	
-    	iPadAreaSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 4;
+            Image[] _vImgButtons, Image[] _vImgButtonsPressed, int[] _iButtonsX, int[] _iButtonsY, int _iValorDOWN, int _iValorDRAG, int _iValorUP) {
+
+        iPadAreaSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 4;
         iPadSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 12;
         iButtonsize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 8;
 
+        this.indexTouchingPad = -1;
         this.iActionDOWN = _iValorDOWN;
         this.iActionDRAG = _iValorDRAG;
         this.iActionUP = _iValorUP;
@@ -247,9 +251,10 @@ public class TouchPadControl implements GameControl{
      * getters
      */
     public TouchPadControl(
-    		Image _vImgPadArea, Image _vImgPad, int _iPadX, int _iPadY, int _iValorDOWN, int _iValorDRAG, int _iValorUP) {
-    	
-    	iPadAreaSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 4;
+            Image _vImgPadArea, Image _vImgPad, int _iPadX, int _iPadY, int _iValorDOWN, int _iValorDRAG, int _iValorUP) {
+
+        this.indexTouchingPad = -1;
+        iPadAreaSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 4;
         iPadSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 12;
         iButtonsize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 8;
 
@@ -288,16 +293,17 @@ public class TouchPadControl implements GameControl{
      * getters
      */
     public TouchPadControl(
-    		Image _vImgPadArea, Image _vImgPad, int _iValorDOWN, int _iValorDRAG, int _iValorUP) {
-    	
-    	iPadAreaSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 4;
+            Image _vImgPadArea, Image _vImgPad, int _iValorDOWN, int _iValorDRAG, int _iValorUP) {
+
+        this.indexTouchingPad = -1;
+        iPadAreaSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 4;
         iPadSize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 12;
         iButtonsize = ((Settings.getInstance().getScreenWidth() + Settings.getInstance().getScreenHeight())/2) / 8;
-        
+
         iActionDOWN = _iValorDOWN;
         iActionDRAG = _iValorDRAG;
         iActionUP = _iValorUP;
-    	
+
         this.vImgPadArea = _vImgPadArea;
         this.vImgPad = _vImgPad;;
 
@@ -317,18 +323,12 @@ public class TouchPadControl implements GameControl{
         return fForce;
     }
 
-    //0-256
-    public int getForce256() {
-        float force = fForce * 256;
-        return (int) force;
-    }
-
     public int getAngle() {
         return iAngle;
     }
 
     public boolean isTouchingPad() {
-        return isTouchingPad;
+        return indexTouchingPad != -1;
     }
 
     public boolean isButtonPressed(int _iIndex) {
@@ -339,303 +339,18 @@ public class TouchPadControl implements GameControl{
         }
     }
 
-    public boolean isButtonActived(int _iIndex) {
-        if (isButtonsActived[_iIndex]) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public int getButtonCounter(int _iIndex) {
         return iButtonsCounter[_iIndex];
     }
 
-    /////////////////////////////////////////////////////////////////////////////////
-    /*Single touch*/
-    private boolean isTouchingScreen(int _iTouchEvent) {
-        if (_iTouchEvent == iActionDOWN || _iTouchEvent == iActionDRAG) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    /*Multitouch*/
-    private boolean isTouchingScreen(int[] _iTouchEvents) {
-        for (int i = 0; i < _iTouchEvents.length; i++) {
-            if (_iTouchEvents[i] == iActionDOWN || _iTouchEvents[i] == iActionDRAG) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    /*Simple touch engines*/
-    private void updateButtons(int _iTouchX, int _iTouchY, int _iTouchEvents) {
-    	
-        //Button collide
-        for (int j = 0; j < vImgButtons.length; j++) {
-        	//Desactivo todo:
-        	isButtonsActived[j] = false;
-        	
-            int ButtonX = iButtonsX[j];
-            int ButtonY = iButtonsY[j];
-            //Si el index multitouch es no es actionUp y el index multitouch colisiona con algun boton:
-            if ((_iTouchEvents != iActionUP)
-                    && (_iTouchX > ButtonX - (iButtonsWidth[j] >> 1) && _iTouchX < ButtonX + (iButtonsWidth[j] >> 1)
-                    && _iTouchY > ButtonY - (iButtonsHeight[j] >> 1) && _iTouchY < ButtonY + (iButtonsHeight[j] >> 1))) {
-
-                //Si el index que toca el boton es el reservado para el pad y este esta siendo procesado,
-                //No activamos el boton y nos vamos a la mierda:
-                if (isTouchingPad) {
-                    isButtonsPressed[j] = false;
-                    isButtonsActived[j] = false;
-                    return;
-                }
-                ///////////////////////////////////////////////////////////////////////////////////////////
-                isButtonsPressed[j] = true;
-                if (_iTouchEvents == iActionDOWN && iButtonsCounter[j] == 0) {
-                    isButtonsActived[j] = true;
-                } else {
-                    isButtonsActived[j] = false;
-                }
-
-                iButtonsCounter[j]++;
-            } //Si el index multitouch es de tipo actionUP o no esta colisionando con ningun boton, debemos de comprobar si dicho index multitouch
-            //corresponde algunos de los botonoes que tenemos. En caso de que as� sea, lo desactivamos:
-            else {
-                isButtonsPressed[j] = false;
-                iButtonsCounter[j] = 0;
-                iButtonsFinger[j] = -1;
-
-            }
-        }
-    }
-
-    /*Multitouch engines*/
-    private void updateButtons(int[] _iTouchX, int[] _iTouchY, int[] _iTouchEvents) {
-    	//Desactivo todo:
-    	for (int i = 0; i < vImgButtons.length; i++) {
-    		isButtonsActived[i] = false;
-    	}
-    	
-        for (int i = 0; i < _iTouchX.length; i++) {
-            //Button collide
-            for (int j = 0; j < vImgButtons.length; j++) {
-            	int ButtonX = iButtonsX[j];
-                int ButtonY = iButtonsY[j];
-                //Si el index multitouch es no es actionUp y el index multitouch colisiona con algun boton:
-                if ((_iTouchEvents[i] != iActionUP)
-                        && (_iTouchX[i] > ButtonX - (iButtonsWidth[j] >> 1) && _iTouchX[i] < ButtonX + (iButtonsWidth[j] >> 1)
-                        && _iTouchY[i] > ButtonY - (iButtonsHeight[j] >> 1) && _iTouchY[i] < ButtonY + (iButtonsHeight[j] >> 1))) {
-
-                    //Si el index que toca el boton es el reservado para el pad y este esta siendo procesado,
-                    //No activamos el boton y nos vamos a la mierda:
-                    if (i == 0 && isTouchingPad) {
-                        isButtonsPressed[j] = false;
-                        isButtonsActived[j] = false;
-                        return;
-                    }
-                    ///////////////////////////////////////////////////////////////////////////////////////////
-                    if (iButtonsFinger[j] == -1 || iButtonsFinger[j] == i) {//Si el indice multitouch esta libre o es el que tenemos guardado, lo proceso
-                        isButtonsPressed[j] = true;
-                        iButtonsFinger[j] = i;//Guardo el index del dedo
-
-                        if (_iTouchEvents[i] == iActionDOWN && iButtonsCounter[j] == 0) {
-                            isButtonsActived[j] = true;
-                        } else {
-                            isButtonsActived[j] = false;
-                        }
-
-                        iButtonsCounter[j]++;
-                    }
-                } //Si el index multitouch es de tipo actionUP o no esta colisionando con ningun boton, debemos de comprobar si dicho index multitouch
-                //corresponde algunos de los botonoes que tenemos. En caso de que as� sea, lo desactivamos:
-                else if (iButtonsFinger[j] == i) {
-                    isButtonsPressed[j] = false;
-                    iButtonsCounter[j] = 0;
-                    iButtonsFinger[j] = -1;
-
-                }
-            }
-        }
-    }
-    
-    /*Single touch*/
-    private boolean isButtonCollide(int _iTouchX, int _iTouchY, boolean _isTouchScreen) {
-        if ((!isObjectsToDraw[1] || !_isTouchScreen) && !isTouchingPad) {
-            return false;
-        } else {
-            for (int i = 0; i < vImgButtons.length; i++) {
-                if (_isTouchScreen
-                        && (_iTouchX + (iPadAreaWidth >> 1) > iButtonsX[i] - (iButtonsWidth[i] >> 1) && _iTouchX - (iPadAreaWidth >> 1) < iButtonsX[i] + (iButtonsWidth[i] >> 1)
-                        && _iTouchY + (iPadAreaHeight >> 1) > iButtonsY[i] - (iButtonsHeight[i] >> 1) && _iTouchY - (iPadAreaHeight >> 1) < iButtonsY[i] + (iButtonsHeight[i] >> 1))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /*Multitouch*/
-    //El indice touch 0 se guarda para el pad, en caso de qu elo haya. 
-    //Pero este s�lo se pinta en caso de que no se dicho indice no colisione con ningun boton .
-    //Este metodo comprueba que dicho indice no este colisionando con ningun boton
-    private boolean isButtonCollide0(int[] _iTouchX, int[] _iTouchY, boolean _isTouchScreen) {
-        if ((!isObjectsToDraw[1] || !_isTouchScreen) && !isTouchingPad) {
-            return false;
-        } else {
-            for (int i = 0; i < vImgButtons.length; i++) {
-                if (_isTouchScreen
-                        && (_iTouchX[0] + (iPadAreaWidth >> 1) > iButtonsX[i] - (iButtonsWidth[i] >> 1) && _iTouchX[0] - (iPadAreaWidth >> 1) < iButtonsX[i] + (iButtonsWidth[i] >> 1)
-                        && _iTouchY[0] + (iPadAreaHeight >> 1) > iButtonsY[i] - (iButtonsHeight[i] >> 1) && _iTouchY[0] - (iPadAreaHeight >> 1) < iButtonsY[i] + (iButtonsHeight[i] >> 1))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /*Single touch*/
-    /*
-    private void updateVirtualPad(int _iOriginX, int _iOriginY, int _iTouchX, int _iTouchY, int[] _iTouchEvents) {
-    	if (!isPadAnchored) {
-            iPadAreaX = _iOriginX;
-            iPadAreaY = _iOriginY;
-        }
-        if (isTouchingScreen(_iTouchEvents)) {
-            int touchX = _iTouchX;
-            int touchY = _iTouchY;
-            int distX = Math.abs(iPadAreaX - touchX);
-            int distY = Math.abs(iPadAreaY - touchY);
-            int maxDistX = (iPadAreaWidth >> 1);
-            int maxDistY = (iPadAreaHeight >> 1);
-
-            if (distX > maxDistX) {
-                distX = maxDistX;
-            }
-            if (distY > maxDistY) {
-                distY = maxDistY;
-            }
-
-            iAngle = Math2D.getAngle360(iPadAreaX, iPadAreaY, touchX, touchY);
-            
-            iPadX = (iPadAreaX + ((Math2D.cos(iAngle) * distX) / (1 << Math2D.PRECISION_BITS)));//>>8;//Math2D.cos(360));
-            iPadY = (iPadAreaY + ((Math2D.sin(iAngle) * distY) / (-1 << Math2D.PRECISION_BITS)));//>>8;//Math2D.sin(270));
-
-            //Force:
-            fForce = (float) getMayor(distX, distY) / (float) (iPadAreaWidth / 2) > 1f ? 1f : (float) getMayor(distX, distY) / (float) (iPadAreaWidth / 2);
-
-            isTouchingPad = true;
-        } else {//No tocamos nah
-            iPadX = iPadAreaX;
-            iPadY = iPadAreaY;
-            iAngle = -1;
-            fForce = 0;
-            isTouchingPad = false;
-        }
-    }
-    */
-    
-    /*Multitouch*/
-    private void updateVirtualPad(int _iOriginX, int _iOriginY, int _iTouchX, int _iTouchY, int _iTouchEvent) {
-        if (!isPadAnchored) {
-            iPadAreaX = _iOriginX;
-            iPadAreaY = _iOriginY;
-        }
-        if (isTouchingScreen(_iTouchEvent)) {
-            int touchX = _iTouchX;
-            int touchY = _iTouchY;
-            int distX = Math.abs(iPadAreaX - touchX);
-            int distY = Math.abs(iPadAreaY - touchY);
-            int maxDistX = (iPadAreaWidth >> 1);
-            int maxDistY = (iPadAreaHeight >> 1);
-
-            if (distX > maxDistX) {
-                distX = maxDistX;
-            }
-            if (distY > maxDistY) {
-                distY = maxDistY;
-            }
-
-            iAngle = Math2D.getAngle360(iPadAreaX, iPadAreaY, touchX, touchY);
-            /*
-             * 1 << Math2D.PRECISION_BITS == dist Math2D.cos(touchAngle) == x
-             */
-            iPadX = (iPadAreaX + ((Math2D.cos(iAngle) * distX) / (1 << Math2D.PRECISION_BITS)));//>>8;//Math2D.cos(360));
-            iPadY = (iPadAreaY + ((Math2D.sin(iAngle) * distY) / (-1 << Math2D.PRECISION_BITS)));//>>8;//Math2D.sin(270));
-
-            //Force:
-            fForce = (float) getMayor(distX, distY) / (float) (iPadAreaWidth / 2) > 1f ? 1f : (float) getMayor(distX, distY) / (float) (iPadAreaWidth / 2);
-
-            isTouchingPad = true;
-        } else {//No tocamos nah
-            iPadX = iPadAreaX;
-            iPadY = iPadAreaY;
-            iAngle = -1;
-            fForce = 0;
-            isTouchingPad = false;
-        }
-    }
-
-    public void reset() {
-        if (isObjectsToDraw[0]) {
-            isTouchingPad = false;
-        }
-        if (isObjectsToDraw[1]) {
-            for (int i = 0; i < isButtonsPressed.length; i++) {
-                isButtonsPressed[i] = false;
-                isButtonsActived[i] = false;
-                iButtonsCounter[i] = 0;
-                iButtonsFinger[i] = -1;
-            }
-        }
-
-    }
-
-    private int getMayor(int _iValue1, int _iValue2) {
-        return _iValue1 > _iValue2 ? _iValue1 : _iValue2;
-    }
-    
-    /*Single touch engines*/
-    public void update(int _iOriginX, int _iOriginY, int _iTouchX, int _iTouchY, int _iTouchEvent) {
-        try {
-            if (isObjectsToDraw[1]) {
-                updateButtons(_iTouchX, _iTouchY, _iTouchEvent);
-            }
-            if (isObjectsToDraw[0]) {
-                if (isTouchingPad || !isButtonCollide(_iTouchX, _iTouchY, isTouchingScreen(_iTouchEvent))) {
-                    if (isTouchingScreen(_iTouchEvent)) {
-                        iLastTouchValidX = _iOriginX;
-                        iLastTouchValidY = _iOriginY;
-                    }
-                    updateVirtualPad(iLastTouchValidX, iLastTouchValidY, _iTouchX, _iTouchY, _iTouchEvent);
-                }
-            }
-        } catch (Exception e) {
-            //e.printStackTrace();
-            System.out.println("Error in TouchControl draw: " + e.toString());
-        }
-    }
-
     /*Multouch engines*/
-    public void update(int[] _iOriginX, int[] _iOriginY, int[] _iTouchX, int[] _iTouchY, int[] _iTouchEvents) {
+    public void update(int[] originX, int[] originY, int[] touchX, int[] touchY, int[] touchEvents) {
         try {
             if (isObjectsToDraw[1]) {
-                updateButtons(_iTouchX, _iTouchY, _iTouchEvents);
-
+                updateButtons(touchX, touchY, touchEvents);
             }
             if (isObjectsToDraw[0]) {
-                //El touch index 0 esta reservado al pad vitual, en caso de que haya uno. 
-                //Si este colisiona con un boton en cuando se produce un evento de tipo PERS_DOWN, no se pintar� el pad
-                if (isTouchingPad || !isButtonCollide0(_iTouchX, _iTouchY, isTouchingScreen(_iTouchEvents))) {//OJO CON isTouchingPad. Si lo comentas, el pad dejar de ser inactivo cuando colisiona con los botones y se cuenta la caja del area para esta colision. Si no lo comentas, se puede pintar el pad encima de los botones
-                    if (isTouchingScreen(_iTouchEvents)) {
-                        iLastTouchValidX = _iOriginX[0];
-                        iLastTouchValidY = _iOriginY[0];
-                    }
-                    //updateVirtualPad(iLastTouchValidX, iLastTouchValidY, _iTouchX[0], _iTouchY[0], _iTouchEvents);
-                    updateVirtualPad(iLastTouchValidX, iLastTouchValidY, _iTouchX[0], _iTouchY[0], _iTouchEvents[0]);
-                }
+                updateVirtualPad(originX, originY, touchX, touchY, touchEvents);
             }
         } catch (Exception e) {
             //e.printStackTrace();
@@ -644,14 +359,14 @@ public class TouchPadControl implements GameControl{
     }
 
     public void draw(Graphics _g) {
-    	_g.setClip(0, 0, Settings.getInstance().getScreenWidth(), Settings.getInstance().getScreenHeight());
+        _g.setClip(0, 0, Settings.getInstance().getScreenWidth(), Settings.getInstance().getScreenHeight());
         try {
             //Pad
             if (isObjectsToDraw[0]) {
-                if (isTouchingPad) {
-                	_g.setColor(0xFF1E00FF);
+                if (isTouchingPad()) {
+                    _g.setColor(0xFF1E00FF);
                 } else {
-                	_g.setColor(0xfffd0101);
+                    _g.setColor(0xfffd0101);
                 }
                 //Virtual pad
                 if (iPadX>0 || iPadY>0) {
@@ -687,13 +402,13 @@ public class TouchPadControl implements GameControl{
                             //#endif
                         } else {
                             _g.setColor(0xFF1E00FF);
-                            _g.drawRoundRect(iButtonsX[i] - (iButtonsWidth[i] >> 1), iButtonsY[i] - (iButtonsHeight[i] >> 1), iButtonsWidth[i], iButtonsHeight[i], 
-                            		iButtonsWidth[i], iButtonsHeight[i]);
+                            _g.drawRoundRect(iButtonsX[i] - (iButtonsWidth[i] >> 1), iButtonsY[i] - (iButtonsHeight[i] >> 1), iButtonsWidth[i], iButtonsHeight[i],
+                                    iButtonsWidth[i], iButtonsHeight[i]);
                             _g.setColor(0xFFFFFFFF);
                             _g.drawRoundRect(
-                            		iButtonsX[i] - (iButtonsWidth[i] >> 1)-1, iButtonsY[i] - (iButtonsHeight[i] >> 1)-1, 
-                            		iButtonsWidth[i]+2, iButtonsHeight[i]+2, 
-                            		iButtonsWidth[i]+2, iButtonsHeight[i]+2);
+                                    iButtonsX[i] - (iButtonsWidth[i] >> 1)-1, iButtonsY[i] - (iButtonsHeight[i] >> 1)-1,
+                                    iButtonsWidth[i]+2, iButtonsHeight[i]+2,
+                                    iButtonsWidth[i]+2, iButtonsHeight[i]+2);
                         }
                     } else {
                         if (vImgButtons[i] != null) {
@@ -706,14 +421,14 @@ public class TouchPadControl implements GameControl{
                             //#endif
                         } else {
                             _g.setColor(0xFFFF0000);
-                            _g.drawRoundRect(iButtonsX[i] - (iButtonsWidth[i] >> 1), iButtonsY[i] - (iButtonsHeight[i] >> 1), iButtonsWidth[i], iButtonsHeight[i], 
-                            		iButtonsWidth[i], iButtonsHeight[i]);
-                            
+                            _g.drawRoundRect(iButtonsX[i] - (iButtonsWidth[i] >> 1), iButtonsY[i] - (iButtonsHeight[i] >> 1), iButtonsWidth[i], iButtonsHeight[i],
+                                    iButtonsWidth[i], iButtonsHeight[i]);
+
                             _g.setColor(0xFFFFFFFF);
                             _g.drawRoundRect(
-                            		iButtonsX[i] - (iButtonsWidth[i] >> 1)-1, iButtonsY[i] - (iButtonsHeight[i] >> 1)-1, 
-                            		iButtonsWidth[i]+2, iButtonsHeight[i]+2, 
-                            		iButtonsWidth[i]+2, iButtonsHeight[i]+2);
+                                    iButtonsX[i] - (iButtonsWidth[i] >> 1)-1, iButtonsY[i] - (iButtonsHeight[i] >> 1)-1,
+                                    iButtonsWidth[i]+2, iButtonsHeight[i]+2,
+                                    iButtonsWidth[i]+2, iButtonsHeight[i]+2);
                         }
                     }
                 }
@@ -724,31 +439,187 @@ public class TouchPadControl implements GameControl{
         }
 
         if (isDebug) {
-        	_g.setClip(0, 0, Settings.getInstance().getScreenWidth(), Settings.getInstance().getScreenHeight());
-        	_g.setTextSize((int) (24 * Settings.getInstance().getScale()));
-			_g.setAlpha(160);
-			_g.setColor(0xff000000);
-			_g.fillRect(0, 0, Settings.getInstance().getScreenWidth(), _g.getTextHeight() * 6);
-			_g.setAlpha(255);
-        	
+            _g.setClip(0, 0, Settings.getInstance().getScreenWidth(), Settings.getInstance().getScreenHeight());
+            _g.setTextSize((int) (24 * Settings.getInstance().getScale()));
+            _g.setAlpha(160);
+            _g.setColor(0xff000000);
+            _g.fillRect(0, 0, Settings.getInstance().getScreenWidth(), _g.getTextHeight() * 6);
+            _g.setAlpha(255);
+
             if (isObjectsToDraw[0]) {
-	            _g.drawText("Angle: " + getAngle(), 0, _g.getTextHeight(), 0xffffffff);
-	            _g.drawText("Force: " + getForce(), Settings.getInstance().getScreenWidth() / 2, _g.getTextHeight(), 0xffffffff);
+                _g.drawText("Angle: " + getAngle(), 0, _g.getTextHeight(), 0xffffffff);
+                _g.drawText("Force: " + getForce(), Settings.getInstance().getScreenWidth() / 2, _g.getTextHeight(), 0xffffffff);
             }
             if (isObjectsToDraw[1]) {
-	            for (int i = 0; i < isButtonsPressed.length; i++) {
-	            	_g.drawText("Press " + "id: " + i + " :" + isButtonsPressed[i], 0, _g.getTextHeight() * (i + 2), 0xffffffff);
-	            	_g.drawText("Act " + "id: " + i + " :" + isButtonsActived[i], 
-	            			Settings.getInstance().getScreenWidth() / 2 - Settings.getInstance().getScreenWidth() / 8,
-	            			_g.getTextHeight() * (i + 2), 0xffffffff);
-	            	_g.drawText("Tim " + "id: " + i + " :" + iButtonsCounter[i], 
-	            			Settings.getInstance().getScreenWidth() - Settings.getInstance().getScreenWidth() / 4,
-	            			_g.getTextHeight() * (i + 2), 0xffffffff);
-	            }
+                for (int i = 0; i < isButtonsPressed.length; i++) {
+                    _g.drawText("Press " + "id: " + i + " :" + isButtonsPressed[i], 0, _g.getTextHeight() * (i + 2), 0xffffffff);
+                    _g.drawText("Act " + "id: " + i + " :" + isButtonsActived[i],
+                            Settings.getInstance().getScreenWidth() / 2 - Settings.getInstance().getScreenWidth() / 8,
+                            _g.getTextHeight() * (i + 2), 0xffffffff);
+                    _g.drawText("Tim " + "id: " + i + " :" + iButtonsCounter[i],
+                            Settings.getInstance().getScreenWidth() - Settings.getInstance().getScreenWidth() / 4,
+                            _g.getTextHeight() * (i + 2), 0xffffffff);
+                }
             }
 
         }
 
     }
-    
+
+    private boolean isAnyIndexTouchingScreen(int[] touchEvents){
+        for(int i = 0; i < touchEvents.length; i++){
+            if(isIndexTouchingScreen(touchEvents, i)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isIndexTouchingScreen(int[] touchEvents, int index){
+        return touchEvents[index] == iActionDOWN || touchEvents[index] == iActionDRAG;
+    }
+
+    /*Multitouch engines*/
+    private void updateButtons(int[] _iTouchX, int[] _iTouchY, int[] _iTouchEvents) {
+        //Desactivo todo:
+        for (int i = 0; i < vImgButtons.length; i++) {
+            isButtonsActived[i] = false;
+        }
+
+        for (int i = 0; i < _iTouchX.length; i++) {
+            //Button collide
+            for (int j = 0; j < vImgButtons.length; j++) {
+                int ButtonX = iButtonsX[j];
+                int ButtonY = iButtonsY[j];
+                //Si el index multitouch es no es actionUp y el index multitouch colisiona con algun boton:
+                if ((_iTouchEvents[i] != iActionUP)
+                        && (_iTouchX[i] > ButtonX - (iButtonsWidth[j] >> 1) && _iTouchX[i] < ButtonX + (iButtonsWidth[j] >> 1)
+                        && _iTouchY[i] > ButtonY - (iButtonsHeight[j] >> 1) && _iTouchY[i] < ButtonY + (iButtonsHeight[j] >> 1))) {
+
+                    //Si el index que toca el boton es el reservado para el pad y este esta siendo procesado,
+                    //No activamos el boton y nos vamos a la mierda:
+                    if (i == indexTouchingPad) {
+                        isButtonsPressed[j] = false;
+                        isButtonsActived[j] = false;
+                        return;
+                    }
+                    ///////////////////////////////////////////////////////////////////////////////////////////
+                    if (iButtonsFinger[j] == -1 || iButtonsFinger[j] == i) {//Si el indice multitouch esta libre o es el que tenemos guardado, lo proceso
+                        isButtonsPressed[j] = true;
+                        iButtonsFinger[j] = i;//Guardo el index del dedo
+
+                        if (_iTouchEvents[i] == iActionDOWN && iButtonsCounter[j] == 0) {
+                            isButtonsActived[j] = true;
+                        } else {
+                            isButtonsActived[j] = false;
+                        }
+
+                        iButtonsCounter[j]++;
+                    }
+                } //Si el index multitouch es de tipo actionUP o no esta colisionando con ningun boton, debemos de comprobar si dicho index multitouch
+                //corresponde algunos de los botonoes que tenemos. En caso de que asi sea, lo desactivamos:
+                else if (iButtonsFinger[j] == i) {
+                    isButtonsPressed[j] = false;
+                    iButtonsCounter[j] = 0;
+                    iButtonsFinger[j] = -1;
+
+                }
+            }
+        }
+    }
+
+    /*Single touch*/
+    private boolean isButtonCollide(int _iTouchX, int _iTouchY) {
+        if (isObjectsToDraw[1]) {
+            for (int i = 0; i < vImgButtons.length; i++) {
+                if ((_iTouchX + (iPadAreaWidth >> 1) > iButtonsX[i] - (iButtonsWidth[i] >> 1) &&
+                        _iTouchX - (iPadAreaWidth >> 1) < iButtonsX[i] + (iButtonsWidth[i] >> 1) &&
+                        _iTouchY + (iPadAreaHeight >> 1) > iButtonsY[i] - (iButtonsHeight[i] >> 1) &&
+                        _iTouchY - (iPadAreaHeight >> 1) < iButtonsY[i] + (iButtonsHeight[i] >> 1))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void updateVirtualPad(int originX[], int originY[], int _iTouchX[], int _iTouchY[], int[] touchEvents) {
+
+        if(isAnyIndexTouchingScreen(touchEvents)){
+            //Mientras se este tocando la pantalla sin colisionar con ningun boton, se esta tocado el pad
+            if (indexTouchingPad == -1) {
+                //Ontengo el primer indice que no este colisionando con ningun boton:
+                indexTouchingPad = -1;
+                for (int i = 0; i < touchEvents.length && indexTouchingPad == -1; i++) {
+                    if (isIndexTouchingScreen(touchEvents, i) && !isButtonCollide(_iTouchX[i], _iTouchY[i])) {
+                        indexTouchingPad = i;
+                        iLastTouchValidX = originX[indexTouchingPad];
+                        iLastTouchValidY = originY[indexTouchingPad];
+                        if (!isPadAnchored) {
+                            iPadAreaX = originX[indexTouchingPad];
+                            iPadAreaY = originY[indexTouchingPad];
+                        }
+                    }
+                }
+            }
+            if(indexTouchingPad != -1 && isIndexTouchingScreen(touchEvents, indexTouchingPad)) {
+                {
+                    int touchX = _iTouchX[indexTouchingPad];
+                    int touchY = _iTouchY[indexTouchingPad];
+                    int distX = Math.abs(iPadAreaX - touchX);
+                    int distY = Math.abs(iPadAreaY - touchY);
+                    int maxDistX = (iPadAreaWidth >> 1);
+                    int maxDistY = (iPadAreaHeight >> 1);
+
+                    if (distX > maxDistX) {
+                        distX = maxDistX;
+                    }
+                    if (distY > maxDistY) {
+                        distY = maxDistY;
+                    }
+
+                    iAngle = Math2D.getAngle360(iPadAreaX, iPadAreaY, touchX, touchY);
+                    /*
+                     * 1 << Math2D.PRECISION_BITS == dist Math2D.cos(touchAngle) == x
+                     */
+                    iPadX = (iPadAreaX + ((Math2D.cos(iAngle) * distX) / (1 << Math2D.PRECISION_BITS)));//>>8;//Math2D.cos(360));
+                    iPadY = (iPadAreaY + ((Math2D.sin(iAngle) * distY) / (-1 << Math2D.PRECISION_BITS)));//>>8;//Math2D.sin(270));
+
+                    //Force:
+                    fForce = (float) getMayor(distX, distY) / (float) (iPadAreaWidth / 2) > 1f ? 1f : (float) getMayor(distX, distY) / (float) (iPadAreaWidth / 2);
+                }
+            }else{
+                resetPad();
+            }
+        }else{
+            resetPad();
+        }
+    }
+
+    public void resetPad(){
+        iPadX = iPadAreaX;
+        iPadY = iPadAreaY;
+        iAngle = -1;
+        fForce = 0;
+        indexTouchingPad = -1;
+    }
+
+    public void reset() {
+        if (isObjectsToDraw[0]) {
+            indexTouchingPad = -1;
+        }
+        if (isObjectsToDraw[1]) {
+            for (int i = 0; i < isButtonsPressed.length; i++) {
+                isButtonsPressed[i] = false;
+                isButtonsActived[i] = false;
+                iButtonsCounter[i] = 0;
+                iButtonsFinger[i] = -1;
+            }
+        }
+
+    }
+
+    private int getMayor(int _iValue1, int _iValue2) {
+        return _iValue1 > _iValue2 ? _iValue1 : _iValue2;
+    }
 }
