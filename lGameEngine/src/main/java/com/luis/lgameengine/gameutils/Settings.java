@@ -230,23 +230,13 @@ public class Settings {
         Log.i("Debug", "Native resolution: " + nativeResolutionSet);
        
 		resolutionSet = -1;
-		for(int i = resolutionAvailableSet.length -1; i > 0; i--){
-			if(resolutionAvailableSet[i] && i == nativeResolutionSet){
+		for(int i = nativeResolutionSet; i > 0; i--){
+			if(resolutionAvailableSet[i]){
 				resolutionSet = i;
 				break;
 			}
 		}
 		
-		if(resolutionSet == -1){
-			Log.i("Debug", "No existe un set de resolucion para esta pantalla");
-			
-			for(int i = 0; i < resolutionAvailableSet.length;i++){
-				if(resolutionAvailableSet[i]){
-					resolutionSet = i;
-					break;
-				}
-			}
-		}
 		Log.i("Debug", "Resolution: " + resolutionSet);
 		
 		boolean isLandscape = orientation == Settings.ORIENTATION_LANDSCAPE;

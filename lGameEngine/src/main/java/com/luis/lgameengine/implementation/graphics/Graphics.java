@@ -537,6 +537,7 @@ public class Graphics {
     private int clipH;
     public void setClip(int x, int y, int width, int height) {
         //canvas.clipRect(x, y, x+width, y+height, Op.REPLACE);
+        canvas.clipRect(x, y, x+width, y+height);
         this.clipX = x;
         this.clipY = y;
         this.clipW = width;
