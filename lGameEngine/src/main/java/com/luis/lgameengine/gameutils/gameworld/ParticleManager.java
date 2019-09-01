@@ -199,7 +199,6 @@ public class ParticleManager {
 	
 	public void draw(Graphics g, WorldConver worldConver, GameCamera camera){
 		if(m_bParticleData != null){
-			g.setClip(0, 0, (int)worldConver.getLayoutX(), (int)worldConver.getLayoutY());
 			for(int i = 0;i< m_bParticleData.length;i++){
 				if(m_bParticleData[i][0][POS_ALPHA]>1){
 					for(int j = 0; j < NUMBER_PARTICLES; j++){

@@ -182,8 +182,6 @@ public class BattleBox extends MenuBox{
 		super.draw(g, GfxManager.imgBlackBG);
 		if(state != STATE_UNACTIVE){
 			for(int i = 0; i < GfxManager.imgIconTroop.size(); i++){
-				g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-				
 				if(waitButton != null){
 					waitButton.draw(g, (int)modPosX, 0);
 				}
@@ -217,7 +215,6 @@ public class BattleBox extends MenuBox{
 				
 				//Right
 				if(armyDefense != null){
-					g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 					g.drawImage(
 							GfxManager.imgIconTroop.get(i),
 							getX()+GfxManager.imgBigBox.getWidth()/2 - 
@@ -244,7 +241,6 @@ public class BattleBox extends MenuBox{
 			}
 			
 			if(armyDefense == null){
-				g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 				int initY = getY() -
 						((GfxManager.imgVillagers.getHeight() + 
 								Font.getFontHeight(Font.FONT_MEDIUM)+ separation)/2);
@@ -285,8 +281,7 @@ public class BattleBox extends MenuBox{
 					Font.getFontHeight(Font.FONT_SMALL)/2,
 					Graphics.VCENTER|Graphics.HCENTER);
 			
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-			g.drawImage(GfxManager.imgFlagBigList.get(armyAtack.getPlayer().getFlag()), 
+			g.drawImage(GfxManager.imgFlagBigList.get(armyAtack.getPlayer().getFlag()),
 					getX()-GfxManager.imgTerrainBox.get(terrain.getType()).getWidth()/3 +
 					(int)modPosX, 
 					centerY +
@@ -307,7 +302,6 @@ public class BattleBox extends MenuBox{
 					Font.getFontHeight(Font.FONT_SMALL)/2,
 					Graphics.VCENTER|Graphics.HCENTER);
 				
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			g.drawImage(
 					(armyDefense != null?
 					GfxManager.imgFlagBigList.get(armyDefense.getPlayer().getFlag()):
@@ -323,8 +317,7 @@ public class BattleBox extends MenuBox{
 					Graphics.VCENTER|Graphics.HCENTER);
 			
 			
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-			g.drawImage(GfxManager.imgTerrainBox.get(terrain.getType()), 
+			g.drawImage(GfxManager.imgTerrainBox.get(terrain.getType()),
 					getX()+(int)modPosX, 
 					centerY +
 					Font.getFontHeight(Font.FONT_BIG)/2 + 
@@ -371,7 +364,6 @@ public class BattleBox extends MenuBox{
 			int atackWidth = (atackForces*barWidth)/totalForces;
 			int defenseWidth = (defenseForces*barWidth)/totalForces;
 			
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			g.setColor(Main.COLOR_GREEN);
 			g.fillRect(getX()-barWidth/2 +(int)modPosX,
 					centerY +

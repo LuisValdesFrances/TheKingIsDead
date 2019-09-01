@@ -85,7 +85,6 @@ public class DescriptionBox extends SimpleBox{
 	public void draw(Graphics g, Image imgBG){
 		super.draw(g, imgBG);
 		if(state != STATE_UNACTIVE){
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			buttonLeft.draw(g, (int)getModPosX(), 0);
 			buttonRight.draw(g, (int)getModPosX(), 0);
 		}

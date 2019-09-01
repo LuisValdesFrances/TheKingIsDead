@@ -233,9 +233,7 @@ public class ConfigurationBox extends MenuBox{
 		if(state != STATE_UNACTIVE){
 			super.draw(g, imgBG);
 			
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-			
-			TextManager.drawSimpleText(g, Font.FONT_SMALL, RscManager.allText[RscManager.TXT_LANGUAGE], 
+			TextManager.drawSimpleText(g, Font.FONT_SMALL, RscManager.allText[RscManager.TXT_LANGUAGE],
 					optLabelX+(int)modPosX, languageY, Graphics.VCENTER | Graphics.RIGHT);
 			languageButton.draw(g, (int)modPosX, 0);
 			TextManager.drawSimpleText(g, Font.FONT_SMALL, RscManager.allText[RscManager.TXT_SOUND], 

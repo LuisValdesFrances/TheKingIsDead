@@ -371,7 +371,6 @@ public class ModeGame {
 	}
 
 	public static void draw(Graphics _g, int _iState) {
-		_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 		switch(_iState){
 		case Define.ST_GAME_INIT_PASS_AND_PLAY:
 		case Define.ST_GAME_INIT_ON_LINE:
@@ -411,7 +410,6 @@ public class ModeGame {
 	public static final int DEBUG_BUTTON_Y = Define.SIZEY4 + Define.SIZEY8 - DEBUG_BUTTON_H/2;
 	private static void drawDebugButton(Graphics _g){
 		if(Main.IS_GAME_DEBUG){
-			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			if(!showDebugInfo){
 				_g.setColor(Main.COLOR_RED);
 			}else{

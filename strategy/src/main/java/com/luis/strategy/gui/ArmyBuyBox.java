@@ -191,7 +191,6 @@ public class ArmyBuyBox {
 	
 	public void draw(Graphics g){
 		if(state != STATE_UNACTIVE){
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			int menuHeight = GfxManager.imgTextBox.getHeight();
 			int modAlpha = (int) ((Math.abs(modPosY) * MenuElement.bgAlpha) / 
 					(Define.SIZEY2+menuHeight/2));

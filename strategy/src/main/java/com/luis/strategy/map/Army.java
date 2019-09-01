@@ -206,8 +206,6 @@ public class Army extends MapObject{
 				getAbsoluteY()-getHeight()/2, 
 				getWidth(), getHeight())){
 		
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-			
 			int pX = worldConver.getConversionDrawX(gameCamera.getPosX(), getAbsoluteX());
 			int pY = worldConver.getConversionDrawY(gameCamera.getPosY(), getAbsoluteY());
 			
@@ -252,8 +250,6 @@ public class Army extends MapObject{
 			
 			
 			if(state != STATE_DEAD){
-				g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-				
 				float flagX;
 				if(state != STATE_MOVE && state != STATE_ATACK){
 					flagX = (float) (pX
@@ -343,7 +339,6 @@ public class Army extends MapObject{
 			*/
 			
 			if(typeGame == GameState.GAME_MODE_ONLINE && state != STATE_DEAD && getPlayer() != null){
-				g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 				Graphics _g = imgNickBuffer.getGraphics();
 				_g.drawImage(
 						GfxManager.imgNickBox, imgNickBuffer.getWidth()/2, 

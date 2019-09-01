@@ -920,7 +920,6 @@ public class GameManager {
 						(!startConquest && subState != SUB_STATE_ACTION_CONQUEST) || 
 						i!=player.getKingdomList().size()-1){
 						
-						gameBuffer.getGraphics().setClip(0, 0, gameBuffer.getWidth(), gameBuffer.getHeight());
 						gameBuffer.getGraphics().drawImage(GfxManager.imgFlagList.get(player.getFlag()),
 								worldConver.getConversionDrawX(gameCamera.getPosX(), flagX),
 								worldConver.getConversionDrawY(gameCamera.getPosY(), flagY),
@@ -948,8 +947,7 @@ public class GameManager {
 		 }
 		 
 		 //Gold
-		 gameBuffer.getGraphics().setClip(0, 0, Define.SIZEX, Define.SIZEY);
-		 if(	
+		 if(
 				getSelectedArmy() != null && 
 				getSelectedArmy().getPlayer()!= null && 
 				getSelectedArmy().getPlayer().getActionIA() == null && 
@@ -994,7 +992,6 @@ public class GameManager {
 		 for(Mist m : mistList){
 			 m.clear = false;
 		 }
-		 g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 		 Player humanPlayer = null;
 		 if(getCurrentPlayer().getActionIA() == null){
 			 humanPlayer = getCurrentPlayer();
@@ -1048,10 +1045,7 @@ public class GameManager {
 		
 		
 		//Fin buffer
-		g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-		
-		
-		
+
 		drawGUI(g);
 		
 		if(ModeGame.showDebugInfo){
@@ -1074,7 +1068,6 @@ public class GameManager {
 					Graphics.BOTTOM | Graphics.RIGHT);
 			
 			//Margenes
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			g.setColor(Main.COLOR_PURPLE_GALAXY);
 			g.fillRect(0, 0, Define.SIZEX, worldConver.getMarginN());
 			g.fillRect(0, Define.SIZEY-worldConver.getMarginS(), Define.SIZEX, worldConver.getMarginS());
@@ -1091,7 +1084,6 @@ public class GameManager {
 					cameraR);
 			
 			
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			g.setTextSize(32);
 			g.setAlpha(160);
 			g.setColor(0x88000000);
@@ -1743,7 +1735,6 @@ public class GameManager {
 	
 	private void drawPresentation(Graphics g){
 		if(presentationState != 0){
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			g.setAlpha(140);
 			g.setImageSize(1f, 1f-(Math.abs(presentationModX)/Define.SIZEX));
 			g.drawImage(GfxManager.imgTextBG, Define.SIZEX2, Define.SIZEY2, Graphics.VCENTER | Graphics.HCENTER);

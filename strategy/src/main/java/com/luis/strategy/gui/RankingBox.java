@@ -106,7 +106,6 @@ public class RankingBox extends MenuBox {
                 startX + Define.SIZEX32 + GfxManager.imgFlagSmallList.get(0).getWidth(),
                 startY,
                 Graphics.VCENTER | Graphics.HCENTER);
-        g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 
         int startIconX = Define.SIZEX4 - Define.SIZEX16;
         int iconSep = Define.SIZEX8;
@@ -135,8 +134,6 @@ public class RankingBox extends MenuBox {
                 startX + startIconX - Define.SIZEX24 + iconSep*4,
                 startY,
                 Graphics.VCENTER | Graphics.HCENTER);
-
-        g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 
         for(int i = 0; i < pList.length; i++){
             g.drawImage(GfxManager.imgFlagSmallList.get(pList[i].getFlag()),

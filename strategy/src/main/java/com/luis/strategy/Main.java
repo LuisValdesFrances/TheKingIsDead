@@ -270,7 +270,10 @@ public class Main extends Screen implements Runnable{
 	}
 
 	@Override
-	protected void paint(Graphics _g) {
+	protected void paint(Graphics g) {
+		if(Settings.getInstance().androidApiVersion < Settings.OREO) {
+			g.clipScreen(Define.SIZEX, Define.SIZEY);
+		}
 		if (!isClock) {
 			switch (state) {
 				 case Define.ST_MENU_START:
@@ -297,7 +300,7 @@ public class Main extends Screen implements Runnable{
                  case Define.ST_MENU_ON_LINE_RANKING:
 		        	 
 		         case Define.ST_TEST:
-					ModeMenu.draw(_g,  state);
+					ModeMenu.draw(g,  state);
 					break;
 		         case Define.ST_GAME_INIT_PASS_AND_PLAY:
 		         case Define.ST_GAME_INIT_ON_LINE:
@@ -306,107 +309,102 @@ public class Main extends Screen implements Runnable{
 		         case Define.ST_GAME_PAUSE:
 		         case Define.ST_GAME_OPTIONS:
 		         case Define.ST_GAME_CONFIRMATION_QUIT:
-		        	 ModeGame.draw(_g, state);
+		        	 ModeGame.draw(g, state);
 					break;
 			}
 			
 			if (Main.IS_FPS) {
-				_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-				_g.setTextSize(Font.SYSTEM_SIZE[Settings.getInstance().getNativeResolutionSet()]);
-				_g.drawText("" + iFramesXSecond + "/" + targetFPS,  0, _g.getTextHeight(), COLOR_RED);
+				g.setTextSize(Font.SYSTEM_SIZE[Settings.getInstance().getNativeResolutionSet()]);
+				g.drawText("" + iFramesXSecond + "/" + targetFPS,  0, g.getTextHeight(), COLOR_RED);
 			}
 			else if (Main.IS_DEBUG) {
-				_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-				_g.setTextSize(Font.SYSTEM_SIZE[Settings.getInstance().getNativeResolutionSet()]);
-				_g.setAlpha(160);
-				_g.setColor(0x88000000);
-				_g.fillRect(0, 0, Define.SIZEX, _g.getTextHeight() * 4);
-				_g.setAlpha(255);
-				_g.drawText("LGameEngine v.: " + Settings.LGAME_ENGINE_VERSION, 0, _g.getTextHeight(), COLOR_WHITE);
-				_g.drawText("FPS: " + iFramesXSecond + "/" + targetFPS, 0, _g.getTextHeight() * 2, COLOR_WHITE);
-				_g.drawText("DT Real/Trans: " + ((float)deltaTime / 1000f) + "/" + getDeltaSec(), Define.SIZEX4, _g.getTextHeight() * 2, COLOR_WHITE);
-				_g.drawText("SizeX: " + Define.SIZEX, 0, _g.getTextHeight() * 3,COLOR_WHITE);
-				_g.drawText("SizeY: " + Define.SIZEY, Define.SIZEX2, _g.getTextHeight() * 3, COLOR_WHITE);
-				_g.drawText("RealW: " + Settings.getInstance().getRealWidth(), 0, _g.getTextHeight() * 4, COLOR_WHITE);
-				_g.drawText("RealH: " + Settings.getInstance().getRealHeight(), Define.SIZEX2, _g.getTextHeight() * 4, COLOR_WHITE);
+				g.setTextSize(Font.SYSTEM_SIZE[Settings.getInstance().getNativeResolutionSet()]);
+				g.setAlpha(160);
+				g.setColor(0x88000000);
+				g.fillRect(0, 0, Define.SIZEX, g.getTextHeight() * 4);
+				g.setAlpha(255);
+				g.drawText("LGameEngine v.: " + Settings.LGAME_ENGINE_VERSION, 0, g.getTextHeight(), COLOR_WHITE);
+				g.drawText("FPS: " + iFramesXSecond + "/" + targetFPS, 0, g.getTextHeight() * 2, COLOR_WHITE);
+				g.drawText("DT Real/Trans: " + ((float)deltaTime / 1000f) + "/" + getDeltaSec(), Define.SIZEX4, g.getTextHeight() * 2, COLOR_WHITE);
+				g.drawText("SizeX: " + Define.SIZEX, 0, g.getTextHeight() * 3,COLOR_WHITE);
+				g.drawText("SizeY: " + Define.SIZEY, Define.SIZEX2, g.getTextHeight() * 3, COLOR_WHITE);
+				g.drawText("RealW: " + Settings.getInstance().getRealWidth(), 0, g.getTextHeight() * 4, COLOR_WHITE);
+				g.drawText("RealH: " + Settings.getInstance().getRealHeight(), Define.SIZEX2, g.getTextHeight() * 4, COLOR_WHITE);
 				
-				_g.setColor(Main.COLOR_GREEN);
-				_g.fillRect(0, 0, Define.SCR_MIDLE/64, Define.SCR_MIDLE/64);
-				_g.fillRect(0, Define.SIZEY-Define.SCR_MIDLE/64, Define.SCR_MIDLE/64, Define.SCR_MIDLE/64);
-				_g.fillRect(Define.SIZEX-Define.SCR_MIDLE/64, 0, Define.SCR_MIDLE/64, Define.SCR_MIDLE/64);
-				_g.fillRect(Define.SIZEX-Define.SCR_MIDLE/64, Define.SIZEY-Define.SCR_MIDLE/64, Define.SCR_MIDLE/64, Define.SCR_MIDLE/64);
+				g.setColor(Main.COLOR_GREEN);
+				g.fillRect(0, 0, Define.SCR_MIDLE/64, Define.SCR_MIDLE/64);
+				g.fillRect(0, Define.SIZEY-Define.SCR_MIDLE/64, Define.SCR_MIDLE/64, Define.SCR_MIDLE/64);
+				g.fillRect(Define.SIZEX-Define.SCR_MIDLE/64, 0, Define.SCR_MIDLE/64, Define.SCR_MIDLE/64);
+				g.fillRect(Define.SIZEX-Define.SCR_MIDLE/64, Define.SIZEY-Define.SCR_MIDLE/64, Define.SCR_MIDLE/64, Define.SCR_MIDLE/64);
 			
 			}else if (Main.IS_TOUCH_INPUT_DEBUG){
-				_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-				_g.setTextSize(Font.SYSTEM_SIZE[Settings.getInstance().getNativeResolutionSet()]);
-				_g.setAlpha(160);
-				_g.setColor(0x88000000);
-				_g.fillRect(0, 0, Define.SIZEX, _g.getTextHeight() * 7);
-				_g.setAlpha(255);
-				_g.drawText("TouchAction: " + 
-				multiTouchHandler.getTouchAction(0), 0, _g.getTextHeight(),COLOR_WHITE);
-				_g.drawText("TouchFrame: " + 
-				multiTouchHandler.getTouchFrames(0), Define.SIZEX2-Define.SIZEX4, _g.getTextHeight(), COLOR_WHITE);
+				g.setTextSize(Font.SYSTEM_SIZE[Settings.getInstance().getNativeResolutionSet()]);
+				g.setAlpha(160);
+				g.setColor(0x88000000);
+				g.fillRect(0, 0, Define.SIZEX, g.getTextHeight() * 7);
+				g.setAlpha(255);
+				g.drawText("TouchAction: " +
+				multiTouchHandler.getTouchAction(0), 0, g.getTextHeight(),COLOR_WHITE);
+				g.drawText("TouchFrame: " +
+				multiTouchHandler.getTouchFrames(0), Define.SIZEX2-Define.SIZEX4, g.getTextHeight(), COLOR_WHITE);
 				/*
 				_g.drawText("Buffer size: " + 
 						UserInput.getInstance().getMultiTouchHandler().getBufferSize(), Define.SIZEX2+Define.SIZEX4,_g.getTextHeight() * 5, 
 						UserInput.getInstance().getMultiTouchHandler().getBufferSize() <= MultiTouchHandler.BUFFER_SIZE ? COLOR_WHITE : COLOR_RED);
 				*/
-				_g.drawText("Orin_X: " + 
-				multiTouchHandler.getTouchOriginX(0), 0, _g.getTextHeight()*2,COLOR_WHITE);
-				_g.drawText("Orin_Y: " + 
-				multiTouchHandler.getTouchOriginY(0), Define.SIZEX2-Define.SIZEX4,_g.getTextHeight()*2, COLOR_WHITE);
-				_g.drawText("Current_X: " + 
-					UserInput.getInstance().getMultiTouchHandler().getTouchX(0), 0, _g.getTextHeight() * 3, COLOR_WHITE);
-				_g.drawText("Current_Y: " +
-					UserInput.getInstance().getMultiTouchHandler().getTouchY(0), Define.SIZEX2-Define.SIZEX4,_g.getTextHeight() * 3, COLOR_WHITE);
-				_g.drawText("Dist_X: " + 
-					UserInput.getInstance().getMultiTouchHandler().getTouchDistanceX(0), 0, _g.getTextHeight() * 4, COLOR_WHITE);
-				_g.drawText("Dist_Y: " + 
-					UserInput.getInstance().getMultiTouchHandler().getTouchDistanceY(0), Define.SIZEX2-Define.SIZEX4,_g.getTextHeight() * 4, COLOR_WHITE);
+				g.drawText("Orin_X: " +
+				multiTouchHandler.getTouchOriginX(0), 0, g.getTextHeight()*2,COLOR_WHITE);
+				g.drawText("Orin_Y: " +
+				multiTouchHandler.getTouchOriginY(0), Define.SIZEX2-Define.SIZEX4,g.getTextHeight()*2, COLOR_WHITE);
+				g.drawText("Current_X: " +
+					UserInput.getInstance().getMultiTouchHandler().getTouchX(0), 0, g.getTextHeight() * 3, COLOR_WHITE);
+				g.drawText("Current_Y: " +
+					UserInput.getInstance().getMultiTouchHandler().getTouchY(0), Define.SIZEX2-Define.SIZEX4,g.getTextHeight() * 3, COLOR_WHITE);
+				g.drawText("Dist_X: " +
+					UserInput.getInstance().getMultiTouchHandler().getTouchDistanceX(0), 0, g.getTextHeight() * 4, COLOR_WHITE);
+				g.drawText("Dist_Y: " +
+					UserInput.getInstance().getMultiTouchHandler().getTouchDistanceY(0), Define.SIZEX2-Define.SIZEX4,g.getTextHeight() * 4, COLOR_WHITE);
 				
-				_g.drawText("Pointer 2: " +
-					UserInput.getInstance().getMultiTouchHandler().getTouchAction(1), 0,_g.getTextHeight() * 6, COLOR_WHITE);
-				_g.drawText("Pointer 3: " +
-					UserInput.getInstance().getMultiTouchHandler().getTouchAction(2), Define.SIZEX2-Define.SIZEX4, _g.getTextHeight() * 6, COLOR_WHITE);
-				_g.drawText("Pointer 4: " +
-					UserInput.getInstance().getMultiTouchHandler().getTouchAction(3), 0,_g.getTextHeight() * 7, COLOR_WHITE);
-				_g.drawText("Pointer 5: " + 
-					UserInput.getInstance().getMultiTouchHandler().getTouchAction(4), Define.SIZEX2-Define.SIZEX4, _g.getTextHeight() * 7, COLOR_WHITE);
+				g.drawText("Pointer 2: " +
+					UserInput.getInstance().getMultiTouchHandler().getTouchAction(1), 0,g.getTextHeight() * 6, COLOR_WHITE);
+				g.drawText("Pointer 3: " +
+					UserInput.getInstance().getMultiTouchHandler().getTouchAction(2), Define.SIZEX2-Define.SIZEX4, g.getTextHeight() * 6, COLOR_WHITE);
+				g.drawText("Pointer 4: " +
+					UserInput.getInstance().getMultiTouchHandler().getTouchAction(3), 0,g.getTextHeight() * 7, COLOR_WHITE);
+				g.drawText("Pointer 5: " +
+					UserInput.getInstance().getMultiTouchHandler().getTouchAction(4), Define.SIZEX2-Define.SIZEX4, g.getTextHeight() * 7, COLOR_WHITE);
 
 			}else if (Main.IS_KEY_INPUT_DEBUG){
-				_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-				_g.setTextSize(Font.SYSTEM_SIZE[Settings.getInstance().getNativeResolutionSet()]);
-				_g.setAlpha(160);
-				_g.setColor(0x88000000);
-				_g.fillRect(0, 0, Define.SIZEX, _g.getTextHeight() * 3);
-				_g.setAlpha(255);
-				_g.drawText("Key UP: " + 
-					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_UP).getAction()), 0, _g.getTextHeight(),COLOR_WHITE);
-				_g.drawText("Key DOWN: " + 
-					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_DOWN).getAction()), Define.SIZEX2,_g.getTextHeight(), COLOR_WHITE);
-				_g.drawText("Key LEFT: " + 
-					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_LEFT).getAction()), 0, _g.getTextHeight() * 2, COLOR_WHITE);
-				_g.drawText("Key RIGHT: " + 
-					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_RIGHT).getAction()), Define.SIZEX2,_g.getTextHeight() * 2, COLOR_WHITE);
-				_g.drawText("Key A: " + 
-					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_SHIELD_A).getAction()), 0, _g.getTextHeight() * 3, COLOR_WHITE);
-				_g.drawText("Key B: " + 
-					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_SHIELD_B).getAction()), Define.SIZEX2,_g.getTextHeight() * 3, COLOR_WHITE);
+				g.setTextSize(Font.SYSTEM_SIZE[Settings.getInstance().getNativeResolutionSet()]);
+				g.setAlpha(160);
+				g.setColor(0x88000000);
+				g.fillRect(0, 0, Define.SIZEX, g.getTextHeight() * 3);
+				g.setAlpha(255);
+				g.drawText("Key UP: " +
+					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_UP).getAction()), 0, g.getTextHeight(),COLOR_WHITE);
+				g.drawText("Key DOWN: " +
+					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_DOWN).getAction()), Define.SIZEX2,g.getTextHeight(), COLOR_WHITE);
+				g.drawText("Key LEFT: " +
+					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_LEFT).getAction()), 0, g.getTextHeight() * 2, COLOR_WHITE);
+				g.drawText("Key RIGHT: " +
+					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_RIGHT).getAction()), Define.SIZEX2,g.getTextHeight() * 2, COLOR_WHITE);
+				g.drawText("Key A: " +
+					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_SHIELD_A).getAction()), 0, g.getTextHeight() * 3, COLOR_WHITE);
+				g.drawText("Key B: " +
+					(UserInput.getInstance().getKeyboardHandler().getPressedKeys(UserInput.KEYCODE_SHIELD_B).getAction()), Define.SIZEX2,g.getTextHeight() * 3, COLOR_WHITE);
 			}if(IS_GAME_DEBUG){
 				//Margenes
 				if(isIntervalTwo()) {
-					_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-					_g.setColor(Main.COLOR_GREEN);
-					_g.fillRect(0, 0, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
-					_g.fillRect(0, Define.SIZEY-Define.SCR_MIDLE/32, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
-					_g.fillRect(Define.SIZEX-Define.SCR_MIDLE/32, 0, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
-					_g.fillRect(Define.SIZEX-Define.SCR_MIDLE/32, Define.SIZEY-Define.SCR_MIDLE/32, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
+					g.setColor(Main.COLOR_GREEN);
+					g.fillRect(0, 0, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
+					g.fillRect(0, Define.SIZEY-Define.SCR_MIDLE/32, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
+					g.fillRect(Define.SIZEX-Define.SCR_MIDLE/32, 0, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
+					g.fillRect(Define.SIZEX-Define.SCR_MIDLE/32, Define.SIZEY-Define.SCR_MIDLE/32, Define.SCR_MIDLE/32, Define.SCR_MIDLE/32);
 				}
 			}
-			_g.setAlpha(255);
+			g.setAlpha(255);
 		} else {
-			drawClock(_g);
+			drawClock(g);
 		}
 	}
 	

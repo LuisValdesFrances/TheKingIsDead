@@ -234,7 +234,6 @@ public class ArmyBox extends MenuBox{
 			int countFiles = 0;
 			int initX = getX() - fileWidth/2 + GfxManager.imgSmallTroop.get(0).getWidth()/2;
 			int initY = getY() - columnHeight/2 + GfxManager.imgSmallTroop.get(0).getHeight()/2;
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			for(int i = 0; i < army.getTroopList().size(); i++){
 				
 				if(countColumns == totalColums){

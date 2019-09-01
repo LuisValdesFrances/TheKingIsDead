@@ -102,7 +102,6 @@ public class NotificationBox extends MenuElement{
 	
 	public void draw(Graphics g){
 		if(state != 0){
-			g.setClip(0, 0, screenWidth, screenHeight);
 			int posY = (int)modY*-1;
 			if(imgBox != null){
 				g.drawImage(imgBox, 

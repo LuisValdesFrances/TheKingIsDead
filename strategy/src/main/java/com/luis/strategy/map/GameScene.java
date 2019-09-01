@@ -145,7 +145,6 @@ public class GameScene{
 	private float alphaFaith = 255;
 	
 	public void drawMap(Graphics g, WorldConver worldConver, GameCamera gameCamera, List<Player> playerList){
-		g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 		int pW = GfxManager.imgMapList.get(0).getWidth();
 		int pH = GfxManager.imgMapList.get(0).getHeight();
 		{
@@ -224,8 +223,6 @@ public class GameScene{
 					//Fe
 					if(k.getTerrainList().get(i).getType() == GameParams.CITY){
 						if(k.isProtectedByFaith()){
-							g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-							
 							float total = GameParams.BUILDING_STATE.length * GameParams.BUILDING_STATE[0].length;
 							float mod = (k.getCityManagement().getTotalLevel() * 0.5f) / total;
 							float size = 0.5f+mod;
@@ -291,8 +288,6 @@ public class GameScene{
 	}
 	
 	public void drawTarget(Graphics g, WorldConver worldConver, GameCamera gameCamera){
-		
-		g.setClip(0, 0, Define.SIZEX, Define.SIZEX);
 		for(Kingdom k : kingdomList){
 			
 			if(k.getTarget() != -1){

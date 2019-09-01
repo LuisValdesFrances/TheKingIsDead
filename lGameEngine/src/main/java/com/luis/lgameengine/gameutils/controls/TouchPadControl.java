@@ -359,7 +359,6 @@ public class TouchPadControl implements GameControl{
     }
 
     public void draw(Graphics _g) {
-        _g.setClip(0, 0, Settings.getInstance().getScreenWidth(), Settings.getInstance().getScreenHeight());
         try {
             //Pad
             if (isObjectsToDraw[0]) {
@@ -439,7 +438,6 @@ public class TouchPadControl implements GameControl{
         }
 
         if (isDebug) {
-            _g.setClip(0, 0, Settings.getInstance().getScreenWidth(), Settings.getInstance().getScreenHeight());
             _g.setTextSize((int) (24 * Settings.getInstance().getScale()));
             _g.setAlpha(160);
             _g.setColor(0xff000000);

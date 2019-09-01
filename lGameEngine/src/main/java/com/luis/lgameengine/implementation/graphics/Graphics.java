@@ -535,9 +535,14 @@ public class Graphics {
     private int clipY;
     private int clipW;
     private int clipH;
+
+    public void clipScreen(int screenX, int screenY){
+        canvas.clipRect(0, 0, screenX, screenY, Op.REPLACE);
+    }
+
     public void setClip(int x, int y, int width, int height) {
         //canvas.clipRect(x, y, x+width, y+height, Op.REPLACE);
-        canvas.clipRect(x, y, x+width, y+height);
+        //canvas.clipRect(x, y, x+width, y+height);
         this.clipX = x;
         this.clipY = y;
         this.clipW = width;

@@ -101,8 +101,8 @@ public class ModeMenu {
 
 	private static int debugCount;
     private static int easterEggCount;
-	
-	public static void init(int _iMenuState){
+
+    public static void init(int _iMenuState){
 		Log.i("Info", "Init State: "+ _iMenuState);
 		switch (_iMenuState) {
 		
@@ -275,7 +275,6 @@ public class ModeMenu {
 			
 			break;
 		case Define.ST_MENU_MAIN:
-
 			if(Main.lastState < Define.ST_MENU_MAIN){
 				alpha = 255;
 				startTime = System.currentTimeMillis();
@@ -1378,7 +1377,6 @@ public class ModeMenu {
 		
 		switch (state) {
 		case Define.ST_MENU_START:
-			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			_g.setColor(Main.COLOR_BLACK);
 			_g.fillRect(0, 0, Define.SIZEX, Define.SIZEY);
 			
@@ -1396,7 +1394,6 @@ public class ModeMenu {
 			break;
 			
 		case Define.ST_MENU_LOGO:
-			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			_g.setColor(Main.COLOR_BLACK);
 			_g.fillRect(0, 0, Define.SIZEX, Define.SIZEY);
 			
@@ -1408,15 +1405,15 @@ public class ModeMenu {
              
 			break;
 		case Define.ST_MENU_ASK_LANGUAGE:
-			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			break;
 			
 		case Define.ST_MENU_ASK_SOUND:
-			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			break;
 		
 		case Define.ST_MENU_MAIN:
 			drawMenuBG(_g);
+			TextManager.drawSimpleText(_g, Font.FONT_SMALL, BuildConfig.VERSION_NAME,
+					0, Define.SIZEY, Graphics.LEFT | Graphics.BOTTOM);
 			btnCampaign.draw(_g, 0, 0);
 			btnQuickPlay.draw(_g, 0, 0);
 			btnInfo.draw(_g, 0, 0);
@@ -1429,7 +1426,6 @@ public class ModeMenu {
 			break;
 			
 		case Define.ST_MENU_OPTIONS:
-			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			break;
 			
 		case Define.ST_MENU_INFO:
@@ -1560,13 +1556,11 @@ public class ModeMenu {
                  btnBack.draw(_g, 0, 0);
 		     break;
 		 case Define.ST_MENU_EXIT:
-			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			break;
 			
 		case Define.ST_TEST:
 			
 			_g.setColor(0x000000);
-			_g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			_g.fillRect(0, 0, Define.SIZEX, Define.SIZEY);
 			break;
 		}
@@ -1701,7 +1695,6 @@ public class ModeMenu {
 	}
 	
 	private static void drawMenuBG(Graphics g){
-		g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 		g.drawImage(GfxManager.imgMainBG, 0, 0, Graphics.TOP | Graphics.LEFT);
 		
 		g.setAlpha(logoAlpha);

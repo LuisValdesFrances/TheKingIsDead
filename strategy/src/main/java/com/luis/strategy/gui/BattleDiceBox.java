@@ -209,7 +209,6 @@ public class BattleDiceBox {
 	
 	public void draw(Graphics g){
 		if(state != STATE_UNACTIVE){
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			int m = ((Define.SIZEY-totalHeight)+totalHeight);
 			int modAlpha = (int) ((Math.abs(modPosY) * MenuElement.bgAlpha) / m);
 			g.setAlpha(MenuElement.bgAlpha-modAlpha);
@@ -226,9 +225,8 @@ public class BattleDiceBox {
 			TextManager.drawSimpleText(g, Font.FONT_BIG, 
 					RscManager.allText[RscManager.TXT_GAME_DIFFICULTY] + " "+ diceDifficult, 
 					parchmentX, parchmentY + modY, Graphics.VCENTER | Graphics.HCENTER);
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-			
-			g.drawImage(GfxManager.imgShield, 
+
+			g.drawImage(GfxManager.imgShield,
 					shieldX, 
 					shieldY + modY, 
 					Graphics.VCENTER | Graphics.HCENTER);

@@ -153,9 +153,7 @@ public class LoginBox extends MenuBox{
 	}
 	
 	public void draw(Graphics g){
-		g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
-		
-		TextManager.drawSimpleText(g, Font.FONT_MEDIUM, RscManager.allText[RscManager.TXT_NAME], 
+		TextManager.drawSimpleText(g, Font.FONT_MEDIUM, RscManager.allText[RscManager.TXT_NAME],
 				labelX+(int)modPosX, lineNamePosY, 
 				Graphics.VCENTER | Graphics.LEFT);
 		TextManager.drawSimpleText(g, Font.FONT_MEDIUM, RscManager.allText[RscManager.TXT_PASS], 
@@ -166,7 +164,6 @@ public class LoginBox extends MenuBox{
 		inputBoxPass.draw(g, (int)modPosX, 0);
 		
 		if(Main.iFrame%20<10){
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			int textW = Font.getFontWidth(Font.FONT_SMALL)*(keyboard.getTextChain().length()+1);
 			switch(inputPointer){
 			case 0:

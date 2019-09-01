@@ -376,7 +376,6 @@ public class CityBox extends MenuBox{
 								buildingImageList[i][j].x+(int)modPosX, 
 								buildingImageList[i][j].y, 
 								Graphics.VCENTER | Graphics.HCENTER);
-						g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 					}
 				}
 				if(levelUpButtonList != null){

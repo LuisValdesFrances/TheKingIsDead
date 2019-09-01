@@ -75,7 +75,6 @@ public class MapBox extends MenuBox{
 		super.draw(g, GfxManager.imgBlackBG);
 		if(state != STATE_UNACTIVE){
 			Graphics _g = imgMap.getGraphics();
-			_g.setClip(0, 0, imgMap.getWidth(), imgMap.getHeight());
 			int pW = GfxManager.imgMapList.get(0).getWidth();
 			int pH = GfxManager.imgMapList.get(0).getHeight();
 			
@@ -121,7 +120,6 @@ public class MapBox extends MenuBox{
 
 		int i = 0;
 		for(Player p : playerList){
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			g.drawImage(
 					GfxManager.imgFlagSmallList.get(p.getFlag()),
                     getX()+(int)modPosX - GfxManager.imgBigBox.getWidth()/2 + Define.SIZEX32 + mapWidth,

@@ -134,7 +134,7 @@ public class MenuManager {
 
         //Pintamos los botones:
         for (int i = 0; i < number_options; i++) {
-            g.setClip(iPosX, iListPosY[i], button.getWidth(), (button.getHeight()>>1));
+            //g.setClip(iPosX, iListPosY[i], button.getWidth(), (button.getHeight()>>1));
 
             if (i == select_option) {
                 if (isFocusY) {
@@ -200,7 +200,7 @@ public class MenuManager {
 
         //Pintamos los botones:
         for (int i = 0; i < number_options; i++) {
-            g.setClip(iPosX, iListPosY[i], button.getWidth(), (button.getHeight()>>1));
+            //g.setClip(iPosX, iListPosY[i], button.getWidth(), (button.getHeight()>>1));
 
             if (i == select_option) {
                 if (isFocusY) {
@@ -313,24 +313,28 @@ public class MenuManager {
         }
 
         //Pintamos el bot�n:
-        g.setClip(iPosX, iPosY, button.getWidth(), (button.getHeight()>>1));
+        //g.setClip(iPosX, iPosY, button.getWidth(), (button.getHeight()>>1));
         g.drawImage(button, iPosX, iPosY, Graphics.TOP | Graphics.LEFT);
 
         //Pintamos las pesta�as:
         if (changeArrowsFocus(frame)) {
        	   //Izquierda:
+            /*
            g.setClip(  iPosX - (arrows.getWidth()>>1), 
            		iPosY + (MenuManager.buttonH>>2) - (MenuManager.arrowH>>1), 
            		(arrows.getWidth()>>1), 
            		MenuManager.arrowH);
+           	*/
            g.drawImage(arrows, iPosX - (arrows.getWidth()>>1), 
            		iPosY + (MenuManager.buttonH>>2) - (MenuManager.arrowH>>1), 
                        Graphics.TOP | Graphics.LEFT);
            //Derecha:
+            /*
            g.setClip(  iPosX + button.getWidth(), 
            		iPosY + (MenuManager.buttonH>>2) - (MenuManager.arrowH>>1), 
            		(arrows.getWidth()>>1), 
            		MenuManager.arrowH);
+           	*/
            g.drawImage(arrows, (iPosX + button.getWidth()) - (arrows.getWidth()>>1),
            		iPosY + (MenuManager.buttonH>>2) - (MenuManager.arrowH>>1), 
                        Graphics.TOP | Graphics.LEFT);
@@ -373,27 +377,31 @@ public class MenuManager {
 
 
         //Pintamos el bot�n:
-        g.setClip(iPosX, iPosY, button.getWidth(), (button.getHeight()>>1));
+        //g.setClip(iPosX, iPosY, button.getWidth(), (button.getHeight()>>1));
         g.drawImage(button, iPosX, iPosY, Graphics.TOP | Graphics.LEFT);
 
       
         //Pintamos las pesta�as:
         if (changeArrowsFocus(frame)) {
           	 //Izquierda:
+              /*
               g.setClip(
                       iPosX - (arrows.getWidth()>>1), 
               	      iPosY + (MenuManager.buttonH>>2) - (MenuManager.arrowH>>1), 
                       (arrows.getWidth()>>1), 
                       MenuManager.arrowH);
+              */
               g.drawImage(arrows, iPosX - (arrows.getWidth()>>1), 
                       iPosY + (MenuManager.buttonH>>2) - (MenuManager.arrowH>>1), 
                       Graphics.TOP | Graphics.LEFT);
               //Derecha:
+              /*
               g.setClip(
                       iPosX + button.getWidth(), 
                       iPosY + (MenuManager.buttonH>>2) - (MenuManager.arrowH>>1), 
                       (arrows.getWidth()>>1), 
                       MenuManager.arrowH);
+              */
               g.drawImage(arrows, (iPosX + button.getWidth()) - (arrows.getWidth()>>1),
                       iPosY + (MenuManager.buttonH>>2) - (MenuManager.arrowH>>1), 
                       Graphics.TOP | Graphics.LEFT);

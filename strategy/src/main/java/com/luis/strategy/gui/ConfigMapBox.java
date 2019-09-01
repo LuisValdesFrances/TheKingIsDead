@@ -139,7 +139,6 @@ public class ConfigMapBox extends ListBox{
 					Graphics.VCENTER | Graphics.HCENTER);
 			
 			//playerFlagBtnList.get(i).draw(g, (int)modPosX, 0);
-			g.setClip(0, 0, Define.SIZEX, Define.SIZEY);
 			g.setImageSize(0.9f, 0.85f);
 			g.drawImage(
 					GfxManager.imgFlagList.get(playerConfList[i].flag), 
