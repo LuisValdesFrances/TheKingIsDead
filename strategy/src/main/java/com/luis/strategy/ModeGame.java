@@ -441,5 +441,4 @@ public class ModeGame {
 		 };
 		 t.start();
 	}
-	
 }

@@ -20,9 +20,9 @@ public class GameCamera {
 	
 	/**
 	 * Crea una instancia de GameCamera a la cual se le puede aplicar un modificador de pharallax
-	 * @param _fPosX: Posicion x de la camara en el mundo
-	 * @param _fPosY: Posicion y de la camara en el mundo
-	 * @param _fMultiplicatorFPS: Multiplicador de movimiento. Puede ser 1 si no se desea ningun modificador
+	 * @param posX: Posicion x de la camara en el mundo
+	 * @param posY: Posicion y de la camara en el mundo
+	 * @param multiplicatorFPS: Multiplicador de movimiento. Puede ser 1 si no se desea ningun modificador
 	 */
 	public GameCamera(WorldConver worldConver, float posX, float posY, float multiplicatorFPS){
 		//this.worldConver = worldConver;

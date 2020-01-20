@@ -7,7 +7,7 @@ android {
     defaultConfig {
         compileSdkVersion 26
         buildToolsVersion '28.0.3'
-        minSdkVersion 16
+        minSdkVersion 14
     }
 
     buildTypes {

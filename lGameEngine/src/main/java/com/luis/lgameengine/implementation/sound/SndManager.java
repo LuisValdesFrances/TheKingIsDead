@@ -1,184 +1,182 @@
 package com.luis.lgameengine.implementation.sound;
 
 import android.app.Activity;
+import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.content.Context;
 
 public class SndManager extends Activity {
-	
-	private static SndManager sndManager;
-	
-	public static SndManager getInstance(){
-		if(sndManager == null){
-			sndManager = new SndManager();
-		}
-		return sndManager;
-	}
 
-	private boolean sound;
+    private static SndManager sndManager;
 
-	private Context context;
+    public static SndManager getInstance() {
+        if (sndManager == null) {
+            sndManager = new SndManager();
+        }
+        return sndManager;
+    }
 
-	public static final byte FX_NOSOUND = 0;
-	private SoundPool soundPool;
+    private boolean sound;
 
-	public static final int MUSIC_NOSOUND = -1;
-	private MediaPlayer mediaPlayer;
-	private int currentClip;
-	private int musicFileList[];
-	private int streamID;
+    private Context context;
 
-	public void inicialize(Context context, int[] musicFileList, int[] fxFileList) {
+    public static final byte FX_NOSOUND = 0;
+    private SoundPool soundPool;
 
-		try {
-			this.context = context;
-			this.musicFileList = musicFileList;
-			this.sound = true;
-			int numFX = fxFileList.length > 0 ? fxFileList.length : 0;
-			this.soundPool = new SoundPool(numFX, AudioManager.STREAM_MUSIC, 0);
-			
-			for (int i = 0; i < numFX; i++){
-				soundPool.load(context, fxFileList[i], 1);
-			}
+    public static final int MUSIC_NOSOUND = -1;
+    private MediaPlayer mediaPlayer;
+    private int currentClip;
+    private int musicFileList[];
+    private int streamID;
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    public void inicialize(Context context, int[] musicFileList, int[] fxFileList) {
 
-	public void playMusic(int _iMusicID, boolean _bLoop) {
-		if (sound) {
-			try {
+        try {
+            this.context = context;
+            this.musicFileList = musicFileList;
+            this.sound = true;
+            int numFX = fxFileList.length > 0 ? fxFileList.length : 0;
+            this.soundPool = new SoundPool(numFX, AudioManager.STREAM_MUSIC, 0);
 
-				// if the player is already playing the song returns. if is
-				// playing other song it stops
-				if (mediaPlayer != null) {
-					if (currentClip == _iMusicID && mediaPlayer.isPlaying())
-						return;
+            for (int i = 0; i < numFX; i++) {
+                soundPool.load(context, fxFileList[i], 1);
+            }
 
-					stopMusic();
-				}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-				// create, volume and finally plays a wonderful song
-				mediaPlayer = MediaPlayer.create(context, musicFileList[_iMusicID]);
-				mediaPlayer.setLooping(_bLoop);
-				mediaPlayer.setVolume(1f, 1f);
-				/*
-				 * float streamVolume =
-				 * vAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-				 * fVolume = streamVolume /
-				 * vAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-				 * vMusicPlayer.setVolume(fVolume, fVolume); if (fVolume ==
-				 * 0.0f) fVolume = 1.0f;
-				 */
+    public void playMusic(int _iMusicID, boolean _bLoop) {
+        if (sound) {
+            try {
 
-				mediaPlayer.start();
+                // if the player is already playing the song returns. if is
+                // playing other song it stops
+                if (mediaPlayer != null) {
+                    if (currentClip == _iMusicID && mediaPlayer.isPlaying())
+                        return;
 
-				currentClip = _iMusicID;
+                    stopMusic();
+                }
 
-			} catch (Exception e) {
-				e.printStackTrace();
-				currentClip = MUSIC_NOSOUND;
-			}
-		}
-	}
-	
-	public int getMusicDuration(){
-		if (sound) {
-			if(mediaPlayer != null){
-				return mediaPlayer.getDuration();
-			}
-		}
-		return -1;
-	}
+                // create, volume and finally plays a wonderful song
+                mediaPlayer = MediaPlayer.create(context, musicFileList[_iMusicID]);
+                mediaPlayer.setLooping(_bLoop);
+                mediaPlayer.setVolume(1f, 1f);
+                /*
+                 * float streamVolume =
+                 * vAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                 * fVolume = streamVolume /
+                 * vAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                 * vMusicPlayer.setVolume(fVolume, fVolume); if (fVolume ==
+                 * 0.0f) fVolume = 1.0f;
+                 */
 
-	public void pauseMusic() {
-		try {
-			if (mediaPlayer != null)
-				mediaPlayer.pause();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
+                mediaPlayer.start();
 
-	public void unpauseMusic() {
-		try {
-			if (mediaPlayer != null)
-				mediaPlayer.start();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
+                currentClip = _iMusicID;
 
-	public void stopMusic() {
+            } catch (Exception e) {
+                e.printStackTrace();
+                currentClip = MUSIC_NOSOUND;
+            }
+        }
+    }
 
-		try {
-			if (mediaPlayer != null) {
-				mediaPlayer.stop();
-				mediaPlayer.reset();
-			}
-			currentClip = MUSIC_NOSOUND;
+    public int getMusicDuration() {
+        if (sound) {
+            if (mediaPlayer != null) {
+                return mediaPlayer.getDuration();
+            }
+        }
+        return -1;
+    }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    public void pauseMusic() {
+        try {
+            if (mediaPlayer != null)
+                mediaPlayer.pause();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
-	public int playFX(int fxID, int loop) {
-		streamID = 0;
-		if (sound) {
-			try {
-				streamID = soundPool.play(fxID+1, 1f, 1f, 1, loop, 1f);
+    public void unpauseMusic() {
+        try {
+            if (mediaPlayer != null)
+                mediaPlayer.start();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return streamID;
-	}
-	
-	public void stopFX(int fxID){
-		if(sound){
-			try {
-				soundPool.stop(fxID);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public void pauseFX(){
-		soundPool.autoPause();
-	}
-	
-	public void flushSndManager() {
-		try {
-			soundPool.release();
-			soundPool = null;
-			mediaPlayer = null;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    public void stopMusic() {
 
-	public int getCurrentClip() {
-		return currentClip;
-	}
+        try {
+            if (mediaPlayer != null) {
+                mediaPlayer.stop();
+                mediaPlayer.reset();
+            }
+            currentClip = MUSIC_NOSOUND;
 
-	public void setCurrentClip(int currentClip) {
-		this.currentClip = currentClip;
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	public boolean isSound() {
-		return sound;
-	}
+    public int playFX(int fxID, int loop) {
+        streamID = 0;
+        if (sound) {
+            try {
+                streamID = soundPool.play(fxID + 1, 1f, 1f, 1, loop, 1f);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return streamID;
+    }
 
-	public void setSound(boolean sound) {
-		this.sound = sound;
-	}
-	
-	
-	
+    public void stopFX(int fxID) {
+        if (sound) {
+            try {
+                soundPool.stop(fxID);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void pauseFX() {
+        soundPool.autoPause();
+    }
+
+    public void flushSndManager() {
+        try {
+            soundPool.release();
+            soundPool = null;
+            mediaPlayer = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getCurrentClip() {
+        return currentClip;
+    }
+
+    public void setCurrentClip(int currentClip) {
+        this.currentClip = currentClip;
+    }
+
+    public boolean isSound() {
+        return sound;
+    }
+
+    public void setSound(boolean sound) {
+        this.sound = sound;
+    }
+
+
 }
