@@ -21,7 +21,7 @@ public class VictoryPoints {
                 troopPoints+= GameParams.TROOP_COST[t.getType()];
             }
         }
-        return player.getGold()/10 + player.getTaxes() + troopPoints;
+        return player.getGold()/10 + player.getTaxes() + troopPoints/10;
     }
 
     public int getCityPoints(Player player){

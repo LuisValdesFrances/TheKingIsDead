@@ -35,7 +35,7 @@ Sonido On
 Sonido Off
 Vibracion On
 Vibracion Off
-Quieres sair?
+¿Quieres sair?
 No
 Si
 AYUDA
@@ -78,6 +78,7 @@ Enviando datos de la partida...
 Tu versión del juego esta obsoleta. Por favor, descarga la ultima version.
 ¡Tu reino te necesita!
 ¿Comfirmas la orden?
+¿Quieres acabar el turno?
 Tienes una partida para responder
 ¿Quieres crear esta partida? La partida empezará cuando se hayan unido el resto de jugadores.
 TURNO:
@@ -146,7 +147,7 @@ Mercado
 Iglesia
 Incrementa la defensa de la ciudad.
 Incrementa los ingresos de la ciudad.
-Protege el reino de cualquier ataque (Probabilidad).
+Protege el reino de cualquier ataque.
 Has perdido la partida.
 pierde la partida.
 Tu ejército ha sido derrotado por

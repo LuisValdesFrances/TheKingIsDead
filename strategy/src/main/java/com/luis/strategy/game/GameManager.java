@@ -1,8 +1,11 @@
 package com.luis.strategy.game;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import com.luis.lgameengine.gameutils.Settings;
 import com.luis.lgameengine.gameutils.fonts.Font;
 import com.luis.lgameengine.gameutils.fonts.TextManager;
 import com.luis.lgameengine.gameutils.gameworld.GameCamera;
@@ -44,8 +47,7 @@ import com.luis.strategy.map.Troop;
 
 
 public class GameManager {
-	
-	//
+
 	public static boolean game3D = false;
 	private Image gameBuffer;
 	private float distorsion = 1.16f;
@@ -129,6 +131,7 @@ public class GameManager {
 	private SimpleBox endGameBox;
 	private DialogBox troopExceedBox;
 	private DialogBox confirmActionBox;
+	private DialogBox confirmTurnBox;
 	
 	//private Army activeArmy;
 	//private Kingdom selectKingdom;
@@ -190,7 +193,7 @@ public class GameManager {
 			@Override
 			public void onButtonPressUp(){
 				SndManager.getInstance().playFX(Main.FX_NEXT, 0);
-				changeState(state+1);
+				confirmTurnBox.start(null, RscManager.allText[RscManager.TXT_GAME_CONFIRM_TURN]);
 				reset();
 			}
 		};
@@ -533,6 +536,17 @@ public class GameManager {
 				}
 			}
 		};
+
+		confirmTurnBox = new DialogBox(GfxManager.imgSmallBox){
+			@Override
+			public void onFinish() {
+				if(this.getIndexPressed() == 0){
+					btnCancel.trigger();
+				}else{
+					changeState(STATE_END);
+				}
+			}
+		};
 		
 		discardBox = new SimpleBox(GfxManager.imgNotificationBox, false, false){
 			@Override
@@ -625,43 +639,45 @@ public class GameManager {
 				break;
 				
 			case SUB_STATE_ACTION_WAIT:
-				
-				//Actualizar iteracion terreno:
-				for(Kingdom kingdom : gameScene.getKingdomList()){
-					for(Terrain terrain : kingdom.getTerrainList()){
-						if(terrain.isSelect()){
-							terrain.getButton().reset();
-							
-							//Porculeria de los terrenos
-							if(terrain.getType() >= GameParams.CITY){
-							
-								cityBox.start(getCurrentPlayer(), kingdom,
-									terrain.getType() >= GameParams.CITY &&
-									getArmyAtKingdom(kingdom)== null && 
-									getCurrentPlayer().hasKingom(kingdom));
-									
-								changeSubState(SUB_STATE_CITY_MANAGEMENT);
+				if(!confirmTurnBox.update(UserInput.getInstance().getMultiTouchHandler(), delta)) {
+
+					//Actualizar iteracion terreno:
+					for (Kingdom kingdom : gameScene.getKingdomList()) {
+						for (Terrain terrain : kingdom.getTerrainList()) {
+							if (terrain.isSelect()) {
+								terrain.getButton().reset();
+
+								//Porculeria de los terrenos
+								if (terrain.getType() >= GameParams.CITY) {
+
+									cityBox.start(getCurrentPlayer(), kingdom,
+											terrain.getType() >= GameParams.CITY &&
+													getArmyAtKingdom(kingdom) == null &&
+													getCurrentPlayer().hasKingom(kingdom));
+
+									changeSubState(SUB_STATE_CITY_MANAGEMENT);
+								}
 							}
 						}
 					}
-				}
-					
-				for(int i = 0; i < gameScene.getPlayerList().size(); i++){
-					for(Army army: gameScene.getPlayerList().get(i).getArmyList()){
-						if(army.isSelect()){
-							SndManager.getInstance().playFX(Main.FX_SELECT_ARMY, 0);
-							cleanArmyAction();
-							setSelectedArmy(army);
-							btnFlagCastle.start();
-							//Camara se posiciona en el seleccionado
-							cameraTargetX = getSelectedArmy().getAbsoluteX();
-							cameraTargetY = getSelectedArmy().getAbsoluteY();
-							if(i == gameScene.getPlayerIndex() && army.getState() == Army.STATE_ON){
-								//btnFlagHelmet.start();
-								insertTargetUnMap(getSelectedArmy());
-								changeSubState(SUB_STATE_ACTION_SELECT);
-							}else{
-								btnFlagHelmet.hide();
+
+					for (int i = 0; i < gameScene.getPlayerList().size(); i++) {
+						for (Army army : gameScene.getPlayerList().get(i).getArmyList()) {
+							if (army.isSelect()) {
+								SndManager.getInstance().playFX(Main.FX_SELECT_ARMY, 0);
+								cleanArmyAction();
+								setSelectedArmy(army);
+								btnFlagCastle.start();
+								//Camara se posiciona en el seleccionado
+								cameraTargetX = getSelectedArmy().getAbsoluteX();
+								cameraTargetY = getSelectedArmy().getAbsoluteY();
+								if (i == gameScene.getPlayerIndex() && army.getState() == Army.STATE_ON) {
+									//btnFlagHelmet.start();
+									insertTargetUnMap(getSelectedArmy());
+									changeSubState(SUB_STATE_ACTION_SELECT);
+								} else {
+									btnFlagHelmet.hide();
+								}
 							}
 						}
 					}
@@ -702,9 +718,7 @@ public class GameManager {
 				break;
 				
 			case SUB_STATE_ACTION_EXCEED:
-				if(troopExceedBox.update(UserInput.getInstance().getMultiTouchHandler(), delta)){
-					
-				}
+				if(troopExceedBox.update(UserInput.getInstance().getMultiTouchHandler(), delta)){}
 				break;
 				
 			case SUB_STATE_ACTION_MOVE:
@@ -797,8 +811,6 @@ public class GameManager {
 				break;
 			}
 		break;
-		
-		
 		    case STATE_WIN:
 		    case STATE_GAME_OVER:
 			if(!endGameBox.update(UserInput.getInstance().getMultiTouchHandler(), delta)){
@@ -815,7 +827,6 @@ public class GameManager {
             if(!rankingBox.update(UserInput.getInstance().getMultiTouchHandler(), delta)){
                 btnRanking.setDisabled(false);
             }
-			
 			if(!cityBox.update(UserInput.getInstance().getMultiTouchHandler(), delta)){
 			
 				//Actualizar iteracion terreno:
@@ -857,8 +868,7 @@ public class GameManager {
 					}
 				}
 			}
-			
-			
+
 			break;
 		}
 		boolean listenEvents = false;
@@ -870,6 +880,7 @@ public class GameManager {
 			!endGameBox.isActive() &&
 			!troopExceedBox.isActive() &&
 			!confirmActionBox.isActive() &&
+			!confirmTurnBox.isActive() &&
 			!cityBox.isActive()){
 			updateCamera();
 			if(
@@ -934,7 +945,6 @@ public class GameManager {
 			gameScene.drawTarget(gameBuffer.getGraphics(), worldConver, gameCamera);
 		}
 		
-		 
 		 //Army
 		 for(int i = 0; i < gameScene.getPlayerList().size(); i++){
 			 for(Army army: gameScene.getPlayerList().get(i).getArmyList()){
@@ -986,8 +996,7 @@ public class GameManager {
 				 }
 			 }
 		 }
-		 
-		 
+
 		 //Mist
 		 for(Mist m : mistList){
 			 m.clear = false;
@@ -1009,8 +1018,7 @@ public class GameManager {
 				}
 			}
 		}
-		 
-		
+
 		if(!Main.IS_GAME_DEBUG && humanPlayer != null){//Si p == null significa que todos los jugadores son IA, asi que no pinto niebla
 			for(Mist m : mistList){
 				
@@ -1082,9 +1090,9 @@ public class GameManager {
 					(int) gameCamera.getPosX()+worldConver.getMarginW(),
 					(int) gameCamera.getPosY()+worldConver.getMarginN(),
 					cameraR);
-			
-			
-			g.setTextSize(32);
+
+
+			g.setTextSize(Font.SYSTEM_SIZE[Settings.getInstance().getNativeResolutionSet()]);
 			g.setAlpha(160);
 			g.setColor(0x88000000);
 			g.fillRect(0, 0, Define.SIZEX, g.getTextHeight() * 3);
@@ -1162,6 +1170,7 @@ public class GameManager {
 		discardBox.draw(g, null);
 		troopExceedBox.draw(g, GfxManager.imgBlackBG);
 		confirmActionBox.draw(g, GfxManager.imgBlackBG);
+		confirmTurnBox.draw(g, GfxManager.imgBlackBG);
 		battleBox.draw(g);
 		cityBox.draw(g);
 		mapBox.draw(g);
@@ -1729,7 +1738,6 @@ public class GameManager {
 			}
 			return true;
 		}
-		
 		return false;
 	}
 	

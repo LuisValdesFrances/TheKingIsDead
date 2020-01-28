@@ -96,9 +96,12 @@ public class BattleDiceBox {
 					modPosDice = -Define.SIZEX;
 					stateCombat++;
 					combat();
+				} else if(state > STATE_COMBAT_3) {
+					buttonCombat.setDisabled(true);
 				}
-			};
+			}
 		};
+		buttonCombat.setDisabled(true);
 	}
 	
 	private boolean autoPlay;
@@ -148,10 +151,10 @@ public class BattleDiceBox {
 					state = STATE_COMBAT_1;
 				}
 				break;
+
 			case STATE_COMBAT_1:
 			case STATE_COMBAT_2:
 			case STATE_COMBAT_3:
-				
 				if(modPosDice < 0){
 					modPosDice -= (modPosDice*8f)*delta - 1f;
 				}else{
@@ -176,8 +179,6 @@ public class BattleDiceBox {
 						}else{
 							SndManager.getInstance().playFX(Main.FX_SWORD_BLOOD, 0);
 						}
-						
-						
 						if(state == STATE_COMBAT_3){
 							buttonCombat.setImgRelese(GfxManager.imgButtonOkRelease);
 							buttonCombat.setImgFocus(GfxManager.imgButtonOkFocus);
@@ -189,10 +190,13 @@ public class BattleDiceBox {
 					buttonCombat.trigger();
 				}
 				
-				buttonCombat.setDisabled(autoPlay  || resultIcon[stateCombat].modAlpha != 0 || modPosDice != 0);
+				buttonCombat.setDisabled(
+								autoPlay ||
+								resultIcon[stateCombat].modAlpha != 0 ||
+								modPosDice != 0);
 				buttonCombat.update(touchHandler);
-				
 				break;
+
 			case STATE_END:
 				modPosY += (modPosY*16f)*delta + 1f;
 				if(modPosY >= ((Define.SIZEY-totalHeight)+totalHeight)){
@@ -258,8 +262,10 @@ public class BattleDiceBox {
 				g.setAlpha(255);
 				g.setImageSize(1, 1);
 			}
-			
-			buttonCombat.draw(g, 0, modY);
+
+			if(Main.isIntervalTwo() || buttonCombat.isDisabled() || buttonCombat.isTouching()) {
+				buttonCombat.draw(g, 0, modY);
+			}
 		}
 	}
 	

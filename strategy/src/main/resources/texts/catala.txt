@@ -56,7 +56,7 @@ Record:
 Continua
 Abandonar
 Nou rècord:
-¿Vols tornar al menu?
+Vols tornar al menu?
 Notificacions
 Nom
 Password
@@ -75,9 +75,10 @@ Jugadors:
 T'has unit al joc
 Joc carregat
 Enviant dades de la partida ...
-La teua versió del joc esta obsoleta. Per favor, descarrega la darrera versio.
+La teua versió del joc està obsoleta. Per favor, descarrega la última versio.
 El teu regne et necessita!
-¿Comfirmas l'ordre?
+Confirmes l'ordre?
+Vols acabar el torn?
 Tens una partida per respondre
 Vols crear aquesta partida? La partida començarà quan s'hagin unit la resta de jugadors.
 TORN:
@@ -121,9 +122,9 @@ Realment vols descartar aquesta tropa
 per
 monedes
 ?
-Nova tropa adquirda
+Nova tropa adquirida
 Equilibri de poder
-¡Critico!
+¡Crític!
 ¡Pífia!
 Dificultat
 Tropa bàsica d'eficiència mitjana en tot tipus de terrenys.
@@ -140,17 +141,18 @@ Total
 Aumenta la defensa de la ciutat a un
 Aumenta la recaudació de la ciutat a un
 Aumenta la protecció de la ciutat a un
+percent
 Torre
-Mercart
+Mercat
 Esglesia
 Incrementa la defensa de la ciudat.
 Incrementa els ingresos de la ciudat.
-percent
-Protegeix el regne de cualsevol atac (Probabilidat).
+Protegeix el regne de cualsevol atac.
 Has perdut la partida.
 perd la partida.
-El teu ejercit ha estat derrotar per
+El teu ejercit ha estat derrotat per
 Has vençut al ejercit de
 El teu ejercit ha estat destruit per
 Has destruit al ejercit de
 canvia la seva capital.
+

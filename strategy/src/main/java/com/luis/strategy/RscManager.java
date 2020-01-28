@@ -101,7 +101,8 @@ public class RscManager {
 	public static final int TXT_KINGDOM_NEEDS_YOU= TXT_UPDATE_GAME+1;
 	
 	public static final int TXT_GAME_CONFIRM_ACTION= TXT_KINGDOM_NEEDS_YOU+1;
-	public static final int TXT_GAME_ANSWER= TXT_GAME_CONFIRM_ACTION+1;
+	public static final int TXT_GAME_CONFIRM_TURN= TXT_GAME_CONFIRM_ACTION+1;
+	public static final int TXT_GAME_ANSWER= TXT_GAME_CONFIRM_TURN+1;
 	
 	public static final int TXT_GAME_CREATE_CONF= TXT_GAME_ANSWER+1;
 	

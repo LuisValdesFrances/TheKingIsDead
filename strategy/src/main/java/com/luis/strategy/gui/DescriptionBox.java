@@ -36,12 +36,12 @@ public class DescriptionBox extends SimpleBox{
 			public void onButtonPressUp() {
 				SndManager.getInstance().playFX(Main.FX_SELECT, 0);
 				reset();
-				index = index+1%(totalIndex-1);
-				index = index > totalIndex-1 ? 0 : index;
-				
+				index = index-1;
+				index = index < 0 ? totalIndex-1 : index;
+
 				setTextHeader(RscManager.allText[indexTextHeader + index]);
 				setTextBody(RscManager.allText[indexTextBody + index]);
-			};
+			}
 		};
 		
 		buttonRight = new Button(
@@ -55,8 +55,8 @@ public class DescriptionBox extends SimpleBox{
 			public void onButtonPressUp() {
 				SndManager.getInstance().playFX(Main.FX_SELECT, 0);
 				reset();
-				index = index-1;
-				index = index < 0 ? totalIndex-1 : index;
+				index = index+1%(totalIndex-1);
+				index = index > totalIndex-1 ? 0 : index;
 				
 				setTextHeader(RscManager.allText[indexTextHeader + index]);
 				setTextBody(RscManager.allText[indexTextBody + index]);

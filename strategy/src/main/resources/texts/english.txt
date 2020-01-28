@@ -78,6 +78,7 @@ Send game data...
 Your version of the game is obsolete, please download the latest version.
 Your kingdom needs you!
 Do you confirm the order?
+Do you want to end the turn?
 You have a game to answer
 Do you want to create this game? The game will start when the other players have joined.
 TURN:
@@ -146,7 +147,7 @@ Market
 Church
 Increase the defense of the city.
 Increase the gold of the city.
-Protect the kingdom from any attack (Probability).
+Protect the kingdom from any attack.
 You lost the game.
 lost the game.
 Your army has been defeated by

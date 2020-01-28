@@ -331,14 +331,15 @@ public class ModeMenu {
                     };
 
                     debugCount = 0;
-                    btnDebug = new Button(Define.SIZEX12, Define.SIZEY12, Define.SIZEX24, Define.SIZEY - Define.SIZEY24) {
+                    int size = (Define.SIZEX12 + Define.SIZEY12)/2;
+                    btnDebug = new Button(size, size, size/2, Define.SIZEY - size/2) {
                         @Override
                         public void onButtonPressDown() {
                         }
 
                         @Override
                         public void onButtonPressUp() {
-                            if (debugCount == 8) {
+                            if (debugCount == 16) {
                                 debugCount = 0;
                                 Main.IS_GAME_DEBUG = !Main.IS_GAME_DEBUG;
                                 NotificationBox.getInstance().addMessage(Main.IS_GAME_DEBUG ? "DEBUG ON" : "DEBUG OFF");
@@ -1459,14 +1460,14 @@ public class ModeMenu {
 
             case Define.ST_MENU_SELECT_GAME:
                 drawMenuBG(_g);
-                if (gameVersionBox != null) {
-                    gameVersionBox.draw(_g, GfxManager.imgBlackBG);
-                }
                 btnBack.draw(_g, 0, 0);
                 btnPassAndPlay.draw(_g, 0, 0);
                 btnOnLine.draw(_g, 0, 0);
                 if (btnContinuePassAndPlay != null) {
                     btnContinuePassAndPlay.draw(_g, 0, 0);
+                }
+                if (gameVersionBox != null) {
+                    gameVersionBox.draw(_g, GfxManager.imgBlackBG);
                 }
                 break;
 
