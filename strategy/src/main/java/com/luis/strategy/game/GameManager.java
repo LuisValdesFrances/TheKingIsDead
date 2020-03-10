@@ -2144,8 +2144,8 @@ public class GameManager {
 		Army enemy = getEnemyAtKingdom(getCurrentPlayer());
 		
 		/*
-		 * El ejercito ganador genera la mitad de su valor en da�o al ejercito perdedor
-		 * El ejercito perdedor genera la la cuarta parte de su da�o al ejercito ganador
+		 * El ejercito ganador genera la mitad de su valor en danyo al ejercito perdedor
+		 * El ejercito perdedor genera la la cuarta parte de su danyo al ejercito ganador
 		 */
 		boolean showResultBox = 
 				getSelectedArmy().getPlayer().getActionIA() == null ||
@@ -2187,7 +2187,7 @@ public class GameManager {
                 if(enemy != null){
                     getCurrentPlayer().setWin(getCurrentPlayer().getWin()+1);
                     enemy.getPlayer().setDefeat(enemy.getPlayer().getDefeat()+1);
-                    loot = ((enemy.getCost() * 25) / 100);
+                    loot = ((enemy.getCost() * GameParams.PERCENT_VICTORY_LOOT) / 100);
                 }
 				break;
 			case 3: 
@@ -2196,7 +2196,7 @@ public class GameManager {
                 if(enemy != null){
                     getCurrentPlayer().setBigWin(getCurrentPlayer().getBigWin()+1);
                     enemy.getPlayer().setBigDefeat(enemy.getPlayer().getBigDefeat()+1);
-                    loot = ((enemy.getCost() * 50) / 100);
+                    loot = ((enemy.getCost() * GameParams.PERCENT_BIG_VICTORY_LOOT) / 100);
                 }
 				break;
 		}
@@ -2247,11 +2247,11 @@ public class GameManager {
 				int casualtiesFromArmy = 0;
 				int casualtiesFromEnemy = 0;
 				if(result == 1){//Ejercito selecionado pierde
-					casualtiesFromArmy = (getSelectedArmy().getCost() * 25) / 100; 
-					casualtiesFromEnemy = (enemy.getCost() * 50) / 100; 
+					casualtiesFromArmy = (getSelectedArmy().getCost() * GameParams.PERCENT_CASUALTIES_VICTORY) / 100;
+					casualtiesFromEnemy = (enemy.getCost() * GameParams.PERCENT_CASUALTIES_DEFEAT) / 100;
 				}else if(result == 2){//Ejercito selecionado gana
-					casualtiesFromArmy = (getSelectedArmy().getCost() * 50) / 100; 
-					casualtiesFromEnemy = (enemy.getCost() * 25) / 100;
+					casualtiesFromArmy = (getSelectedArmy().getCost() * GameParams.PERCENT_CASUALTIES_DEFEAT) / 100;
+					casualtiesFromEnemy = (enemy.getCost() * GameParams.PERCENT_CASUALTIES_VICTORY) / 100;
 				}
 				getSelectedArmy().setDamage(casualtiesFromEnemy);
 				enemy.setDamage(casualtiesFromArmy);

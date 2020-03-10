@@ -1417,8 +1417,6 @@ public class ModeMenu {
 
             case Define.ST_MENU_MAIN:
                 drawMenuBG(_g);
-                TextManager.drawSimpleText(_g, Font.FONT_SMALL, BuildConfig.VERSION_NAME,
-                        0, Define.SIZEY, Graphics.LEFT | Graphics.BOTTOM);
                 btnCampaign.draw(_g, 0, 0);
                 btnQuickPlay.draw(_g, 0, 0);
                 btnInfo.draw(_g, 0, 0);
@@ -1450,6 +1448,9 @@ public class ModeMenu {
                 TextManager.draw(_g, Font.FONT_BIG, RscManager.allText[RscManager.TXT_ABOUT_DESCRIP],
                         Define.SIZEX2, Define.SIZEY2,
                         Define.SIZEX - Define.SIZEX8, TextManager.ALING_CENTER, numLetters);
+                TextManager.drawSimpleText(_g, Font.FONT_SMALL,
+                        BuildConfig.VERSION_NAME + "v - " + Settings.getInstance().getResolutionSet() + "rs",
+                        0, Define.SIZEY, Graphics.LEFT | Graphics.BOTTOM);
                 btnBack.draw(_g, 0, 0);
                 break;
 
