@@ -48,3 +48,4 @@ obj/
 .externalNativeBuild
 
 strategy/release/strategy-release.zip
+strategy/release/strategy-release.aab
