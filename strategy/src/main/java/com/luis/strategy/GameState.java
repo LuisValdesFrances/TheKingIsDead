@@ -110,7 +110,6 @@ public class GameState {
         this.gameMode = gameMode;
     }
 
-
     public class PlayerConf {
         public String name;
         public int flag;

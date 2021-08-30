@@ -1,7 +1,5 @@
 package com.luis.strategy.game;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +41,6 @@ import com.luis.strategy.map.GameScene;
 import com.luis.strategy.map.Player;
 import com.luis.strategy.map.Terrain;
 import com.luis.strategy.map.Troop;
-
-
 
 public class GameManager {
 
@@ -137,7 +133,7 @@ public class GameManager {
 	//private Kingdom selectKingdom;
 	private List<Mist> mistList;
 
-	private int intertitialCount;
+	private int spotCount;
 	
 	public GameManager(WorldConver wc, GameCamera gc, GameScene gs){
 		this.gameBuffer = Image.createImage(
@@ -153,7 +149,7 @@ public class GameManager {
 		this.cameraTargetX=0;//worldConver.getCentlayoutX();
 		this.cameraTargetY=0;//=worldConver.getCentlayoutY();
 
-		this.intertitialCount = 0;
+		this.spotCount = 0;
 		
 		this.dataSender = new DataSender();
 		MenuElement.bgAlpha = GameParams.BG_BLACK_ALPHA;
@@ -1317,11 +1313,11 @@ public class GameManager {
 
 			if(GameState.getInstance().getGameMode() == GameState.GAME_MODE_PLAY_AND_PASS) {
 				if (getCurrentPlayer().getActionIA() == null) {
-					intertitialCount += 2;
+					spotCount += 2;
 				} else {
-					intertitialCount += 1;
+					spotCount += 1;
 				}
-				if (getCurrentPlayer().getActionIA() == null && intertitialCount >= 20) {
+				if (getCurrentPlayer().getActionIA() == null && spotCount >= 20) {
 					Main.getInstance().getActivity().requestInterstitial();
 				}
 			}
@@ -1330,9 +1326,9 @@ public class GameManager {
 		case STATE_ECONOMY:
 			if(GameState.getInstance().getGameMode() == GameState.GAME_MODE_PLAY_AND_PASS) {
 				if (getCurrentPlayer().getActionIA() == null) {
-					if (getCurrentPlayer().getActionIA() == null && intertitialCount >= 20) {
+					if (getCurrentPlayer().getActionIA() == null && spotCount >= 20) {
 						Main.getInstance().getActivity().loadInterstitial();
-						intertitialCount = 0;
+						spotCount = 0;
 					}
 				}
 			}
@@ -1659,9 +1655,11 @@ public class GameManager {
 		do{
 			gameScene.setPlayerIndex((gameScene.getPlayerIndex()+1)%gameScene.getPlayerList().size());
 		}
-		while(getCurrentPlayer().getNumberCitys() == 0);
+		while(getCurrentPlayer().getNumberCities() == 0);
+		//Se obtiene que player tiene el menor index
+		//Si es el tuno del player con menor index, se suma un turno
 		
-		if(gameScene.getPlayerIndex()==0){
+		if(gameScene.getPlayerIndex() == this.getMinorIndex()){
 			gameScene.setTurnCount(gameScene.getTurnCount()+1);
 		}
 	}
@@ -1700,6 +1698,16 @@ public class GameManager {
 	private static final int STATE_PRESENTATION_MOVE_1 = 1;
 	private static final int STATE_PRESENTATION_SHOW = 2;
 	private static final int STATE_PRESENTATION_MOVE_2 = 3;
+
+	private int getMinorIndex(){
+		int minorIndex = gameScene.getPlayerList().get(gameScene.getPlayerList().size()-1).getId();
+		for(Player player : gameScene.getPlayerList()){
+			if(player.getNumberCities() > 0 && player.getId() < minorIndex){
+				minorIndex = player.getId();
+			}
+		}
+		return minorIndex;
+	}
 	
 	private void startPresentation(int font, String text){
 		presentationState = STATE_PRESENTATION_MOVE_1;
@@ -2258,7 +2266,7 @@ public class GameManager {
 				textB = 
 						RscManager.allText[RscManager.TXT_GAME_ATTACKER_LOST] + " " +
 						casualtiesFromEnemy + " " + RscManager.allText[RscManager.TXT_GAME_LOSSES] + " " +
-						RscManager.allText[RscManager.TXT_GAME_DEFENSER_LOST] + " " + 
+						RscManager.allText[RscManager.TAT_GAME_DEFENDER_LOST] + " " +
 						casualtiesFromArmy + " " + RscManager.allText[RscManager.TXT_GAME_LOSSES];
 				
 				if(defeated.getPlayer().getId() != getCurrentPlayer().getId()){

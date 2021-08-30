@@ -1,8 +1,5 @@
 package com.luis.lgameengine.gui;
 
-import android.util.Log;
-
-import com.luis.lgameengine.gui.Button;
 import com.luis.lgameengine.implementation.graphics.Graphics;
 import com.luis.lgameengine.implementation.graphics.Image;
 import com.luis.lgameengine.implementation.input.MultiTouchHandler;
@@ -77,8 +74,6 @@ public class Keyboard{
 							&& (maxLetters == -1 || (maxLetters > 0 && textChain.length() < maxLetters))){
 						textChain += getText();
 					}
-					
-					Log.i("Debug", "Tecleado: " + textChain);
 					reset();
 				}
 			};
@@ -89,10 +84,6 @@ public class Keyboard{
 			}
 		}
 	}
-	
-	
-	
-	
 
 	public String getTextChain() {
 		return textChain;

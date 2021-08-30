@@ -67,9 +67,7 @@ public class CreateUserBox extends MenuBox{
 		textRepPassword = new String("");
 		
 		keyboard.setTextChain(textName);
-		
-		
-		
+
 		int sepW = Define.SIZEX64;
 		int formWidth = GfxManager.imgInputBox.getWidth() + sepW + Font.getFontWidth(Font.FONT_MEDIUM)*RscManager.allText[RscManager.TXT_REPEAT_PASS].length();
 		int inputX = Define.SIZEX2 + formWidth/2 - GfxManager.imgInputBox.getWidth()/2;
@@ -149,8 +147,7 @@ public class CreateUserBox extends MenuBox{
 				keyboard.setTextChain(textRepPassword);
 			}
 		};
-		
-		
+
 		btnOk = new Button(GfxManager.imgButtonArrowNextRelease, GfxManager.imgButtonArrowNextFocus,
 				Define.SIZEX - Define.SIZEX32-GfxManager.imgButtonArrowBackRelease.getWidth()/2,
 				Define.SIZEY - Define.SIZEY32-GfxManager.imgButtonArrowBackRelease.getHeight()/2,
@@ -257,15 +254,10 @@ public class CreateUserBox extends MenuBox{
 		TextManager.drawSimpleText(g, Font.FONT_SMALL, pass, 
 				inputBoxRepPass.getX()+(int)modPosX, lineRepPassPosY, 
 				Graphics.VCENTER | Graphics.HCENTER);
-		
-		
-		
+
 		keyboard.draw(g);
 		btnOk.draw(g, 0, 0);
 	}
-
-	
-
 
 	public String getTextName() {
 		return textName;
@@ -285,7 +277,4 @@ public class CreateUserBox extends MenuBox{
 	public void setTextRepPassword(String textRepPassword) {
 		this.textRepPassword = textRepPassword;
 	}
-	
-	
-
 }

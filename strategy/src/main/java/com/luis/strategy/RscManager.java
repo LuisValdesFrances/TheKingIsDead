@@ -136,8 +136,8 @@ public class RscManager {
 	public static final int TXT_GAME_ATTACKER_HAS_BEEN_DESTROYED= TXT_GAME_ATTACKER_HAS_DESTROYED+1;
 	
 	public static final int TXT_GAME_ATTACKER_LOST= TXT_GAME_ATTACKER_HAS_BEEN_DESTROYED+1;
-	public static final int TXT_GAME_DEFENSER_LOST= TXT_GAME_ATTACKER_LOST+1;
-	public static final int TXT_GAME_LOSSES= TXT_GAME_DEFENSER_LOST+1;
+	public static final int TAT_GAME_DEFENDER_LOST = TXT_GAME_ATTACKER_LOST+1;
+	public static final int TXT_GAME_LOSSES= TAT_GAME_DEFENDER_LOST +1;
 	public static final int TXT_GAME_NEW_ARMY= TXT_GAME_LOSSES+1;
 	public static final int TXT_GAME_ARMY_JOIN= TXT_GAME_NEW_ARMY+1;
 	public static final int TXT_GAME_ECONOMY= TXT_GAME_ARMY_JOIN+1;

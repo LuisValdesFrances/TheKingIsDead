@@ -133,9 +133,7 @@ public class ListBox extends MenuBox{
 	public boolean update(MultiTouchHandler touchHandler, float delta){
 		if(scroll){
 			if(state == STATE_ACTIVE){
-				
 				boolean reset = (int)speedY!=0f;
-				
 				if(
 						touchHandler.getTouchAction(0) == TouchData.ACTION_MOVE
 						&& touchHandler.getTouchFrames(0) > 1){

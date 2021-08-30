@@ -222,7 +222,7 @@ public class Player {
 		return kingdom;
 	}
 
-	public int getNumberCitys(){
+	public int getNumberCities(){
 		int n = 0;
 		for(int i = 0; i < kingdomList.size(); i++){
 			if(kingdomList.get(i).isACity()){

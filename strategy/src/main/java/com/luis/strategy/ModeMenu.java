@@ -288,8 +288,8 @@ public class ModeMenu {
                     startTime = System.currentTimeMillis();
 
                     cloudFarBGX = Define.SIZEX2;
-                    cloudNearBGX = Define.SIZEX;
-                    cloudNear2BGX = Define.SIZEX + Define.SIZEX2;
+                    cloudNearBGX = Define.SIZEX2 + Define.SIZEX4;
+                    cloudNear2BGX = Define.SIZEX4;
 
                     cloudFarBGY = Define.SIZEY2;
                     cloudNearBGY = Define.SIZEY2 + Define.SIZEY4;
@@ -1681,9 +1681,9 @@ public class ModeMenu {
         if (cloudNear2BGX < -(GfxManager.imgCloudBG.getWidth() * 1.4f) / 2) {
             cloudNear2BGX = Define.SIZEX + ((GfxManager.imgCloudBG.getWidth() * 1.4f) / 2);
         }
-        cloudFarBGX -= 10f * delta;
-        cloudNearBGX -= 20f * delta;
-        cloudNear2BGX -= 40f * delta;
+        cloudFarBGX -= 8f * delta;
+        cloudNearBGX -= 24f * delta;
+        cloudNear2BGX -= 60f * delta;
 
         if (!configurationBox.isActive() &&
                 (Main.state == Define.ST_MENU_MAIN ||

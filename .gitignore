@@ -47,5 +47,4 @@ obj/
 /captures
 .externalNativeBuild
 
-ServerURL.java
 strategy/release/strategy-release.zip

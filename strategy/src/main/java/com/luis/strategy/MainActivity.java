@@ -1,6 +1,5 @@
 package com.luis.strategy;
 
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
@@ -28,7 +27,7 @@ public class MainActivity extends Activity {
     private InterstitialAd mInterstitialAd;
 
     public static final String ADMOB_ID = "ca-app-pub-9871578065265688~4052408776";
-    //public static final String ADMOB_TEST_ID = "ca-app-pub-3940256099942544/1033173712";
+    //public static final String ADMOB_ID = "ca-app-pub-3940256099942544/1033173712";//TEST
     public static final String INTERSTITIAL_ID = "ca-app-pub-9871578065265688/6188968599";
 
     private PowerManager powerManager;
@@ -77,7 +76,6 @@ public class MainActivity extends Activity {
         Log.i("Debug", "onStart is called");
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -121,13 +119,10 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
         Log.i("Debug", "Thread stoped with exit!");
-
     }
 
     private void startGame() {
         try {
-
-
             boolean notification = false;
             if (getIntent().getExtras() != null) {
                 if (getIntent().getExtras().keySet().size() > 1) {
@@ -146,7 +141,6 @@ public class MainActivity extends Activity {
                 }
                 */
             }
-
             Settings.getInstance().init(
                     this,
                     new boolean[]{
@@ -226,7 +220,6 @@ public class MainActivity extends Activity {
 		notificationManager.notify(notificationId, mBuilder.build());
 	}
 	*/
-
 }
 
 
