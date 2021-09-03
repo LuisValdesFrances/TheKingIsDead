@@ -146,8 +146,8 @@ public class MainActivity extends Activity {
                     new boolean[]{
                             false,
                             true,
-                            true,
-                            true
+                            false,
+                            false
                     }, Settings.ORIENTATION_LANDSCAPE);
 
             main = new Main(this, Settings.getInstance(), notification);
