@@ -146,6 +146,7 @@ public class Settings {
 
 
         //Hide systemUI
+        /*
         final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -172,6 +173,7 @@ public class Settings {
                         }
                     });
         }
+        */
 
         DisplayMetrics dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -312,10 +314,9 @@ public class Settings {
                 }
             }
             reader.close();
-
-        } catch (IOException ex) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-
         return maxFreq;
     }
 
